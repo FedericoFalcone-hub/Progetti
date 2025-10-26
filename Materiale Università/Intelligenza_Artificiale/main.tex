@@ -1,5 +1,4 @@
 \documentclass{article}
-\usepackage[italian]{babel}
 \usepackage[a4paper, top=2cm, bottom=2cm, left=2.5cm, right=2.5cm]{geometry}
 \usepackage{graphicx}
 \usepackage{float}
@@ -88,7 +87,7 @@ Una sequenza di azioni forma un \textbf{cammino}; una \textbf{soluzione} è un c
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.5\linewidth]{ricerca1.png}
+    \includegraphics[width=0.5\linewidth]{Images/ricerca1.png}
 \end{figure}
 
 \subsubsection{La formulazione dei problemi}
@@ -142,14 +141,14 @@ L'UCS consiste nella selezione (espansione) del nodo con $g$ minore ancora da es
 Ci si pone la domanda: abbiamo trovato il percorso ottimale per l'obiettivo? Per dare una risposta, possiamo ispezionare il grafico.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.5\linewidth]{UCS.png}
+    \includegraphics[width=0.5\linewidth]{Images/UCS.png}
 \end{figure}
 Come si nota dal grafico, sì, trova la soluzione ottimale.
 \\
 Anzi possiamo affermare che: \textcolor{red}{ogni volta che UCS \textbf{seleziona} per la prima volta un nodo per l'espansione, il percorso che, sull'albero di ricerca, porta a quel nodo ha un \textbf{costo minimo}}. 
 \subsubsection{Ottimalità di UCS}
 \begin{figure}[H]
-    \includegraphics[width=0.5\linewidth]{Ottimilita_UCS.png}
+    \includegraphics[width=0.5\linewidth]{Images/Ottimilita_UCS.png}
 \end{figure}
 \textbf{Overload della notazione}: estendo la notazione di $g$ rendendola applicabile anche ai path $g(X → Y → \dots → Z) = g(Z))$.
 \\ \textbf{Ipotesi:}
@@ -169,12 +168,12 @@ $p*$ è il \textbf{path ottimo}, quindi $g(p_1^*)<g(p_1*)+\Delta{p_2^*} < g(p)$.
 \end{itemize}
 
 \begin{figure}[H]
-    \includegraphics[width=1\linewidth]{UCS_conEXL.png}
+    \includegraphics[width=1\linewidth]{Images/UCS_conEXL.png}
 \end{figure}
 
 \subsubsection{Implementazione}
 \begin{figure}[H]
-    \includegraphics[width=1\linewidth]{implementazione_UCS.png}
+    \includegraphics[width=1\linewidth]{Images/implementazione_UCS.png}
 \end{figure}
 \subsection{Ricerca informata}
 \subsubsection{Ricerca non informata e non informata}
@@ -196,7 +195,7 @@ A* è ottima se $h(n)$ è una \textbf{euristica ammissibile}, ovvero se $h(n)$ \
 \subsubsection{A* con EXL}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.4\linewidth]{A_conEXL.png}
+    \includegraphics[width=0.4\linewidth]{Images/A_conEXL.png}
 \end{figure}
 Grazie all'ammisibilità manteniamo la stessa proprietà di ottimalità che abbiamo dimostrato con UCS: se non sovrastimiamo non possiamo scartare il path ottimo. \\
 Se lavoriamo con EXL l'ammissibilità \textbf{non garantisce} l'ottimalità. Per risolvere ciò bisogna aggiungere all'euristica una proprietà più stringente: la \textcolor{red}{\textbf{consistenza}}.
@@ -207,7 +206,7 @@ Se lavoriamo con EXL l'ammissibilità \textbf{non garantisce} l'ottimalità. Per
 Afferma che ogni lato del triangolo non può mai essere più lungo della somma degli altri due. 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.25\linewidth]{consistenza.png}
+    \includegraphics[width=0.25\linewidth]{Images/consistenza.png}
 \end{figure}
 \subsubsection{Ottimalità di A*}
 Se assumiamo che $h$ sia consistente, possiamo costruire una dimostrazione per l'ottimalità di A*. \\ Cominciamo con il derivare una proprietà di $f$:
@@ -221,7 +220,7 @@ Se assumiamo che $h$ sia consistente, possiamo costruire una dimostrazione per l
     \item \textcolor{red}{\textbf{$f(U) \geq f(V) \Rightarrow$}} \textbf{lungo ogni perorso nell'albero di ricerca la $f$ è monotono non decrescente}.
     \begin{figure}[H]
         \centering
-        \includegraphics[width=0.25\linewidth]{assimilitaA.png}
+        \includegraphics[width=0.25\linewidth]{Images/assimilitaA.png}
     \end{figure}
 \end{enumerate}
 
@@ -234,7 +233,7 @@ Estendo la notazione di $f$ esplicitando il path su cui si calcola il costo $g$:
 Dato 2 e la \textcolor{green}{\textbf{separation property}} della frontiera, sappiamo che deve esistere un nodo $X$ sulla frontiera che si trova sul cammino ottimo $p^*=p^*_1+p^*_2$ verso $V$;
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.50\linewidth]{OttimalitaA2.png}
+    \includegraphics[width=0.50\linewidth]{Images/OttimalitaA2.png}
 \end{figure}
 
 \begin{enumerate}
@@ -249,7 +248,7 @@ Per capire come trovare un metodo per costruire buone euristiche, cerchiamo prim
 \\ Possiamo immaginare la nostra $h$ come un punto in un intervallo limitato:
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1\linewidth]{creareEuristica.png}
+    \includegraphics[width=1\linewidth]{Images/creareEuristica.png}
 \end{figure}
 Vorrei spingere il più possibile a destra il punto, mantendendo però l'\textbf{efficienza} nel computare $h$. Perchè?
 \\ A* espande tutti gli stati $S$ tali per cui $f(S)<g^*(goal)$ cioè tutti gli stati $S$ tali per cui $h(S)<g^*(goal)-g(S)$. QUinsi se per ogni stato $S,h_1(S) \leq h_2(S)$ allora $h_2$ domina $h_1$ e A* con $h_2$ non espanderà ppiù nodi di A* con $h_1$ (sempre assumendo che entrambe le euristiche siano consistenti e calcolabili in tempo efficiente). \'E\ facile vedere che date due euristiche consistenti $h_1$ e $h_2$ dove nessuna domina l'altra, possiamo costruire una terza euristica che le domina entrambe: $h_3 = max\{h_1,h_2\}$
@@ -258,7 +257,7 @@ Vorrei spingere il più possibile a destra il punto, mantendendo però l'\textbf
 \subsection{Rilassamento di un problema}
 Dato un problema $P$, un \textbf{rilassamento di P} è una versione più semplice di $P$ in cui alcuni vincoli sono stati rimossi.
 \begin{figure} [H]
-  \centering\includegraphics[width=0.75\linewidth]{rilassamento.png}
+  \centering\includegraphics[width=0.75\linewidth]{Images/rilassamento.png}
 \end{figure}
 \textbf{Idea}:
 \begin{enumerate}
@@ -273,5 +272,76 @@ Possiamo facilmente definire un problema di rilassamento, si tratta solo di rimu
     \item Dalla definizione di rilassamento $\hat{c}(S,a,U) \leq c(S,a,U)$.
     \item \textbf{L'euristica h è consistente} $h(S)\leq c(S,a,U)+h(U)$.
 \end{enumerate}
-
+\break
+\section{Bounded Suboptimal Search e varianti di A* }
+\subsection{Limiti di A*}
+L'uso di euristiche ammissibili costituisce un vantaggio perchè garantisce l'ottimalità. Può essere anche essere un grosso limite per mancanza di flessibilità. 
+\\ Consideriamo, ad esempio, una situazione in cui in frontiera non ci sono un gran numero di nodi:
+\begin{itemize}
+    \item ciascun nodo rappresenta un path verso il goal:
+    \item ciascun path ha più o meno lo stesso costo, uno solo ha il costo minimo.
+\end{itemize}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{Images/limitiA.png}
+\end{figure}
+\textcolor{red}{A* spenderà un sacco di tempo a distinguere il path ottimo tra tutti questi path che sostanzialmente sono equivalenti}. NOn si accontenta di un path sub-ottimale, anche quando il suo
+costo dista di pochissimo dall'ottimo.
+\\ \textcolor{blue}{Come possiamo equipaggiare A* con un po' di flessibilità?}.
+\subsection{Focal Search}
+Supponiamo di avere a disposizione una seconda euristica, \textbf{non ammissibile}, che chiamiamo $\hat{h}_F$.
+\\ $\hat{h}_F(n)$ è una stima del \textbf{costo computazionale} necessario per completare la ricerca del percorso ottimo verso il goal.
+\\ Ricordando che, in generale, in un problema di search le azioni \textbf{non} hanno costi uniformi, possiamo dire che dato un nodo $n$:
+\begin{itemize}
+    \item $h(n)$ stima ottimisticamente il costo rimanente da spendere per arrivare al goal;
+    \item $\hat{h}_F(n)$ stima il numero di azioni ancora da compiere per arrivare al goal, ovvero la lunghezza della parte di soluzione ancora da costruire.
+\end{itemize} 
+Più è lunga la parte di soluzione da costruire, più lavoro dovrò fare per costruirla! Questa valutazione non è legata al costo rimanente.
+\\ \textcolor{green}{\textbf{Esempio: Traveling Salesman Problem}}
+\begin{figure}[H]
+    \includegraphics[width=1\linewidth]{Images/salesman.png}
+\end{figure}
+\begin{itemize}
+    \item $F$: la lista di nodi in frontiera, quella usata da A*.
+    \item $n_{best} = arg min_{n \in F} f(n)$
+    \item $\omega \geq 1$, un parametro che scegliamo noi 
+    \item $FOCAL \subseteq F$ sotto-lista definita cosi: \[FOCAL = \{n \in F | f(n) \leq \omega f(n_{best})\} \]
+\end{itemize}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{Images/focal.png}
+\end{figure}
+\textbf{Regola di espansione}: scegliere la $FOCAL$ il nodo che minimizza $\hat{h}_F, n_{next} = arg min_{n \in FOCAL} \hat{h}_F(n)$.
+\\ Tutto il resto resta uguale ad A*.
+\\ \textcolor{red}{\textbf{Perdiamo l'ottimalità!}} Quando l'algoritmo seleziona per l'espansione un nodo di goal $e$ potrebbe non aver trovato il percorso ottimo
+(potremmo non aver scelto il nodo con $f$ minima in frontiera e quindi potremmo aver saltato una linea di costo!)
+\\ \textcolor{ForestGreen}{\textbf{La persita di ottimalità non è arbitrariamente grande}}, ma controllabile con il parametro $\omega$.
+\subsubsection{Focal Search è una BSS}
+\begin{itemize}
+\item $e$: il nodo di goal selezionato da FOCAL (fa terminare la ricerca)
+\item $n*$: il nodo che conduceva al goal su path ottimo, è in frontiera ma (assumiamo) non sia stato scelto
+\item $OPT$ è il costo della soluzione ottima
+\item $f(n^*)\leq OPT$ perchè $f$ usa un'euristica ammissibile
+\item $f(n_{best}) \leq f(n^*)$ per definizione di $n_{best}$
+\item $f(e)\leq \omega f(n_{best})$ per costruzione dell'algoritmo Focal Search
+\item Mettendo insieme le disuguaglianze di cui sopra otteniamo: \[ g(e)=f(e)\leq \omega f(n_{best})\leq\omega f(n^*) \leq \omega OPT \Rightarrow g(e) \leq \omega OPT \]
+\end{itemize}
+Il costo della soluzione trovata da Focal Search può essere al più $\omega$ volte peggiore dell'ottimo
+\\ BSS: Bounded Subotimal Search
+\subsection{Problema del trashing}
+La funzione $f$ può solo crescere. Questo implica, in $FOCAL$ search due effetti:
+\begin{itemize}
+    \item in $FRONTIER$ il nodo $n_{best}$ tenderà a stare a profondità bassa e quindi ad avere un valore alto di $\hat{h}_F$ (resta in FOCAL a lungo senza esser scelto)
+    \item i nodi generati da una espansione tenderanno a non entrare in $FOCAL$ per molto tempo (fino a quando $n_{best}$ non viene rimosso).
+\end{itemize}
+Effetto "fisarmonica": $FOCAL$ viene svuotata, nel momento in cui viene rimosso $N_{best}$ viene riempita di nuovo, poi ancora svuotata, ... .
+\\ Causa del problema: Focal Search usa $f$ per riempire $FOCAL$, questo sembrerebbe l'unico modo per garantire il bound della subottimalità, \textbf{ma non lo è}.
+\\ Idea: usare $f$ solo per garantire il bound e usare, in ordine, $\hat{h}_F$, e una euristica "aggressiva" $\hat{h}$ per scegliere il nodo da espandere, EES (Explicit EStimation Search, 2011)
+\subsection{Altri algoritmi di ricerca}
+I vari concetti che definiscono gli algoritmi di ricerca visti in precedenza, possono essere visti come il loro building blocks.
+\\ NUlla vieta di combinarli in modi alternativi per definire nuovi algoritmi di ricerca.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{Images/moreAlgoritmi.png}
+\end{figure}
 \end{document}
