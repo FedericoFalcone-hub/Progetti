@@ -344,4 +344,54 @@ I vari concetti che definiscono gli algoritmi di ricerca visti in precedenza, po
     \centering
     \includegraphics[width=1\linewidth]{Images/moreAlgoritmi.png}
 \end{figure}
+\section{Adversarial Search}
+L'adversarial search è una \textbf{ricerca con avversari} creata in un \textbf{ambiente competitivo} in cui vi sono due o più agenti con obiettivi in conglitto.
+\\ Consiste in un ambiente multi-agente in cui gli obiettivi degli altri obiettivi non sono necessariamente concordanti con quelli del nostro agente di riferimento. In questi casi si parla di un sistema
+multi-agente e l'interazione tra di esse può essere chiamata \textbf{gioco}.
+\subsection{Giochi}
+Un gioco è un problema di decisione \textbf{interattivo}. Ogni agente ha le proprie preferenze (utilità) individuali sugli stati del mondo. Le azioni di un agente influenzano l'ambiente e quindi, indirettamente, 
+anche gli altri agenti. \\ Nel cercare una sequenza di azioni verso l ostato desiderato, l'agente da noi controlalto deve considerare le \textbf{strategie} degli altri decisori.
+\\ Esistono diversi tipi di giochi:
+\begin{itemize}
+    \item 2 o \textit{n} giocatori;
+    \item Agenti \textbf{razionali}, $\epsilon$-razionali;
+    \item Struttura sequenziale: \textbf{turni}, azioni simultanee, ...;
+    \item \textbf{Deterministico} o stocastico: tutte le azioni hanno effetti prevedibili?
+    \item Stuttura dei payoff: \textbf{somma costante} o somma generica;
+    \item \textbf{Informazione completa}/incompleta: i giocatori conoscono/non conoscono gli obiettivi e le azioni disponibili agli altri agenti;
+    \item \textbf{Indormazione perfetta}/imperfetta: i giocatori sono/non sono informati di tutto quello che è succesos af ogni punto del gioco.
+\end{itemize}
+Lo studio del comportamente individuale dei singoli agenti si chiama \textcolor{red}{\textbf{teoria dei giochi competitivi}}.
+\\Lo studio delle dinamiche nella formazione di coalizioni si chiama \textcolor{Aquamarine}{\textbf{teoria dei giochi cooperativa}}.
+\\I giochi più studiati in IA sono quelli che gli studiosi di teoria dei giochi chiamano deterministici, a due giocatori, a turni, con \textbf{informazione perfetta} (completamente osservabile), \textbf{a somma zero} (ciò che a vantaggio di un giocatore danneggia l'altro).
+\newpage
+Consideriamo giochi formalizzati così:
+\begin{itemize}
+    \item \textbf{Stati}: $S=\{s_1,s_2,\dots\}$ insieme o \textbf{spazio} degli stati, dove $s_k \in S$ è lo stato \textbf{iniziali} (la situazione di partenza in cui trovano gli agenti e ambiente).
+    \item \textbf{Giocatori e azioni possibili}: insieme di agenti $I=\{i_1,i_2\}$, insieme di azioni disponibili $A=\{a_1,a_2,a_3,\dots\}$.
+    \item \textbf{Turni e azioni legali}: dato $s_k \in S$, $I(S_k)\in I$ è il giocatore che hanno diritto di compiere un'azione (turno) e $A(s_k)$ è l'insieme di azioni che può intraprendere.
+    \item \textbf{Modello di transizione}: dato $s_k \in S$ e $a \in A(I(s_k))$, $f(s_k,a)\in S$ indica il prossimo stato del gioco e cioè il risultato della mossa $a$.
+    \item \textbf{Stati terminiali}: dato uno stato $s_k$, $T(s_k)=1$ se $s_k$ è uno stato terminale, dove il gioco termina e un payoff viene inviato ad ogni giocatore; vale 0 altrimenti.
+    \item \textbf{utilità}: dato uno stato terminare $s_t$, $u_i(s_t)$ è il payoff che il giocatore $i$ riceve in quello stato.
+\end{itemize} 
+Tutti questi punti prendono il nome di \textbf{meccanismo}.
+\\ Questa formalizzazione implica: 2 giocatori, struttura sequenziale a turni alternati e azioni deterministiche.
+\\ I giochi hanno anche altre caratteristiche:
+\begin{itemize}
+    \item \textbf{Informazione completa}: entrambi i giocatori hanno acceso al meccanismo, conoscono azioni possibili e utilità del proprio avversario.
+    \item \textbf{Informazione perfetta}: dato uno stato corrente del gioco $s_j$ ogni giocatore ha accesso allo stato e alla sequenza di azioni che, a partire dallo stato iniziale, ha portato dino ad $s_k$.
+    \item \textbf{A "somma zero"}: significa che in ogni stato terminale $s_t$ vale $u_1(s_t)+U_2(s_t)=0$.
+    \begin{itemize}
+        \item schema di competizione pura: il guadagno di un agente corrisponde ad una egual perdita dell'avversario;
+        \item da un punto di vista matematico \textbf{è equivalente ad un gioco a somma costante} $u_1(s_t)+u_2(s_t)=C$
+        \item Interpretazione: ogni giocatore paga una quota di $\frac{C}{2}$ per entrare nel gioco, poi $C$ viene ridistribuito a seconda dell'esito;
+        \item Il gioco a somma costante $C$ può essere sempre trasformto in un gioco a somma zero rinormalizzando i payoff con una trasformazione affine;
+        \item In un gioco a somma zero l'utilità del secondo giocatore è implicita, si indica solo con $u_1$, come se ci fosse un trasferimetno di utilità da $i_1$ a $i_2$. \textcolor{ForestGreen}{Esempio: $u_1=5 \rightarrow i_2$ paga $5$ a $i_1$, $u_1=-5 \rightarrow i_1$ paga $5$ a $i_2$}.
+        \item Entrambi \textbf{massimizzano la loro utilità}, ma per $i_2$ (quello di cui non esplicitiamo l'utilità) vale: $max\{u_2\} = max\{-u_1\}= -min\{u_1\}$, quindi possiamo dire che cercherà di minimizzare $u_1$ così da ricevere il miglior posto possibile $-u_1$.
+    \end{itemize}
+\end{itemize} 
+Il meccanismo descriver le "regole" del gioco, ma rappresenta solo una parte della sua descrizione.
+L'altra parte è data dalle \textbf{strategie}.
+\\ La strategia di un giocatore $i$ specifica il comportamente di quel giocatore in ogni possibile stato del gioco, dato $s_k$, tale per cui $I(s_k)=i,\sigma_i(s_k)$ è la strategia di $i$ nello stato $s_k$. Se la strategia coincide con una singola azione, quella da giocare in quel caso si chiama \textbf{strategia pura} $\sigma_i:\{s_k | I(s_k)=i\} \rightarrow A(s_k)$. Se invece la strategia è una distribuzione di probabilità su più azioni, si chiama \textbf{strategia mista} $\sigma_i:\{s_k|I(s_k)=i\} \rightarrow \Pi(A(s_k))$ (dove $\Pi(Q)$ è lo spazio di distribuzioni di probabilità sugli elementi di $Q$).
+
 \end{document}
