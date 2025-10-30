@@ -344,7 +344,8 @@ I vari concetti che definiscono gli algoritmi di ricerca visti in precedenza, po
     \centering
     \includegraphics[width=1\linewidth]{Images/moreAlgoritmi.png}
 \end{figure}
-\section{Adversarial Search}
+\section{Giochi: nozioni di base e Minimax}
+\subsection{Adversarial Search}
 L'adversarial search è una \textbf{ricerca con avversari} creata in un \textbf{ambiente competitivo} in cui vi sono due o più agenti con obiettivi in conglitto.
 \\ Consiste in un ambiente multi-agente in cui gli obiettivi degli altri obiettivi non sono necessariamente concordanti con quelli del nostro agente di riferimento. In questi casi si parla di un sistema
 multi-agente e l'interazione tra di esse può essere chiamata \textbf{gioco}.
@@ -390,8 +391,50 @@ Tutti questi punti prendono il nome di \textbf{meccanismo}.
         \item Entrambi \textbf{massimizzano la loro utilità}, ma per $i_2$ (quello di cui non esplicitiamo l'utilità) vale: $max\{u_2\} = max\{-u_1\}= -min\{u_1\}$, quindi possiamo dire che cercherà di minimizzare $u_1$ così da ricevere il miglior posto possibile $-u_1$.
     \end{itemize}
 \end{itemize} 
-Il meccanismo descriver le "regole" del gioco, ma rappresenta solo una parte della sua descrizione.
+Il meccanismo descrive le "regole" del gioco, ma rappresenta solo una parte della sua descrizione.
 L'altra parte è data dalle \textbf{strategie}.
 \\ La strategia di un giocatore $i$ specifica il comportamente di quel giocatore in ogni possibile stato del gioco, dato $s_k$, tale per cui $I(s_k)=i,\sigma_i(s_k)$ è la strategia di $i$ nello stato $s_k$. Se la strategia coincide con una singola azione, quella da giocare in quel caso si chiama \textbf{strategia pura} $\sigma_i:\{s_k | I(s_k)=i\} \rightarrow A(s_k)$. Se invece la strategia è una distribuzione di probabilità su più azioni, si chiama \textbf{strategia mista} $\sigma_i:\{s_k|I(s_k)=i\} \rightarrow \Pi(A(s_k))$ (dove $\Pi(Q)$ è lo spazio di distribuzioni di probabilità sugli elementi di $Q$).
+\\Ci concentreremo prinicipalmente sulle \textbf{strategie pure}
+\\ \textbf{\textcolor{red}{Strategia ottima}}: quella strategia tale per cui ogni strategia diversa non introduce miglioramenti contro un avversario \textbf{infallibile}. 
+\\Per ricolvere un gioco bisogna calcolare la strategia ottima.
 
+\subsubsection{Albero di gioco}
+Il meccanismo dà origine all'\textbf{\textcolor{red}{albero di gioco}}. Esso è un \textbf{albero di ricerca} che si ottiene sviluppando tutte le possibili sequenze di mosse alternate, in cui ogni nodo è un \textbf{\textcolor{red}{nodo di decisione}}: uno dei due giocatori deve fare la sua mossa.
+\\ Ogni branch rappresenta un gioco (partita). Dallo stato iniziale fino a quello terminale dove il gioco termina e i payoff sono distribuiti, ogni foglia è uno stato terminale su cui indichiamo il payoff del giocatore $i_1$ (quello del giocatore $i_1$ è uguale all'oppsoto).
+\textcolor{ForestGreen}{Esempio: il gioco del tris, Giocatore $i_1$: X, giocaotre $i_2$:0. Il branching massimo è b=9 e profondità massima d=9. Gli stati sono: \begin{itemize}
+    \item $\leq 3^9=19683$
+    \item rimuovendo gli stati illegali ne restano 5478, al netto delle simmetriche sussistono di fatto 5478, al netto delle simmetrie sussistono di fatto 765 diverse situazioni strategiche in cui decide.
+    \end{itemize}
+NUmero di nodi dell'albero di gioco: $\leq 1+9+(9*8)+(9*8*7)+(9*8*7*6)+ \dots = 986410$ se non facciamo ottimizzazioni è una stima ragionevole.
+\\ Numero di giochi (ovvero i branch dell'albero o i suoi nodi terminali):\begin{itemize}
+    \item $9*8*7*6*5*4*3*2*=9!=362880$
+    \item numero esatto $255168$, al netto delle simmetrie $26830$.
+\end{itemize}}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{Images/alberoGioco.png}
+\end{figure}
+\subsection{Minimax}
+Nei problemi di search l'albero di ricerca rappresentava/supportava il processo di inferenza per trovare una strada o la strada ottima per il goal. L'albero di gioco ha una funzione analoga: rappresenta/supporta il ragionamento strategico.
+\\ Per adesso assumiamo che trovaer la strategia ottima sia un problema di search che tiene conto dell'avverario: \textbf{aversarial search}. L'approccio di base con cui si risolve la classe di giochi che stiamo considerando è dato dall'algormitmo \textbf{\textcolor{red}{minimax}}, sostanzialmente una DFS sull'albero di gioco con un \textbf{ritorno all'indietro} dei valori di utilità.
+\\ È un approccio esautistivo e inefficiente che possiamo adottare solo per giochi di dimentisioni limitate, ma è un approccio esatto, corretto e completa; sta alla base dei metodi più sofisticati.
+\\Introduciamo della notazione per semplificare la descrizione dell'algoritmo:
+\\$I=\{\textcolor{red}{MAX},\textcolor{blue}{MIN}\}$, il giocatore $i_1$ si chiama \textcolor{red}{MAX} e il suo obiettivo nel gioco è ottenere un valore di utilità il più alto possibile. Il giocatore $i_2$ si chiama \textcolor{blue}{MIN} e il suo obiettivo è far sì che l'utilità di \textcolor{red}{MAX} sia la più bassa possibile
+(implicitamente massimizza la sua utilità che, sotto l'assunzione di somma zero ,equivale a minimizzare l'utilità dell'avversario).
+\\ Per semplicità \textcolor{red}{MAX} avrà sempre utilità $\geq 0$ (e di conseguenza quelle di \textcolor{blue}{MIN} saranno sempre $<0$).
+Consideriamo giochi piccoli per ragioni di spazio, ma le considerazioni si generalizzano su ogni gioco.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{Images/minmax.png}
+\end{figure}
+Procedimento:
+\begin{enumerate}
+    \item Eseguire una DFS sull'albero di gioco
+    \item Riposrto all'indietro dei valori
+\end{enumerate}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{Images/analisiMinMax.png}
+\end{figure}
 \end{document}
+    
