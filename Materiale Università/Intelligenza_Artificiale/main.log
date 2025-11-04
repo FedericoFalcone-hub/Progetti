@@ -1,95 +1,94 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.10.19)  30 OCT 2025 10:11
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.9.29)  4 NOV 2025 12:01
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**"/home/federico/Progetti-e-materiali/Materiale Università/Intelligenza_Artificiale/main.tex"
-(/home/federico/Progetti-e-materiali/Materiale Università/Intelligenza_Artificiale/main.tex
-LaTeX2e <2023-11-01> patch level 1
-L3 programming layer <2024-01-22>
-(/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
-Document Class: article 2023/05/17 v1.4n Standard LaTeX document class
-(/usr/share/texlive/texmf-dist/tex/latex/base/size10.clo
-File: size10.clo 2023/05/17 v1.4n Standard LaTeX file (size option)
+**"c:/Users/feder/OneDrive/Documenti/GitHub/Progetti-e-materiali/Materiale Università/Intelligenza_Artificiale/main.tex"
+(c:/Users/feder/OneDrive/Documenti/GitHub/Progetti-e-materiali/Materiale Università/Intelligenza_Artificiale/main.tex
+LaTeX2e <2024-11-01> patch level 2
+L3 programming layer <2025-04-29>
+(C:\Users\feder\AppData\Local\Programs\MiKTeX\tex/latex/base\article.cls
+Document Class: article 2024/06/29 v1.4n Standard LaTeX document class
+(C:\Users\feder\AppData\Local\Programs\MiKTeX\tex/latex/base\size10.clo
+File: size10.clo 2024/06/29 v1.4n Standard LaTeX file (size option)
 )
-\c@part=\count187
-\c@section=\count188
-\c@subsection=\count189
-\c@subsubsection=\count190
-\c@paragraph=\count191
-\c@subparagraph=\count192
-\c@figure=\count193
-\c@table=\count194
-\abovecaptionskip=\skip48
-\belowcaptionskip=\skip49
-\bibindent=\dimen140
-) (/usr/share/texlive/texmf-dist/tex/latex/geometry/geometry.sty
+\c@part=\count272
+\c@section=\count273
+\c@subsection=\count274
+\c@subsubsection=\count275
+\c@paragraph=\count276
+\c@subparagraph=\count277
+\c@figure=\count278
+\c@table=\count279
+\abovecaptionskip=\skip49
+\belowcaptionskip=\skip50
+\bibindent=\dimen146
+) (C:\Users\feder\AppData\Local\Programs\MiKTeX\tex/latex/geometry\geometry.sty
 Package: geometry 2020/01/02 v5.9 Page Geometry
- (/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
+ (C:\Users\feder\AppData\Local\Programs\MiKTeX\tex/latex/graphics\keyval.sty
 Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
 \KV@toks@=\toks17
-) (/usr/share/texlive/texmf-dist/tex/generic/iftex/ifvtex.sty
+) (C:\Users\feder\AppData\Local\Programs\MiKTeX\tex/generic/iftex\ifvtex.sty
 Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
- (/usr/share/texlive/texmf-dist/tex/generic/iftex/iftex.sty
-Package: iftex 2022/02/03 v1.0f TeX engine tests
+ (C:\Users\feder\AppData\Local\Programs\MiKTeX\tex/generic/iftex\iftex.sty
+Package: iftex 2024/12/12 v1.0g TeX engine tests
 ))
-\Gm@cnth=\count195
-\Gm@cntv=\count196
-\c@Gm@tempcnt=\count197
-\Gm@bindingoffset=\dimen141
-\Gm@wd@mp=\dimen142
-\Gm@odd@mp=\dimen143
-\Gm@even@mp=\dimen144
-\Gm@layoutwidth=\dimen145
-\Gm@layoutheight=\dimen146
-\Gm@layouthoffset=\dimen147
-\Gm@layoutvoffset=\dimen148
+\Gm@cnth=\count280
+\Gm@cntv=\count281
+\c@Gm@tempcnt=\count282
+\Gm@bindingoffset=\dimen147
+\Gm@wd@mp=\dimen148
+\Gm@odd@mp=\dimen149
+\Gm@even@mp=\dimen150
+\Gm@layoutwidth=\dimen151
+\Gm@layoutheight=\dimen152
+\Gm@layouthoffset=\dimen153
+\Gm@layoutvoffset=\dimen154
 \Gm@dimlist=\toks18
-) (/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
+ (C:\Users\feder\AppData\Local\Programs\MiKTeX\tex/latex/geometry\geometry.cfg)) (C:\Users\feder\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphicx.sty
 Package: graphicx 2021/09/16 v1.2d Enhanced LaTeX Graphics (DPC,SPQR)
- (/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
-Package: graphics 2022/03/10 v1.4e Standard LaTeX Graphics (DPC,SPQR)
- (/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty
-Package: trig 2021/08/11 v1.11 sin cos tan (DPC)
-) (/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+ (C:\Users\feder\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphics.sty
+Package: graphics 2024/08/06 v1.4g Standard LaTeX Graphics (DPC,SPQR)
+ (C:\Users\feder\AppData\Local\Programs\MiKTeX\tex/latex/graphics\trig.sty
+Package: trig 2023/12/02 v1.11 sin cos tan (DPC)
+) (C:\Users\feder\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\graphics.cfg
 File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 )
-Package graphics Info: Driver file: pdftex.def on input line 107.
- (/usr/share/texlive/texmf-dist/tex/latex/graphics-def/pdftex.def
-File: pdftex.def 2022/09/22 v1.2b Graphics/color driver for pdftex
+Package graphics Info: Driver file: pdftex.def on input line 106.
+ (C:\Users\feder\AppData\Local\Programs\MiKTeX\tex/latex/graphics-def\pdftex.def
+File: pdftex.def 2024/04/13 v1.2c Graphics/color driver for pdftex
 ))
-\Gin@req@height=\dimen149
-\Gin@req@width=\dimen150
-) (/usr/share/texlive/texmf-dist/tex/latex/float/float.sty
+\Gin@req@height=\dimen155
+\Gin@req@width=\dimen156
+) (C:\Users\feder\AppData\Local\Programs\MiKTeX\tex/latex/float\float.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
-\c@float@type=\count198
+\c@float@type=\count283
 \float@exts=\toks19
-\float@box=\box51
+\float@box=\box53
 \@float@everytoks=\toks20
-\@floatcapt=\box52
-) (/usr/share/texlive/texmf-dist/tex/latex/xcolor/xcolor.sty
-Package: xcolor 2023/11/15 v3.01 LaTeX color extensions (UK)
- (/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/color.cfg
+\@floatcapt=\box54
+) (C:\Users\feder\AppData\Local\Programs\MiKTeX\tex/latex/xcolor\xcolor.sty
+Package: xcolor 2024/09/29 v3.02 LaTeX color extensions (UK)
+ (C:\Users\feder\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\color.cfg
 File: color.cfg 2016/01/02 v1.6 sample color configuration
 )
 Package xcolor Info: Driver file: pdftex.def on input line 274.
- (/usr/share/texlive/texmf-dist/tex/latex/graphics/mathcolor.ltx)
-Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1350.
-Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1354.
-Package xcolor Info: Model `RGB' extended on input line 1366.
-Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1368.
-Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1369.
-Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1370.
-Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1371.
-Package xcolor Info: Model `Gray' substituted by `gray' on input line 1372.
-Package xcolor Info: Model `wave' substituted by `hsb' on input line 1373.
-) (/usr/share/texlive/texmf-dist/tex/latex/graphics/dvipsnam.def
+ (C:\Users\feder\AppData\Local\Programs\MiKTeX\tex/latex/graphics\mathcolor.ltx)
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1349.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1353.
+Package xcolor Info: Model `RGB' extended on input line 1365.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1367.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1368.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1369.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1370.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1371.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1372.
+) (C:\Users\feder\AppData\Local\Programs\MiKTeX\tex/latex/graphics\dvipsnam.def
 File: dvipsnam.def 2016/06/17 v3.0m Driver-dependent file (DPC,SPQR)
-) (/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
-File: l3backend-pdftex.def 2024-01-04 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count199
-\l__pdf_internal_box=\box53
-) (./main.aux)
+) (C:\Users\feder\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdftex.def
+File: l3backend-pdftex.def 2025-04-14 L3 backend support: PDF output (pdfTeX)
+\l__color_backend_stack_int=\count284
+) (main.aux)
 \openout1 = `main.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 9.
@@ -141,24 +140,24 @@ LaTeX Font Info:    ... okay on input line 9.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-(/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+(C:\Users\feder\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count266
-\scratchdimen=\dimen151
-\scratchbox=\box54
-\nofMPsegments=\count267
-\nofMParguments=\count268
+\scratchcounter=\count285
+\scratchdimen=\dimen157
+\scratchbox=\box55
+\nofMPsegments=\count286
+\nofMParguments=\count287
 \everyMPshowfont=\toks21
-\MPscratchCnt=\count269
-\MPscratchDim=\dimen152
-\MPnumerator=\count270
-\makeMPintoPDFobject=\count271
+\MPscratchCnt=\count288
+\MPscratchDim=\dimen158
+\MPnumerator=\count289
+\makeMPintoPDFobject=\count290
 \everyMPtoPDFconversion=\toks22
-) (/usr/share/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
+) (C:\Users\feder\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
- (/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
-File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
+ (C:\Users\feder\AppData\Local\Programs\MiKTeX\tex/latex/00miktex\epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <12> on input line 10.
@@ -166,15 +165,21 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <8> on input line 10.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <6> on input line 10.
- [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2]
+
+[1
+
+{C:/Users/feder/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}]
+
+[2]
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <7> on input line 80.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <5> on input line 80.
- [3]
-<Images/ricerca1.png, id=21, 332.74312pt x 191.9672pt>
+
+
+[3]
+<Images/ricerca1.png, id=20, 332.74312pt x 191.9672pt>
 File: Images/ricerca1.png Graphic file (type png)
 <use Images/ricerca1.png>
 Package pdftex.def Info: Images/ricerca1.png  used on input line 90.
@@ -184,14 +189,18 @@ Overfull \hbox (2.3601pt too wide) in paragraph at lines 104--106
 \OT1/cmr/m/n/10 Un \OT1/cmr/bx/n/10 al-go-ritmo di ricerca \OT1/cmr/m/n/10 riceve in in-put un prob-lema di ricerca e resti-tu-isce una soluzione o un'indicazione
  []
 
+
+
 [4 <./Images/ricerca1.png>]
-<Images/UCS.png, id=29, 308.65312pt x 231.11343pt>
+<Images/UCS.png, id=28, 308.65312pt x 231.11343pt>
 File: Images/UCS.png Graphic file (type png)
 <use Images/UCS.png>
 Package pdftex.def Info: Images/UCS.png  used on input line 144.
 (pdftex.def)             Requested size: 227.62206pt x 170.44292pt.
- [5]
-<Images/Ottimilita_UCS.png, id=33, 270.25969pt x 235.63031pt>
+
+
+[5]
+<Images/Ottimilita_UCS.png, id=32, 270.25969pt x 235.63031pt>
 File: Images/Ottimilita_UCS.png Graphic file (type png)
 <use Images/Ottimilita_UCS.png>
 Package pdftex.def Info: Images/Ottimilita_UCS.png  used on input line 151.
@@ -220,79 +229,97 @@ Overfull \hbox (16.44304pt too wide) in paragraph at lines 153--155
 \OT1/cmr/bx/n/10 Overload della no-tazione\OT1/cmr/m/n/10 : es-tendo la no-tazione di $\OML/cmm/m/it/10 g$ \OT1/cmr/m/n/10 ren-den-dola ap-pli-ca-bile an-che ai path $\OML/cmm/m/it/10 g\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 X\OT1/cmr/m/n/10 ^^Y\OML/cmm/m/it/10 Y\OT1/cmr/m/n/10 ^^Y [] ^^Y\OML/cmm/m/it/10 Z\OT1/cmr/m/n/10 ) =
  []
 
-<Images/UCS_conEXL.png, id=34, 702.37407pt x 286.06876pt>
+<Images/UCS_conEXL.png, id=33, 702.37407pt x 286.06876pt>
 File: Images/UCS_conEXL.png Graphic file (type png)
 <use Images/UCS_conEXL.png>
 Package pdftex.def Info: Images/UCS_conEXL.png  used on input line 171.
 (pdftex.def)             Requested size: 455.24411pt x 185.42303pt.
+
+
 [6 <./Images/UCS.png> <./Images/Ottimilita_UCS.png>]
-<Images/implementazione_UCS.png, id=41, 769.37437pt x 360.59718pt>
+<Images/implementazione_UCS.png, id=40, 769.37437pt x 360.59718pt>
 File: Images/implementazione_UCS.png Graphic file (type png)
 <use Images/implementazione_UCS.png>
 Package pdftex.def Info: Images/implementazione_UCS.png  used on input line 176.
 (pdftex.def)             Requested size: 455.24411pt x 213.37224pt.
- [7 <./Images/UCS_conEXL.png> <./Images/implementazione_UCS.png>]
-<Images/A_conEXL.png, id=48, 368.87813pt x 433.62pt>
+
+
+[7 <./Images/UCS_conEXL.png> <./Images/implementazione_UCS.png>]
+<Images/A_conEXL.png, id=47, 368.87813pt x 433.62pt>
 File: Images/A_conEXL.png Graphic file (type png)
 <use Images/A_conEXL.png>
 Package pdftex.def Info: Images/A_conEXL.png  used on input line 198.
 (pdftex.def)             Requested size: 182.09486pt x 214.05038pt.
-<Images/consistenza.png, id=49, 481.8pt x 385.44pt>
+<Images/consistenza.png, id=48, 481.8pt x 385.44pt>
 File: Images/consistenza.png Graphic file (type png)
 <use Images/consistenza.png>
 Package pdftex.def Info: Images/consistenza.png  used on input line 209.
 (pdftex.def)             Requested size: 113.81102pt x 91.04892pt.
- [8 <./Images/A_conEXL.png> <./Images/consistenza.png>]
-<Images/assimilitaA.png, id=54, 238.8925pt x 234.8775pt>
+
+
+[8 <./Images/A_conEXL.png> <./Images/consistenza.png>]
+<Images/assimilitaA.png, id=53, 238.8925pt x 234.8775pt>
 File: Images/assimilitaA.png Graphic file (type png)
 <use Images/assimilitaA.png>
 Package pdftex.def Info: Images/assimilitaA.png  used on input line 223.
 (pdftex.def)             Requested size: 113.81102pt x 111.89769pt.
-<Images/OttimalitaA2.png, id=55, 409.53pt x 315.1775pt>
+<Images/OttimalitaA2.png, id=54, 409.53pt x 315.1775pt>
 File: Images/OttimalitaA2.png Graphic file (type png)
 <use Images/OttimalitaA2.png>
 Package pdftex.def Info: Images/OttimalitaA2.png  used on input line 236.
 (pdftex.def)             Requested size: 227.62206pt x 175.18527pt.
-<Images/creareEuristica.png, id=56, 1330.9725pt x 299.1175pt>
+<Images/creareEuristica.png, id=55, 1330.9725pt x 299.1175pt>
 File: Images/creareEuristica.png Graphic file (type png)
 <use Images/creareEuristica.png>
 Package pdftex.def Info: Images/creareEuristica.png  used on input line 251.
 (pdftex.def)             Requested size: 455.24411pt x 102.30563pt.
- [9 <./Images/assimilitaA.png> <./Images/OttimalitaA2.png>]
-<Images/rilassamento.png, id=60, 1395.2125pt x 379.4175pt>
+
+
+[9 <./Images/assimilitaA.png> <./Images/OttimalitaA2.png>]
+<Images/rilassamento.png, id=59, 1395.2125pt x 379.4175pt>
 File: Images/rilassamento.png Graphic file (type png)
 <use Images/rilassamento.png>
 Package pdftex.def Info: Images/rilassamento.png  used on input line 260.
 (pdftex.def)             Requested size: 341.43307pt x 92.85098pt.
- [10 <./Images/creareEuristica.png> <./Images/rilassamento.png>]
-<Images/limitiA.png, id=64, 542.025pt x 377.41pt>
+
+
+[10 <./Images/creareEuristica.png> <./Images/rilassamento.png>]
+<Images/limitiA.png, id=63, 542.025pt x 377.41pt>
 File: Images/limitiA.png Graphic file (type png)
 <use Images/limitiA.png>
 Package pdftex.def Info: Images/limitiA.png  used on input line 286.
 (pdftex.def)             Requested size: 227.62206pt x 158.49384pt.
-<Images/salesman.png, id=65, 1433.355pt x 371.3875pt>
+<Images/salesman.png, id=64, 1433.355pt x 371.3875pt>
 File: Images/salesman.png Graphic file (type png)
 <use Images/salesman.png>
 Package pdftex.def Info: Images/salesman.png  used on input line 302.
 (pdftex.def)             Requested size: 455.24411pt x 117.95105pt.
- [11 <./Images/limitiA.png> <./Images/salesman.png>]
-<Images/focal.png, id=69, 564.1075pt x 303.1325pt>
+
+
+[11 <./Images/limitiA.png> <./Images/salesman.png>]
+<Images/focal.png, id=68, 564.1075pt x 303.1325pt>
 File: Images/focal.png Graphic file (type png)
 <use Images/focal.png>
 Package pdftex.def Info: Images/focal.png  used on input line 312.
 (pdftex.def)             Requested size: 227.62206pt x 122.3147pt.
-<Images/moreAlgoritmi.png, id=70, 1339.0025pt x 556.0775pt>
+<Images/moreAlgoritmi.png, id=69, 1339.0025pt x 556.0775pt>
 File: Images/moreAlgoritmi.png Graphic file (type png)
 <use Images/moreAlgoritmi.png>
 Package pdftex.def Info: Images/moreAlgoritmi.png  used on input line 345.
 (pdftex.def)             Requested size: 455.24411pt x 189.05536pt.
- [12 <./Images/focal.png>] [13 <./Images/moreAlgoritmi.png>] [14]
-<Images/alberoGioco.png, id=81, 634.37pt x 784.9325pt>
+
+
+[12 <./Images/focal.png>]
+
+[13 <./Images/moreAlgoritmi.png>]
+
+[14]
+<Images/alberoGioco.png, id=80, 634.37pt x 784.9325pt>
 File: Images/alberoGioco.png Graphic file (type png)
 <use Images/alberoGioco.png>
 Package pdftex.def Info: Images/alberoGioco.png  used on input line 415.
 (pdftex.def)             Requested size: 227.62206pt x 281.64127pt.
-<Images/minmax.png, id=82, 1369.115pt x 335.2525pt>
+<Images/minmax.png, id=81, 1369.115pt x 335.2525pt>
 File: Images/minmax.png Graphic file (type png)
 <use Images/minmax.png>
 Package pdftex.def Info: Images/minmax.png  used on input line 428.
@@ -302,31 +329,34 @@ Overfull \hbox (9.11774pt too wide) in paragraph at lines 418--429
 \OT1/cmr/m/n/10 Per adesso as-sum-i-amo che trovaer la strate-gia ot-tima sia un prob-lema di search che tiene conto dell'avverario:
  []
 
-[15 <./Images/alberoGIoco.png>]
-<Images/analisiMinMax.png, id=86, 1413.28pt x 596.2275pt>
+
+
+[15 <./Images/alberoGioco.png>]
+<Images/analisiMinMax.png, id=85, 1413.28pt x 596.2275pt>
 File: Images/analisiMinMax.png Graphic file (type png)
 <use Images/analisiMinMax.png>
 Package pdftex.def Info: Images/analisiMinMax.png  used on input line 437.
 (pdftex.def)             Requested size: 341.43307pt x 144.04367pt.
- [16 <./Images/minmax.png> <./Images/analisiMinMax.png>] (./main.aux)
+
+
+[16 <./Images/minmax.png> <./Images/analisiMinMax.png>] (main.aux)
  ***********
-LaTeX2e <2023-11-01> patch level 1
-L3 programming layer <2024-01-22>
+LaTeX2e <2024-11-01> patch level 2
+L3 programming layer <2025-04-29>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 2644 strings out of 476182
- 42968 string characters out of 5795594
- 1938975 words of memory out of 5000000
- 24651 multiletter control sequences out of 15000+600000
- 563005 words of font info for 52 fonts, out of 8000000 for 9000
- 14 hyphenation exceptions out of 8191
- 57i,7n,71p,982b,312s stack positions out of 10000i,1000n,20000p,200000b,200000s
- </home/federico/.texlive2023/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1000.600pk></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on main.pdf (16 pages, 919063 bytes).
+ 2651 strings out of 469923
+ 44026 string characters out of 5469170
+ 446853 words of memory out of 5000000
+ 29481 multiletter control sequences out of 15000+600000
+ 631761 words of font info for 56 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 57i,7n,71p,1008b,312s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ <C:\Users\feder\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1000.pk><C:/Users/feder/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/feder/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/feder/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/feder/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/feder/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/feder/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/feder/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/feder/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/feder/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/feder/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/feder/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb>
+Output written on main.pdf (16 pages, 931142 bytes).
 PDF statistics:
- 141 PDF objects out of 1000 (max. 8388607)
- 75 compressed objects within 1 object stream
+ 139 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  91 words of extra memory for PDF output out of 10000 (max. 10000000)
 
