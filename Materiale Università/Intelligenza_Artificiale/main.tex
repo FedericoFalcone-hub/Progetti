@@ -344,7 +344,7 @@ I vari concetti che definiscono gli algoritmi di ricerca visti in precedenza, po
     \centering
     \includegraphics[width=1\linewidth]{Images/moreAlgoritmi.png}
 \end{figure}
-\section{Giochi: nozioni di base e Minimax}
+\section{Giochi: nozioni di base, Minimax e alfa-beta pruning} 
 \subsection{Adversarial Search}
 L'adversarial search è una \textbf{ricerca con avversari} creata in un \textbf{ambiente competitivo} in cui vi sono due o più agenti con obiettivi in conglitto.
 \\ Consiste in un ambiente multi-agente in cui gli obiettivi degli altri obiettivi non sono necessariamente concordanti con quelli del nostro agente di riferimento. In questi casi si parla di un sistema
@@ -436,5 +436,46 @@ Procedimento:
     \centering
     \includegraphics[width=0.75\linewidth]{Images/analisiMinMax.png}
 \end{figure}
+\textbf{Lato negativo}: bisogna attraversare tutto l'albero. Il risolutore, a differenza della mente umana ha un limite molto maggiore di ragionamento per sviluppare la propria mossa. Spesso la decisione è estremamente controintuitiva. Questo approccio va bene finchè il numero di decisioni non aumenta.
+\subsubsection{Minimax con avversario non razionale}
+Minimax ragiona per trovare la strategia ottima assumendo che l'avversario giochi a sua volta la sua strategia ottima, date le nostre assunzioni sul meccanismo equivale a dure che l'avversario è \textbf{razionale}.
+\\ Cosa succede se MAX ragiona assumendo un avversario razionale, ma poi, nel momento del gioco, il suo avversario non lo è? In tal caso la strategia Minimax non peggiora, ma \textcolor{red}{non è garantita che sia quella ottima}.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{Images/MinMaxNonOttimo.png}
+\end{figure}
+Minmax è una strategia \textbf{conservativa}. Il valore Minimax è un Lower Bound sul valore del gioco.
+\subsubsection{Minimax con più agenti}
+Minimax può essere facilmente esteso ad una classe di giochi equivalente a quella che abbiamo considerato, ma dove passiamo da 2 a $n$ agenti giocatori. Non possiamo pià rappresentare le utilità rispetto ad un solo giocatore perchè il concetto di somma zero diventa più complicato.
+\\ In ogni stato terminale ripostiamo un vettore di $n$ utilità, una per ciascun giocatore. 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{Images/minmaxmoreagents.png}
+\end{figure}
+L'algoritmo sceglierà quale valore propagare in base al payoff che otterebbe il giocatore che ha eseguito la mossa.
+\subsection{$\alpha-\beta$ pruning}
+\subsubsection{Migliorare le performance di Minimax}
+Minimax ha il problema di eseguire uan DFS esaustiva su tutto l'albero di gioco per poter determinare la sua mossa. La complessità è quindi esponenziale nella profondità dell'albero di gioco: $O(b^d)$.
+\\ Per certi giochi quindi la complessità combinatoria elevata rappresenta un limite \textbf{impossibile} da valicare con l'approccio Minimax.
+\\ \textbf{Idea: } nei problemi di search abbiamo definito delle regole di \textbf{prnunig} che ci hanno aiutato a migliorare l'efficienza pratica degli algoritmi: possiamo definire regole analoghe per la risoluzione di giochi?
+\\ Consideriamo questa situazione su un albeero di gioco esplorato da Minimax
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{Images/migliorieMinimax.png}
+\end{figure}
+Questo schema può essere formalizzato e codificato in una regola di pruning.
+\subsubsection{Potatura $\alpha-\beta$}
+\textbf{Principio dell'$\alpha-\beta$ pruning}: man mano che la DFS procede, teniamo traccia, su ogni nodo del branch corrente, di ciò che sappiamo sul valore di quel nodo. Fino a che la DFS non ha esplorato tutti i nodi figli, non conosciamo con esattezza il valore del nodo. Ma qualcosa sappiamo! 
+\\ Anzichè un valore singolo, usiamo un intervallo di valori $[\alpha, \beta]$: indica che, stando a quanto scoperto dalla DFS fino a quel momento, il valore Minimax di quel nodo è compreso nell'intervallo (inizialmente è $[- \infty, + \infty]$).
+\\ In molti casi, per scartare un nodo dall'albero di gioco non ci interessa conoscere l'esatto valore Minimax, ci basta $[\alpha, \beta]$.
+\begin{itemize}
+    \item $\alpha$: il minimo valore garantito per MAX.
+    \item $\beta$: il massimo valore garantito per MIN.
+\end{itemize}
+\newpage
+\subsubsection{Esempio}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{Images/alphabeta.png}
+\end{figure}
 \end{document}
-    
