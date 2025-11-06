@@ -478,4 +478,163 @@ Questo schema può essere formalizzato e codificato in una regola di pruning.
     \centering
     \includegraphics[width=1\linewidth]{Images/alphabeta.png}
 \end{figure}
+La potatura $\alpha-\beta$ può introdurre diversi vantaggi, ma ha un problema di fondo sul quale ci si può fare poco: \textbf{almeno una porzione dell'albero di
+gioco va esplorata fino ai nodi terminali}. Questa soluzione risulta impossibile in molti casi reali per due ragioni:
+\begin{enumerate}
+    \item Complessità elevatissima dell'albero di gioco;
+    \item Tempo limitato entro cui va presa la decisione su quale mossa fare.
+\end{enumerate}
+C'è un aspetto più di fondo: risolvere il gioco non è poi così interessante. Immaginiamo due giocatori ideali e cioè entrambi in grado di risolvere il gioco all'esatto, la partita può andare
+solo in tre modi: uno dei due si arrende o si mettono d'accordo per pareggiare.
+\\ Ricapitolando:
+\begin{enumerate}
+    \item Sarebbe bello avere un \textbf{ordering perfetto} delle mosse, ma per averlo equivale a risolvere all'esatto;
+    \item Sarebbe bello poter risolvere \textbf{all'esatto}, ma non abbiamo abbastanza risorse computazionali.
+\end{enumerate}
+\textbf{Domanda sul problema 1}: sarebbe possibile calcolare un ordine delle azioni man mano che la ricerca procede? Non l'ordine perfetto, ma uno euristico, informato da ciò 
+che la ricerca ha scoperto fino a quel momento.
+\\ \textbf{Domanda sul problema 2}: sarebbe possibile assegnare un valore numerico anche ad un nodo non terminale $p$ dell'albero di gioco, in modo da stimare il valore Minimax senza dover 
+scendere in profondità fino ad almeno una foglia del sotto-albero con radice in $p$?
+\\ La risposta ad entrambe le domande è sì e la tecnica per farlo rende la potatura $\alpha,\beta$ più efficiente combinando tre elementi:
+\begin{itemize}
+    \item funzioni di \textbf{valutazione} e \textbf{cutoff};
+    \item tabelle delle \textbf{trasposizioni};
+    \item \textbf{iterative deepening}.
+\end{itemize}
+\subsubsection{Funzioni di valutazione e cutoff}
+Dato un nodo $s$ dell'albero di gioco, anzichè calcolare il suo valore Minimax fornisco una stima di quel valore applicando una funzione di valutazione \textcolor{red}{$v(s)$}. La funzione $v$ è un'\textbf{euristica}: produce 
+una stima della qualità di quel nodo, codifica, in una computazione \textbf{efficiente}, quello che un giocatore umano fa quando cerca di intuire la bontà del trovarsi 
+in una particolare situazione del gioco.
+\\ Approccio: data $v$ e un \textbf{test di cutoff} $CUT(s,d)$ per un nodo $s$ alla profondità $d$, se il test restituisce false, eseguo Minimax da quel nodo, altrimenti fermo Minimax e restituisco $v(s)$.
+\\ Introduciamo incertezza: la complessità computazionale mi impedisce di calcolare il valore esatto di ogni nodo, anche se, viste le assunzioni sul meccanismo, sarebbe possibile. Se la funzione di valutazione è \textbf{efficace},
+posso riuscire comunque a identificare buone mosse.
+\begin{center}
+    \textit{Posso fermare la ricerca dopo un tempo ragionevole e fornire comunque un'azione da giocare!
+    \\ Posso usare $v$ per ordinare le azioni e valutare prima quelle che sembrano migliori!}   
+\end{center}
+Dato uno stato si possono definire delle \textbf{feature} che lo descrivono. \textcolor{ForestGreen}{Ad esempio scacchi: $(n_1,n_2,\dots, n_6)$, dove $n_i$ è il numero di pezzi del tipo $i$ rimasti nella scacchiera.}
+\begin{itemize}
+    \item funzione basata sull' \textcolor{blue}{\textbf{esperienza}} (tante partite che abbiamo giocato e salvato in un dataset):
+    \begin{itemize}
+        \item Ogni profilo di feature $p$ definisce una classe di equivalenza tra stati;
+        \item Dall'esperienza sappiamo che di tutte le occasioni in cui ci siamo trovati in uno stato con profilo $p$, nel $50\%$ dei casi abbiamo vinto, nel $20\%$ abbiamo perso, mentre nel restante $30\%$ abbiamo pareggiato;
+        \item Quindi se $s$ è un nodo con profilo $p$, possiamo assegnargli il valore $v(s)= 0,5*1+0,2*(-1)+0,3*0=0,3$.
+\end{itemize}
+\item funzione basata sulla \textcolor{red}{\textbf{combinazione}} di feature:
+\begin{itemize}
+    \item Se chiamo $f_1(s),f_2(s),\dots,f_n(s)$ le $n$ feature che ho definito per un generico stato $s$, posso aggregarle per ottenere un valore: 
+    \[ v(s)=\omega_1f_1(s)+\omega_2f_2(s)+\dots + \omega_nf_n(s)\]
+\end{itemize}
+\end{itemize}
+Nella pratica queste funzioni sono convenienti se:
+\begin{itemize}
+    \item Riusciamo a definire buone feature \textbf{manualmente}.
+    \item Si può calcolare in modo \textbf{efficiente} le funzioni di valutazione (tempo polinomiale con esponente basso).
+\end{itemize}
+Non sempre questi due scenari si verificano, in certi casi non è ovvio come buone feature siano definite, serve un approccio alternativo per identificarle (es. deep learning).
+\\ Come definire il test di cutoff $CUT(s,d)$? Basato su soglia di profondità \textbf{massima}.
+\\ Identificazione degli \textbf{stati quiescenti}: gli stati in cui non ci si aspettano grandi cambiamenti in termini di valore.
+\\ \textcolor{red}{\textbf{Quiescent search}}: esegue un cutoff restituendo $v()$ solo per gli stati "quieti", dove non ci sono minacce o opportunità imminenti. 
+Se uno stato non è quiescente, si va avanti in profondità.\\ L'arroccio della quiescent search sfrutta una caratteristica ricorrente in molti giochi: gli episodi rilevanti si sviluppano in regioni di profondità relativamente 
+compatte e distanziate:
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{Images/quiescent.png}
+\end{figure}
+\pagebreak
+\subsubsection{Trasposizoni}
+Molti nodi nell'albero di ricerca sono strategicamente equivalenti perchè identici o per via di simmetrie e regolarità.
+\\ \textcolor{ForestGreen}{Esempio: questi due nodi sono equivalenti a meno di una rotazione, dal punto di vista strategico sono lo stesso}
+\begin{figure}[H]
+    \centering
+\includegraphics[width=0.30\linewidth]{Images/tris.png}
+\end{figure}
+In altri casi uno stesso stato può essere raggiunto da sequenze diverse di mosse, in generale uno stato che richiede $m$ mosse da parte di ogni giocatore può ammettere fino a $m!^n$ diverse sequenze
+(dove $n$ è il numero di giocatori).
+\\ \textbf{Trasposition table}: hash table dove per ogni stato $\overline{s}$ valutato dalla ricerca mantengo questi campi:
+\begin{itemize}
+    \item Il valore dello stato $\overline{v}$ e la mossa $\overline{a}$ associata a quel valore.
+    \item La profondità massima $\overline{d}$ da cui è arrivata la ricerca che ha valutato quel nodo (dipende dal cutoff).
+\end{itemize}
+Se durante la ricerca (con limite di profondità $\overline{d}$) tutto il sotto-albero è stato esplorato fino ai nodi terminali, allora $\overline{v}$ è il valore
+Minimax del nodo; in tutti gli altri casi è un bound ($\geq$ o $\leq$ a seconda se il nodo è MIN o MAX)
+\\ È possibile $\overline{v}$ sia stato determinato dopo una potatura $\alpha$ (se il nodo è MIN) o $\beta$ (se il nodo è MAX), quindi non è detto che tutte le azioni siano state valutate.
+\subsection{Giochi stocastici, incertezza}
+Introduciamo l'\textbf{incertezza} nel nostro modello di gioco, questa nuova caratteristica ha un duplice ruolo:
+\begin{itemize}
+    \item ci permette di avere un modello più generale con cui descrivere i giochi dove alcune dinamiche sono random;
+    \item ci permetterà di definire un nuovo approccio per la risoluzione dei giochi non più basato sulla ricerca esatta, ma su una ricerca "probabilistica" che può essere usato sia con giochi stocastici che non.
+\end{itemize}
+Come si introduce l'incerteza nei giochi? Si introduce un nuovo giocatore: \textbf{la Natura: $\mathcal{N}$}.
+\\ $\mathcal{N}$ può essere pensata come un giocatore analogo a tutti gli altri: avrà i suoi turni di gioco e, di conseguenza, i suoi nodi di decisione sull'albero di ricerca (detti anche \textbf{nodi di chance}).
+\\ Tuttavia, rispetto agli altri giocatori presenta \textcolor{red}{\textbf{tre}} differenze fondamentali:
+\begin{itemize}
+    \item La sua strategia di gioco è \textbf{fissa a priori} ed è conosciuta da tutti gli altri giocatori da prima che il gioco inizi (come se $\mathcal{N}$, prima di iniziare la partita, dichiarasse pubblicamente
+    la sua strategia e, durante il gioco, rispettase la promessa).
+    \item La sua strategia di gioco è \textbf{mista} (una distribuzione di probabilità sulle azioni), quindi nel momento di decidere l'azione si lanciano dei dadi.
+    \item $\mathcal{N}$ non riceve payoff, è totalmente agnostica rispetto alle dinamiche del gioco , quindi la sua strategia è un \textbf{fenomeno dato} non il risultato di un ragionamento rispetto a delle preferenze.
+\end{itemize}
+\textcolor{Fuchsia}{È sostanzialmente l'ambiente, a cui non frega di vincere o di perdere}
+\pagebreak
+\\ Come cambia la rappresentazione grafica del gioco?
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{Images/giocoConIncertezza.png}
+\end{figure}
+Le mosse colorate in nero sono quelle dell'ambiente, nodi di chance. Gli agenti si trovano in un ambiente \textbf{stocastico}
+
+\subsubsection{Expectimax}
+Visto che $\mathcal{N}$ non ha un comportamento strategico, la logica Minimax è ancora valida: possiamo estendere l'algoritmo in modo che gestisca l'incertezza.
+\\ \textcolor{red}{\textbf{Idea}}: Minimax dove il valore dei nodi di chance non è determinato con il \textit{max} o \textit{min} dei valori sottostanti, ma con il \textbf{valore atteso} $E[X]$ definito come la somma
+dei valori sottostanti, ciascuno moltiplicato per la probabilità di finire in quel nodo.
+\\ Nel caso di somma-zero a due giocatori con turni alternati (che includano anche $\mathcal{N}$), l'algoritmo Minimax si estende naturalmente e diventa \textcolor{red}{Expectimax}.
+\\ Problema: la potatura $\alpha,\beta$ sotto un nodo di chance (e quindi in generale) \textbf{non si può applicare} perchè la scelta dell'azione non è guidata da un giocatore. Il valore che "sale" dai nodi sottostanti cambia
+se ne scartiamo alcuni. Questo non valeva con MAX o MIN perchè il massimo/minimo tra $n$ valori rimane lo stesso se, tra quegli $n$, si scartano i valori che non sono il massimo/minimo.
+\\ Se ci sono date assunzioni sui payoff però si può fare!
+\\ \textcolor{ForestGreen}{\textbf{Esempio} supponiamo di sapere che $10\leq u_1 \leq 30$ in qualsiasi terminale}.  
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{Images/alfabeta_stocastico.png}
+\end{figure}
+
+\subsubsection{Stimare il valore di un'azione}
+L'incertezza non è una caratteristica del problema che dobbiamo gestire, ma può essere "sfruttata" nella definizione di un metodo risolutivo alternativo.
+\\ Con l'eccezione di $PROBCUT$, tutti i metodi che abbiamo studiato si basano su inferenze esatte; tutti questi approcci soffrono di un problema di scalabilità.
+\\ \textcolor{red}{\textbf{Idea}}: trasformare il processo di inferenza in un \textbf{processo di stima}: non cerco l'azione migliore, ma stimo la bontà di ogni azione e scelgo quella con il valore stimato più alto.
+\\ Se il processo di stima è ben definito, con il tempo, i valori stimati convergono al \textcolor{red}{valore esatto}.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{Images/montecarlo.png}
+\end{figure}
+\begin{itemize}
+    \item Considero un'azione e lo stato $s$ in cui mi porterebbe.
+    \item Simulo un numero molto alto di partite a partire da $s$: gioco contro me stesso scegliendo le azioni in modo casuale.
+    \item La media dei punteggi finali è una stima del valore di $s$.
+    \item Ripeto per ogni azione e scelgo quella con la stima più alta.
+    \item Questa idea si chiama \textcolor{red}{Monte Carlo Tree Search} (MCTS).
+\end{itemize}
+\subsubsection{Monte Carlo Tree Search (MCTS)}
+Caso semplificato: stimare la \textbf{winning rate} di un'azione $a_i$, cioè la probabilità di vincere la partita se mi trovassi nello stato, che indico con $s_i$, in cui tale azione mi porta.
+\\ Posso scegliere tra $n$ azioni ($a_1, a_2,\dots, a_n$) e ho un tempo limitato che consente di svolgere un totale di $N$ simulazioni (supponiamo di non poter parallelizzare).
+\\ Appoccio naive: eseguo $\frac{N}{n}$ simulazioni per ogni $s_i$ e per ciascuno ottengo la stima della winning rate $\omega_i=\frac{nW_i}{N}$ dove $W_i$ è il numero di simulazioni in cui ho vinto;
+alla fine gioco $a^*=argmax_i\{\omega_i\}$.
+\\ \textcolor{red}{\textbf{Problema}}: sto suddividendo lo sforzo in modo uniforme e non informato, potrei spendere troppo tempo su azioni che è chiaro che nono sono buone e, viceversa, troppo poco tempo su azioni che sembrerebbero
+buone e che richiederebbero maggior precisione di stima (più simulazioni delle altre).
+\\ \textcolor{Green}{\textbf{Soluzione}}: concentrare più sforzo (numero di simulazioni) verso le azioni che si configurano come migliori.
+\\ \textcolor{red}{\textbf{ATTENZIONE!}} Devo stare attento a non escludere del tutto le azioni che non sembrano buone perchè, magari, con più simulazioni posso scoprire che in realtà sono migliori!
+Questo è un problema fondamentale dell'informatica: \textcolor{red}{\textbf{EXPLORATION VS ESPLOITATION}} dilemma.
+\subsubsection{Multi-Armed Bandit Problem (MAB)}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Images/mab.png}
+\end{figure}
+Come spendere al meglio le $N$ giocate? \textcolor{red}{\textbf{Risultato fondamentale}}: simula l'azione che massimizza l'\textbf{Upper Confidence Bound} $UCB_i=\omega_i+c \sqrt{\frac{logN}{N-i}}$ dove $N_i$ è il numero di simulazioni
+svolte per $a_i$ e $c$ è un parametro che bilancia exploration ed exploitation.
+\subsubsection{MCTS con UCB}
+Vantaggi:
+\begin{itemize}
+    \item \textbf{Anytime}: fermando l'algoritmo ad un qualsiasi tempo $t$ otteniamo la decisione migliore possibile con le informazioni raccolte fino a quel momento.
+    \item Non necessita euristiche, funzioni di valutazione, definizione di feature, ...
+    \item \textbf{Informato}: la ricerca si concentra maggiormente sui branch più promettenti (senza tralasciare mai completamente tutti gli altri).
+\end{itemize}
 \end{document}
