@@ -637,4 +637,86 @@ Vantaggi:
     \item Non necessita euristiche, funzioni di valutazione, definizione di feature, ...
     \item \textbf{Informato}: la ricerca si concentra maggiormente sui branch più promettenti (senza tralasciare mai completamente tutti gli altri).
 \end{itemize}
+
+\section{Constraint Satisfaction Problems}
+Gli algoritmi di search si basano su una assunzione di fondo: \textbf{lo stato è un'entità atomica}, la cui struttura interna non è accessibile. Fare search vuol dire ragionare sulla struttura dello spazio degli stati
+(come questi sono collegati tra loro) senza considerare il come uno stato codifica ciò che rappresenta. 
+\\ Esistono però molti problemi in cui la struttura dello stato è \textcolor{red}{accessibile}. Anzichè creare una sequenza di transizioni per attraversare lo spazio degli stati verso un goal, cerchiamo di costruire/\textbf{identificare}
+lo stato di un goal (soluzione) manipolando direttamente la sua struttura interna (search vs identification).
+\\ Un CSP è un \textbf{sotto-insieme} di problemi di search dove stato, transizione e goal check hanno una struttura specifica:
+\begin{itemize}
+    \item \textbf{Stato} $\rightarrow$ insieme di variabili, inizialmente senza un valore assegnato.
+    \item \textbf{Transizione} $\rightarrow$ assegnare un valore ad una variabile.
+    \item \textbf{Goal check} $\rightarrow$ soddisfare un insieme di vincoli sugli assegnamenti di alcune o tutte le variabili.
+\end{itemize}
+\textbf{Risolvere un CSP} consiste quindi nel trovare un valore da assegnare ad ogni variabile in modo che nessun vincolo sia violato. Conosciamo la struttura interna del problema attraverso un formalismo più specifico di quello dei problemi
+di search (dove stato, transizione e goal potevano essere arbitrari). È comunque un formalismo abbastanza generale (variabili, vincoli) da permetterci di modellare molti problemi interessanti.
+\\ \textcolor{red}{\textbf{Vantaggio chiave}}: avere accesso alla struttura del problema ci permette di definire algoritmi risolutivi più efficienti (trovando assegnamenti illegali si possono escludere grosse regioni dello spazio degli stati).
+\\ \textbf{Search vs CSP}
+\\ \textcolor{ForestGreen}{Esempio: risolvere un puzzle da 12 pezzi.}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Images/puzzle.png}
+\end{figure}
+\textbf{Formalizzazione}
+
+\begin{itemize}
+    \item Insieme di \textbf{variabili} $X=\{X_1,X_2,\dots,X_n\}$. 
+    \item Insieme di \textbf{domini} $D=\{D_1,D_2,\dots,D_n\}$.
+    \item Insieme di \textbf{vincoli} $C$.
+\end{itemize}
+Un vincolo si rapprenta come una tupla di sue elementi: $\langle variabili, relazione\rangle$:
+\begin{itemize}
+    \item \textbf{variabili}: elenco delle $k\leq n$ variabili coinvolte nel vincolo.
+    \item \textbf{relazione}: elenco delle $k$-tuple di valori che le variabili possono assumere.
+\end{itemize}
+\pagebreak
+È un formalismo teorico con cui si può esprimere qualsiasi vincolo, ma non è efficiente. Restringeremo quindi il tipo di vincoli possibili e adotteremo un linguaggio specifico per quei vincoli.
+\subsection{Esempi}
+\subsubsection{Le N regine}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{Images/regine1.png}
+    \includegraphics[width=1\textwidth]{Images/regine2.png}
+\end{figure}
+
+\subsubsection{Graph coloring}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{Images/coloring1.png}
+\end{figure}
+\subsubsection{Altri esempi}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{Images/sudoku.png}
+\end{figure}
+\subsection{Tipi specifici di vincoli}
+Il tipo di vincolo, diverso a seconda del problema che abbiamo, dipende dal numero di variabili che coinvolge.
+\begin{itemize}
+    \item Vincoli \textbf{unari}: coinvolgono una sola variabile.
+    \item Vincoli \textbf{binari}: coinvolgono copppie di variabili.
+    \item Esistono vincoli più generali che coinvolgono un numero maggiore di variabili. Un vincolo che può coinvolgere fino a \textbf{tutte} le variabili presenti in un CSP 
+    si chiama vincolo \textbf{globale}.
+\end{itemize}
+Un CSP con domini infiniti può essere sempre convertito in uno equivalente con solo vincoli \textcolor{red}{binari}, a patto di introdurre un numero sufficiente di variabili ausiliarie.
+\subsubsection{Convertire un CSP generico in uno binario}
+\textcolor{ForestGreen}{Esempio: come converto il vincolo $A+B=C$ in uno binario?}
+\\Nuova variabile ausiliaria $V$ il cui dominio è $D_A \times D_B$ cioè i "valori" assegnabili a $V$ sono tuple di 2 valori, uno del dominio di $A$ e uno del dominio di $B$.
+\\ \textbf{Nuovi vincoli}: sia $V$ una variabile a $n$ dimensioni (cioè i suoi valori sono tuple di $n$ valori) e $X$ una variabile standard a 1 dimensione:
+\begin{itemize}
+    \item \textcolor{red}{$i(X,V)$} impone che $X$ sia uguale all'$i$-esimo valore della tupla assegnata a $V$; ad esempio se $V=(9,-11,42),2(X,V)$ impone che $X$ debba valere $-11$.
+    \item \textcolor{red}{$\Sigma(X,V)$} impone che $X$ sia uguale alla somma di tutti i valori della tupla assegnata a $V$; ad esempio se $V=(9,-11,42), \sigma(X,V)$ impone che $X$ debba valere $40$.
+\end{itemize}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Images/vincoli.png}
+\end{figure}
+\subsection{Metodi risolutivi}
+Visto che i CSP sono un sottoinsieme di problemi di search, possiamo sicuramente applicare un algoritmo di ricerca come, ad esempio, la DFS dove un goal è uno stato in cui tutte le variabili sono assegnate e i vincoli sono rispettati. \\
+Nel caso pessimo vengono provati tutti gli assegnamenti possibili. Alla fine o abbiamo un goal (assegnamento ammissibile) oppure rispondiamo che il problema non è soddisfacibile (completezza e correttezza garantite).
+\\ Usare DFS però non ci permette di sfruttare pienamente la struttura del problema. La search può essere rafforzata con un'attività di inferenza sui vincoli che si chiama \textbf{\textcolor{red}{constraint propagation}}, che funziona secondo questo principio:
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Images/constraintPropagation.png}
+\end{figure}
 \end{document}

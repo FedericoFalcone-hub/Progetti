@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.10.19)  6 NOV 2025 13:31
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.10.19)  7 NOV 2025 12:08
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -364,25 +364,64 @@ File: Images/mab.png Graphic file (type png)
 <use Images/mab.png>
 Package pdftex.def Info: Images/mab.png  used on input line 629.
 (pdftex.def)             Requested size: 364.19667pt x 155.97322pt.
- [22 <./Images/montecarlo.png> <./Images/mab.png>] [23] (./main.aux)
+ [22 <./Images/montecarlo.png> <./Images/mab.png>]
+<Images/puzzle.png, id=122, 2031.59pt x 907.39pt>
+File: Images/puzzle.png Graphic file (type png)
+<use Images/puzzle.png>
+Package pdftex.def Info: Images/puzzle.png  used on input line 659.
+(pdftex.def)             Requested size: 364.19667pt x 162.65855pt.
+ [23 <./Images/puzzle.png>]
+<Images/regine1.png, id=126, 2041.6275pt x 1082.0425pt>
+File: Images/regine1.png Graphic file (type png)
+<use Images/regine1.png>
+Package pdftex.def Info: Images/regine1.png  used on input line 679.
+(pdftex.def)             Requested size: 455.24411pt x 241.26965pt.
+<Images/regine2.png, id=127, 2306.6175pt x 1102.1175pt>
+File: Images/regine2.png Graphic file (type png)
+<use Images/regine2.png>
+Package pdftex.def Info: Images/regine2.png  used on input line 680.
+(pdftex.def)             Requested size: 455.24411pt x 217.51025pt.
+<Images/coloring1.png, id=128, 2286.5425pt x 1090.0725pt>
+File: Images/coloring1.png Graphic file (type png)
+<use Images/coloring1.png>
+Package pdftex.def Info: Images/coloring1.png  used on input line 686.
+(pdftex.def)             Requested size: 455.24411pt x 217.02928pt.
+ [24 <./Images/regine1.png> <./Images/regine2.png>]
+<Images/sudoku.png, id=132, 2280.52pt x 738.76pt>
+File: Images/sudoku.png Graphic file (type png)
+<use Images/sudoku.png>
+Package pdftex.def Info: Images/sudoku.png  used on input line 691.
+(pdftex.def)             Requested size: 455.24411pt x 147.46756pt.
+ [25 <./Images/coloring1.png> <./Images/sudoku.png>]
+<Images/vincoli.png, id=137, 1156.32pt x 433.62pt>
+File: Images/vincoli.png Graphic file (type png)
+<use Images/vincoli.png>
+Package pdftex.def Info: Images/vincoli.png  used on input line 712.
+(pdftex.def)             Requested size: 364.19667pt x 136.57117pt.
+<Images/constraintPropagation.png, id=138, 1830.84pt x 293.095pt>
+File: Images/constraintPropagation.png Graphic file (type png)
+<use Images/constraintPropagation.png>
+Package pdftex.def Info: Images/constraintPropagation.png  used on input line 720.
+(pdftex.def)             Requested size: 364.19667pt x 58.30042pt.
+ [26 <./Images/vincoli.png> <./Images/constraintPropagation.png>] (./main.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 2714 strings out of 476182
- 45051 string characters out of 5795594
+ 2763 strings out of 476182
+ 46367 string characters out of 5795594
  1938975 words of memory out of 5000000
- 24721 multiletter control sequences out of 15000+600000
+ 24770 multiletter control sequences out of 15000+600000
  563005 words of font info for 52 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  57i,7n,71p,982b,312s stack positions out of 10000i,1000n,20000p,200000b,200000s
  </home/federico/.texlive2023/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1000.600pk></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on main.pdf (23 pages, 3478324 bytes).
+Output written on main.pdf (26 pages, 5527330 bytes).
 PDF statistics:
- 188 PDF objects out of 1000 (max. 8388607)
- 99 compressed objects within 1 object stream
+ 206 PDF objects out of 1000 (max. 8388607)
+ 106 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
- 141 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 176 words of extra memory for PDF output out of 10000 (max. 10000000)
 
