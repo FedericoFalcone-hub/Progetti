@@ -719,4 +719,98 @@ Nel caso pessimo vengono provati tutti gli assegnamenti possibili. Alla fine o a
     \centering
     \includegraphics[width=0.8\textwidth]{Images/constraintPropagation.png}
 \end{figure}
+\subsection{Propagazione dei vincoli}
+\subsubsection{Consistenza di nodo}
+La prima e più semplice forma di propagazione dei vincoli si chiama \textbf{consistenza di nodo}. Si applica solo ai vincoli \textcolor{red}{unari} e, tipicamente, la si esegue in una fase di pre-processing del CSP.
+\\ Procedimento: Per ogni variabile $X_i$ rimuovi da $D_i$ tutti i valori che non soddisfano i vincoli unari.
+\\ \textcolor{ForestGreen}{\textbf{Esempio}: se ho vincolo $X_i \neq 5$, allora rimuovo $5$ dal suo dominio}.  
+\\ Se alla fine di questo procedimento:
+\begin{itemize}
+    \item c'è almeno una variabile con dominio vuoto abbiamo risolto il CSP, che è \textcolor{red}{insoddisfacibile};
+    \item ogni variabile ha un solo valore nel suo dominio: abbiamo risolto il CSP, facciamo l'unico assegnamento possibile e verifichiamo i vincoli;
+    \item in tutti gli altri casi abbiamo un CSP equivalente, ma più compatto.
+\end{itemize}
+Raramente la consistenza di nodo risolve completamente un CSP.
+\pagebreak
+\subsubsection{Consistenza di arco}
+La consistenza di arco propaga i \textbf{vincoli binari} (cioè gli archi del constraint graph).
+ Una variabile $X_i$ è consistente rispetto a una variabile $X_j$ se per ogni valore in $D_i$ c'è un valore in $D_j$ che soddisfa il vincolo binario tra le due.
+\\
+\textcolor{ForestGreen}{\textbf{Esempio}:\\$X_1 \geq X_2,D_1=\{7,12\},d_2=\{1,2,15\} X_1$ arc-consistent rispetto a $X_2$ \\
+$X_1 < X_2,D_1=\{7,6\},d_2=\{5,6,1\} X_1$ \textbf{non} arc-consistent rispetto a $X_2$.\\
+Nel secondo esempio la \textbf{non} consistenza di arco ci suggerisce che 6 non può essere assegnato a $X_1$, quindi potremmo eliminarlo nel suo dominio $D_1$.}
+\\ \textbf{Rendere una variabile arc-consistent}: eliminare dal suo dominio tutti i valori che la rendono non consistente rispetto a un'altra variabile con cui condivide un vincolo binario.
+\\Un CSP è arc-consistent se tutti i nodi (le variabili) sono arc-consistent.
+Valgono le stesse considerazioni fatte per la consistenza di nodo, ma in questo caso succede più spesso.
+\subsubsection{Consistenza d'arco: pre-processing}
+\begin{enumerate}
+    \item Se non lo è, trasformare il constraint graph nella sua versione orientata (con archi)
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.8\textwidth]{Images/consistenza_darco.png}
+    \end{figure}
+    \item Esegui l'algoritmo AC-3 (Arc Consistency ver. 3).
+\end{enumerate}
+\subsubsection{AC-3}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{Images/ac3.png}
+\end{figure}
+Una volta terminato il CSP risultato è equivalente a quello di partenza ma è arc-consistent. In generale potrebbe essere risolto prima.
+\subsubsection{Path consistency}
+Abbiamo visto come la consistenza d'arco in certi casi possa introdurre alcun vantaggio. La consistenza d'arco valuta le coppie di variabili. Possiamo generalizzare?\\
+\textcolor{red}{\textbf{Consistenza di percorso}}: considera gruppi di 3 variabili.
+\\ \textbf{Definizione}: due variabili $\{A,B\}$ sono path-consistent rispetto ad una variabile $C$ se per ogni assegnamento di $(A,B)$ consistente con i \textcolor{red}{vincoli tra $A$ e $B$}, esiste
+un valore $C$ che sia:
+\begin{itemize}
+    \item consistente con i vincoli tra $A$ e $C$;
+    \item cosistente con i vincoli tra $B$ e $C$.
+\end{itemize}
+
+\subsection{Algoritmi di Search per CSP}
+In generale propagare i vincoli non implica la soluzione di un CSP, ma l'ottenimento di una semplificazione. Per costruire un assegnamento dobbiamo combinare la propagazione dei vincoli con una procedura di search.
+\subsubsection{Backtracking Search}
+\textcolor{red}{\textbf{Backtracking search}}: algoritmo di search per risolvere un CSP. 
+\begin{itemize}
+    \item \textbf{Nodo di partenza}: assegnamento vuoto $\Gamma$=$\{\}$.(tutte le variabili non sono assegnate).
+    \item \textbf{Estensione del nodo}: assegnare ad una variabile $X_i$ una valore $v \in D_i$.
+    \item Ricerca in profondità con backtracking.
+    \item Nella costruzione di uno stato l'ordine degli assegnamenti non conto (trasposizioni): posso fissare un ordine e ad ogni livello di profondità assegno una variabile (profondità massima limitata dal numero di variabili).
+    \item La propagazione dei vincoli viene fatta \textbf{durante} la ricerca per accelerarla.
+\end{itemize}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Images/backtracking_search.png}
+\end{figure}
+\subsubsection{Ordering di variabili e valori}
+Le funzioni Seleziona-Variabile e Seleziona-Valore possono applicare un ordering su, rispettivamente, la prossima variabile e il prossimo valore da scegliere durante la ricerca.
+\\ Euristica per le varibili:
+\begin{itemize}
+    \item Ordine lessicografico (statica).
+    \item Random (dinamica).
+    \item \textbf{Euristica di grado} (EG): scegliere la variabile che ha il maggior numero di vincoli con variabili correntemente non assegnate (dinamiche). \textcolor{Fuchsia}{Quella più difficile da posizionare, altrimenti se siamo in fondo dobbiamo tornare indietro tanto}
+    \item  \textbf{Minimum Remaining Values} (MRV, "fail-first"): scegliere la variabile con il minor numero di valori possibili nel dominio (dinamica).
+\end{itemize}
+Nella pratica si usa EG per la prima variabile, poi MRV con EG per gli spareggi.
+\\ Euristica per la scelta del valore:
+\textbf{Least-Constraining Value} (LCV): scegliere il valore che esclude meno valori possibili per le variabili adiacenti (quelle che condividono un vincolo).
+\pagebreak
+\subsubsection{Metodi basati su ricerca locale}
+Approccio alternativo alla risoluzione: non lavorare su assegnamenti parziali, ma su assegnamenti completi che possono violare uno o più vincoli. In un assegnamento $\Gamma_1$ che viola un certo 
+numero di vincoli, cambio il valore di una variabile per ottenere un nuovo assegnamento $\Gamma_2$ che violi un numero \textbf{minore} di vincoli (iterative improvement).
+Come scelgo la variabile e il nuovo valore da assegnare? Euristiche.
+\\ Uno dei metodi più semplici da adottare è anche uno dei migliori: \textcolor{red}{\textbf{Min-Conflicts}}.
+\\ Due principi di funzionamento:
+\begin{enumerate}
+    \item La scelta delle variabili è casuale.
+    \item Il valore scelto è quello che \textbf{minimizza il numero di conflitti} nel nuovo assegnamento completo che si genera.
+\end{enumerate}
+\textcolor{red}{Non garantisce di trovare una soluzione e non è anytime.}
+\\
+Nella pratica Min-Conflicts funziona bene con CSP caratterizzati da elevati numeri di variabili. Questo succede perchè le istanze difficili sono tutte concentrate attorno ad un valore critico di $\rho$
+definito come rapporto tra numero di vincoli e numero di variabili del problema.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Images/min_conflicts.png}
+\end{figure}
 \end{document}
