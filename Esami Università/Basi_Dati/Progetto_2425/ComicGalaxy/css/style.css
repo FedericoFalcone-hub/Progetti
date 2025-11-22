@@ -1,0 +1,335 @@
+/* Font fumettoso */
+@import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap');
+
+body {
+    margin: 0;
+    font-family: 'Comic Neue', cursive;
+    background: linear-gradient(135deg, #ffefba, #ffffff);
+}
+
+/* Navbar fumettosa */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ff6f61;
+    color: white;
+    padding: 10px 20px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    margin-right: 15px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.navbar a:hover {
+    text-decoration: underline;
+    color: #ffe066;
+}
+
+.nav-left, .nav-right {
+    display: flex;
+    align-items: center;
+}
+
+/* Pulsante Login/Logout */
+.nav-right a.button {
+    background-color: #ffe066;
+    color: #ff6f61;
+    padding: 5px 12px;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: 0.3s;
+    text-decoration: none;
+}
+
+.nav-right a.button:hover {
+    background-color: #ff6f61;
+    color: #fff;
+}
+
+/* Main content */
+.main {
+    padding: 40px;
+    text-align: center;
+}
+
+.main h1 {
+    color: #ff6f61;
+    font-size: 48px;
+    text-shadow: 2px 2px #fff;
+}
+
+.main p {
+    font-size: 1.2em;
+    color: #333;
+    max-width: 700px;
+    margin: 20px auto;
+}
+
+/* Decorazioni fumettose */
+.comic-deco {
+    font-size: 50px;
+    display: inline-block;
+    margin: 0 10px;
+}
+
+/* Login page */
+.login-container {
+    background: #fffbf0;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    width: 350px;
+    text-align: center;
+    border: 4px solid #ff6f61;
+    position: relative;
+    margin: auto;
+    top: 50%;
+    transform: translateY(50%);
+}
+
+.login-container h2 {
+    color: #ff6f61;
+    margin-bottom: 25px;
+    font-size: 28px;
+    text-shadow: 2px 2px #fff;
+}
+
+.login-container input[type="text"],
+.login-container input[type="password"] {
+    width: 90%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 2px solid #ff6f61;
+    border-radius: 10px;
+    font-size: 16px;
+    outline: none;
+    transition: 0.3s;
+}
+
+.login-container input[type="text"]:focus,
+.login-container input[type="password"]:focus {
+    border-color: #ffb347;
+}
+
+.login-container input[type="submit"] {
+    background: #ff6f61;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    font-size: 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.login-container input[type="submit"]:hover {
+    background: #ffb347;
+    color: #333;
+}
+
+.error {
+    color: #e60000;
+    background: #ffe5e5;
+    border: 2px solid #e60000;
+    padding: 8px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+.back-link {
+    margin-top: 15px;
+    
+}
+
+.back-link a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.back-link a:hover {
+    text-decoration: underline;
+}
+
+/* Decorazioni fumettose Login */
+.login-container::before {
+    content: "💥";
+    font-size: 40px;
+    position: absolute;
+    top: -20px;
+    left: -20px;
+}
+
+.login-container::after {
+    content: "🌟";
+    font-size: 40px;
+    position: absolute;
+    bottom: -20px;
+    right: -20px;
+}
+
+.manager-card {
+    background: #fffbf0;
+    border: 4px solid #ff6f61;
+    border-radius: 15px;
+    width: 180px;
+    height: 180px;
+    text-align: center;
+    padding: 20px;
+    font-size: 22px;
+    font-weight: bold;
+    color: #ff6f61;
+    text-decoration: none;
+    box-shadow: 0 8px 18px rgba(0,0,0,0.2);
+    transition: transform 0.2s, background 0.2s;
+}
+
+.manager-card:hover {
+    transform: scale(1.07);
+    background: #ffe6d9;
+}
+
+.username-link {
+    color: white;           /* colore testo nella navbar */
+    text-decoration: underline;  /* niente sottolineatura di default */
+    font-weight: bold;
+}
+
+.username-link:hover {
+    text-decoration: underline; /* sottolineato al passaggio del mouse */
+    color: #ffe066;             /* colore fumettoso al passaggio */
+    transition: 0.2s;
+}
+
+.profile-box {
+    background: #fffbf0;
+    border: 4px solid #ff6f61;
+    border-radius: 15px;
+    padding: 30px;
+    max-width: 500px;
+    margin: 40px auto;
+    text-align: left;
+    box-shadow: 0 8px 18px rgba(0,0,0,0.2);
+    font-size: 20px;
+}
+
+.management-section {
+    background: #fffbf0;
+    border: 4px solid #ff6f61;
+    border-radius: 15px;
+    padding: 20px;
+    margin: 30px auto;
+    max-width: 900px;
+    box-shadow: 0 8px 18px rgba(0,0,0,0.2);
+}
+
+.management-section h2 {
+    color: #ff6f61;
+    font-size: 28px;
+    margin-bottom: 15px;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.table th, .table td {
+    border: 2px solid #ff6f61;
+    padding: 8px;
+    text-align: left;
+}
+
+.table th {
+    background-color: #ffe066;
+    color: #333;
+}
+
+.button {
+    background: #ff6f61;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.button:hover {
+    background: #ffb347;
+    color: #333;
+}
+
+.table-scroll {
+    max-height: 300px;   
+    overflow-y: auto;    
+    border: 0px solid #ccc;
+}
+
+/* opzionale: mantiene fissa l’intestazione */
+.table-scroll thead th {
+    position: sticky;
+    top: 0;
+    background: #fff;
+    z-index: 2;
+}
+
+/* Messaggio di successo */
+.success {
+    background-color: #d4edda;   /* verde chiaro */
+    color: #155724;              /* verde scuro testo */
+    border: 1px solid #c3e6cb;  /* bordo verde chiaro */
+    padding: 10px 15px;
+    margin: 10px 0;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.btn-ritira {
+    background-color: #e74c3c; /* rosso vivo */
+    color: white;
+    border: none;
+    padding: 5px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-ritira:hover {
+    background-color: #c0392b; /* rosso scuro al passaggio del mouse */
+}
+
+.nessuna-azione {
+    color: gray;
+    font-style: italic;
+}
+
+.qty-input {
+    width: 70px;
+    padding: 5px;
+    font-size: 14px;
+    text-align: center;
+    border: 2px solid #333;
+    border-radius: 6px;
+    background-color: #fff;
+    box-sizing: border-box;
+
+}
+
+.qty-input:focus {
+    outline: none;
+    border-color: #0077ff;
+    box-shadow: 0 0 4px rgba(0, 119, 255, 0.6);
+}
+
+
+
