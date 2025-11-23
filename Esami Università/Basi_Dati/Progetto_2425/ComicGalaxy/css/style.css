@@ -331,5 +331,15 @@ body {
     box-shadow: 0 0 4px rgba(0, 119, 255, 0.6);
 }
 
+.order-link {
+    color: #0077cc;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.order-link:hover {
+    text-decoration: underline;
+}
+
 
 

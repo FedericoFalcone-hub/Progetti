@@ -205,7 +205,12 @@ if ($negozio === null) {
             <tbody>
                 <?php foreach($ordini as $o): ?>
                 <tr>
-                    <td><?= htmlspecialchars($o['id']) ?></td>
+                    <td>
+                        <a href="dettaglio_ordine.php?id=<?= $o['id'] ?>" class="order-link">
+                            <?= $o['id'] ?>
+                        </a>
+                    </td>
+
                     <td><?= htmlspecialchars($o['data_ordine']) ?></td>
                     <td><?= htmlspecialchars($o['data_consegna']) ?></td>
                     <td>€<?= number_format($o['totale'], 2) ?></td>

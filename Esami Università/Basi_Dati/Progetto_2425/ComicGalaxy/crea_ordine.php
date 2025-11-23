@@ -64,8 +64,7 @@ $success_msg = $error_msg = null;
             <thead>
                 <tr>
                     <th>Prodotto</th>
-                    <th>Fornitore</th>
-                    <th>Prezzo</th>
+                    <th>Prezzo medio</th>
                     <th>Quantità disponibile</th>
                     <th>Ordina</th>
                 </tr>
@@ -74,8 +73,7 @@ $success_msg = $error_msg = null;
                 <?php foreach ($prodotti_fornitori as $p): ?>
                 <tr>
                     <td><?= htmlspecialchars($p['nome_prodotto']) ?></td>
-                    <td><?= htmlspecialchars($p['nome_fornitore']) ?></td>
-                    <td><?= htmlspecialchars($p['prezzo']) ?></td>
+                    <td>€<?= htmlspecialchars($p['prezzo']) ?></td>
                     <td><?= htmlspecialchars($p['quantita']) ?></td>
                     <td>
                         <form method="post">

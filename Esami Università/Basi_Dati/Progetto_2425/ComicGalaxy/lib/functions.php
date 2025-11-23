@@ -197,7 +197,7 @@ function getOrdiniNegozio($id_negozio){
         if ($ritirato === 't' || $ritirato === true) {
             $stato = "Ritirato";
         } 
-        else if ($dataConsegna === $oggi) {
+        else if ($dataConsegna <= $oggi) {
             $stato = "Da ritirare";
         } 
         else {
@@ -251,9 +251,8 @@ function getProdottiOrdinabili(){
         $prodotti[] = array(
             'id_prodotto' => $row['id'],
             'nome_prodotto' => $row['nome_prodotto'],
-            'prezzo' => $row['prezzo'],
-            'quantita' => $row['quantita'],
-            'nome_fornitore' => $row['nome_fornitore']
+            'prezzo' => $row['prezzo_medio'],
+            'quantita' => $row['quantita_totale']
         );
     }
     close_pg_connection($db);
@@ -326,3 +325,71 @@ function getSubtotaleProdotto($id_prodotto, $quantita){
     return $prezzo;
 }
 
+function getDettaglioOrdine($id_ordine){
+    include_once('lib/functions.ini.php');
+
+    $db = open_pg_connection();
+
+    $sql = "SELECT *
+            FROM comicgalaxy.v_storico_ordini_fornitori
+            WHERE id_ordine = $1";
+
+    $param = array($id_ordine);
+    $result = pg_prepare($db, "get_dettaglio_ordine", $sql);
+    $result = pg_execute($db, "get_dettaglio_ordine", $param);
+    
+while ($row = pg_fetch_assoc($result)) {
+        
+        $oggi = date('Y-m-d');
+        $dataConsegna = $row['data_consegna'];
+        $ritirato = $row['ritirato'];
+        if ($ritirato === 't' || $ritirato === true) {
+            $stato = "Ritirato";
+        } 
+        else if ($dataConsegna <= $oggi) {
+            $stato = "Da ritirare";
+        } 
+        else {
+            $stato = "In arrivo";
+        }
+
+        $ordine = array(
+            'data_ordine' => $row['data_ordine'],
+            'nome_fornitore' => $row['nome'],
+            'data_consegna' => $row['data_consegna'],
+            'prezzo' => $row['prezzo'],
+            'totale' => $row['totale'],
+            'stato' => $stato
+        );
+    }
+
+    close_pg_connection($db);
+    return $ordine;
+}
+function getProdottiOrdine($id_ordine){
+    include_once('lib/functions.ini.php');
+
+    $db = open_pg_connection();
+
+    $sql = "SELECT *
+            FROM comicgalaxy.v_storico_prodotti_ordine
+            WHERE id= $1";
+
+    $param = array($id_ordine);
+    $result = pg_prepare($db, "get_prodotti_ordine", $sql);
+    $result = pg_execute($db, "get_prodotti_ordine", $param);
+
+    $prodotti = array();
+    while ($row = pg_fetch_assoc($result)) {
+        $prodotti[] = array(
+            'nome_prodotto' => $row['nome_prodotto'],
+            'nome_fornitore' => $row['nome_fornitore'],
+            'prezzo' => $row['prezzo'],
+            'quantita' => $row['quantita'],
+            'totale' => $row['totale']
+        );
+    }
+
+    close_pg_connection($db);
+    return $prodotti;
+}
