@@ -2,6 +2,8 @@
 \usepackage[a4paper, top=2cm, bottom=2cm, left=2.5cm, right=2.5cm]{geometry}
 \usepackage{graphicx}
 \usepackage{float}
+\usepackage{amsfonts}
+\usepackage{amsmath}
 \usepackage[dvipsnames]{xcolor}
 \title{Intelligenza Artificiale I}
 \author{Federico Falcone}
@@ -813,4 +815,143 @@ definito come rapporto tra numero di vincoli e numero di variabili del problema.
     \centering
     \includegraphics[width=0.8\textwidth]{Images/min_conflicts.png}
 \end{figure}
+\pagebreak
+\section{Markov Decision Prodcess (MDP)}
+Nuova classe di problemi più generale per un singolo agente. Gli ingredienti fondamentali sono:
+\begin{itemize}
+    \item abbandoniamo il concetto di goal come principale rappresentante dei desideri dell'agente;
+    \item tempo orizzontale;
+    \item ambiente \textbf{stocastico}, analogamente a quanto fatto nei problemi di adversarial search.
+\end{itemize}
+Sono utilizzati in svariate applicazioni tra cui la robotica.
+\subsection{Formalizzazione}
+\begin{itemize}
+    \item $S=\{s,p,q,\dots\}$ spazio \textbf{finito} degli stati.
+    \item $s_I \in S$ è lo stato \textbf{iniziale}, descrive la situazione di partenza in cui si trovano agente e ambiente.
+    \item $s_T \in S$ è lo stato \textbf{terminale}:
+    \begin{itemize}
+        \item possono essere più di uno o anche nessuno;
+        \item descrive la situazione in cui il processo di conclude, da uno stato terminale non si possono eseguire azioni.
+    \end{itemize}
+    \item Insieme \textbf{finito} di azioni $A(s)=\{a,b,c,\dots\}$.
+    \item Modello di transizione $f$ \textbf{stocastico}:
+    \begin{itemize}
+        \item dato uno stato di partenza $s \in S$, un'azione $a \in A(s)$ e uno stato di arrivo $s'\in S$ indica la \textbf{probabilità della transizione}
+        $ s \xrightarrow{a} s' $ e cioè la probabilità che eseguendo un'azione $a$ nello stato $s$ si passi allo stato $s'$;
+        \item si rappresenta con una distribuzione di probabilità condizionata $P(s'|s,a)$.
+    \end{itemize}
+    \item  Ad ogni transizione $ s \xrightarrow{a} s' $ è associato un \textbf{reward} (ricompensa) numerico $R(s,a,s')$ che indica il \textbf{beneficio immediato} l'agente riceve un segnale di \textbf{reward additivo} $R(s,a,s')$ 
+    (è un concetto equivalente a quello dei costi al netto di un'interpretazione diversa). Tutti con la stessa unità di misura.
+    \item \textbf{Orizzonte} $H$ determina per quanti step (epoche di decisione) dura l'MDP: tutto quello che succede dopo $H$ transizioni di stato non importa, può essere $H = \infty$.
+\end{itemize}
+\subsection{Markovianità}
+La Markovianità è una proprietà dei processi stocastici che prende il nome dal matematico russo Andrey Markov che la studiò nei primi anni del ventesimo secolo.
+\\ Possiamo pensare ad un processo stacastico come ad una sequenza aleatoria di stati $s_0, s_1, s_2, \dots$ dove $s_t \in S$ è lo stato al tempo $t$. \\
+Nel nostro modello tale sequenza è aleatoria perchè l'ambiente è stocastico, le azioni non hanno esiti certi ma descritti in termini probabilistici.
+\\ \textbf{\textcolor{red}{Proprietà di Markov}}: l'esito di un'azione dipende solo dallo stato corrente (quindi non dagli stati e le azioni precedenti.)
+\\ Nel mostro modello la proprietà è implicitamente codificata nel modello di transizione: $P(s'|s,a)$ infatti è un modo compatto di scrivere $P(s_{t+i}|s_t, a_t)$, dove $t$ è il tempo corrente.
+\\ Il modello di transizione più generale possibile sarebbe indicato come $P(s_{t+1} | s_t, a_t, s_{t-1}, \dots, s_0,a_0)$ ma nel nostro modello tutti gli stati e le azioni intraprese nel passato non influiscono sullo stato futuro
+e quindi possono essere cancellate.
+\pagebreak 
+\subsection{Soluzione di un MDP}
+Nei problemi di search cercavamo un \textbf{piano} (nel caso in cui il problema fosse un CSP il piano corrisponde ad un assegnamento di variabili eseguito in qualsiasi ordine). Nei problemi di adversial search cercavamo una \textbf{strategia}.
+La soluzione di un MDP si chiama \textbf{\textcolor{red}{policy}} ed è definita come una funzione che, dato uno stato, prescrive quale azione l'agente deve compiere:
+\[ \pi: S \rightarrow A \] 
+La policy è deterministica (non randomizza mai su quale azione prescrivere), ma la sequenza di stati che una policy genera è stocastica per via degli esiti incerti delle azioni.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{Images/MDP.png}
+\end{figure}
+Se ci viene fornita una policy $\pi$ per un particolare MDP, l'agente che la implementa esegue iteratamente questi step:
+\begin{enumerate}
+    \item Osserva lo stato in cui si trova, detto \textbf{stato corrente} $s$.
+    \item Consulta la policy $\pi$ e ottiene l'azione $pi(s)$ che essa prescrive.
+    \item Esegue l'azione $\phi(s)$ e ritorno in 1.
+\end{enumerate}
+È un agente reflex. Eseguire e definire una policy è facile, mentre ci serve definire un metodo per definire una policy che massimizzi un critierio di qualità.
+\\ Come si misura la bontà di una policy? Possiamo riusare lo stesso criterio che, nei problemi di search, abbiamo adottato per cercare un piano ottimo. La sequenza di azioni che consente di raggiungere il goal e accumula,
+lungo il percorso, il minor costo possibile.
+\textbf{Problemi}: Non abbiamo più stati goal e non abbiamo più costi, ma reward che, per di più, sono soggetti ad incertezza.
+\\ \textbf{\textcolor{red}{Idea}}: massimizzare il valore atteso della somma dei reward che si ottengono eseguendo la policy $\pi$.
+\\ La policy $\pi$ genera una qualche sequenza di stati $s_0, s_1, s_2, \dots$ che a sua volta corrisponde ad una sequenza di reward $R_0, R_1, R_2, \dots$. Maggiore è la somma
+$U(s_0,s_1, \dots) = R_0,R_1,R_2, \dots $ migliore è la sequenza di stati che si è percorsa.
+\\ La policy che cerchiamo deve massimizzare il \textbf{valore atteso} della somma dei reward rispetto alle sequenze si stati che può generare. La chiameremo policy \textbf{ottima} $\pi^*S \rightarrow A$, ogni altra policy $\pi$ genererà un reward atteso inferiore o uguale
+\[
+\pi^* = \mathop{\arg\max}_{\pi} \, \mathbb{E}_{\pi}\big[\, U(s_0, s_1, \ldots ) \,\big]
+\]
+\subsection{Valore atteso della somma dei reward}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{Images/reward1.png}
+    \includegraphics[width=1\textwidth]{Images/reward2.png}
+\end{figure}
+\subsection{Reward scontati}
+La somma può avere infiniti termini quando $H=\infty$, come compariamo due policy che hanno reward totale infinito? Per fare ciò consideriamo una \textbf{somma scontata}.
+\\ Nella somma dei reward è ragionevole modellare il fatto che l'agente dia più importanza ai reward più imminenti rispetti a quelli molto lontani nel futuro.
+\\ \textbf{\textcolor{ForestGreen}{Metodo}}: applicare un decadimento esponenziale ai termini della somma dei reward:
+\[ U(s_0,s_1,,\dots)= \gamma^0 R_0 + \gamma^1 R_1 + \gamma^2 R_2 + \dots = \sum_{t=0}^{H} \gamma^t R_t \]
+Dove $0<\gamma<1$ è il \textbf{fattore di sconto}, più è piccolo più l'agente è "impaziente".
+\\ Se $H=\infty, \sum^{\infty}_{t=0} \gamma^t R_t \leq R_{max} \sum^{\infty}_{t=0} \gamma^t = \frac{R_{max}}{1-\gamma}$, anche se ci sono infiniti termini, la somma è finita.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{Images/rewardScontati.png}
+\end{figure}
+\subsection{Orizzonte finito o infinito?}
+Potremmo pensare che un orizzonte \textbf{finito} sia una situazione più conveniente:
+\begin{itemize}
+    \item il processo a un certo punto si ferma, come in una ricerca in profondità dove non si va mai oltre una profondità massima.
+    \item Le somme dei reward hanno un numero finito di termini: $U(s_0,s_1,\dots, s_H)=\sum^H_{t=0}R_t$.
+\end{itemize}
+Con orizzonte finito però si presenta un grosso svantaggio: la policy ottima (quella che massimizza il valore atteso di $U()$) \textbf{non è stazionaria}. Significa che l'azione
+da compiere cambia a seconda del momento in cui visitiamo un certo stato.
+\\ Lo stato da solo non basta, devo considerare anche il tempo: perdiamo la buona proprietà indotta dalla Markovianità nel nostro MDP.
+\subsubsection{Stazionarietà della policy ottima}
+Se l'orizzonte $H$ ha un valore finito, significa che ogni volta che l'agente visita uno stato c'è un tempo rimanente $h-T$ che diminuisce transizione dopo transizione.
+\\ Supponiamo di trovarci, dopo $t$ transizioni, nello stato $c$
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{Images/stazionarieta.png}
+\end{figure}
+Che cosa succede nell'esempio se diciamo all'agente che ha sempre di fronte a sé un tempo infinito?
+\textbf{\textcolor{ForestGreen}{Stazionarietà della policy ottima}}: la cosa migliore da fare è funzione unicamente allo stato.
+\pagebreak
+\subsection{Riduzione di un MDP}
+Nella pratica adotteremo sempre un \textbf{orizzonte infinito} e utilizzeremo un \textbf{fattore di sconto} $\gamma$ per evitare di avere sempre somme di reward infinite.
+\\ Come si calcola la policy ottima $\pi^*:S \rightarrow A$?
+\\ \textbf{Dynamic programming}: metodo di ottimizzazione che scompone il problema di partenza $P$ in uno o più sotto-problemi $P_1,P_2,\dots$; la soluzione $P$ è ottenuta combinando soluzioni di $P_1, P_2, \dots$
+a loro volta scomposti in modo ricorsivo.
+Questo metodo si applica a quei problemi dotati di sotto-scrittura ottima o, alternativamente, per cui vale il \textbf{principio di ottimalità di Bellman}.
+\\ Un problema $P$ soddisfa il principio di Bellman se nella soluzione ottima di $P$ le soluzioni dei sotto-problemi $P_1, P_2, \dots$ sono esse stesse soluzioni ottime 
+per quei sottoproblemi. È un principio fondamentale che caratterizza e permette di risolvere un elevato numero di problemi.
+\subsection{Principio di ottimalità}
+Nell'MDP il principio di ottimalità è soddisfatto. Per poterlo "dare" forma alla sotto-struttura ottima dobbiamo introdurre queste nuove quantità che descrivono/definiscono la policy ottima $\pi^*$.
+\\ \textcolor{red}{$V^*(S)$} valore (ottimo) dello stato $s$ (anche detta \textit{state-value function}):
+\begin{itemize}
+    \item L'agente si trova in $s$.
+    \item Se \textbf{da lì in avanti} seguisse la policy ottima $\pi^*$ quanto si aspetta di ottenre in termini di somma totale di reward?
+    \item Dipende dallo stato perchè la policy ottima è stazionaria.
+\end{itemize}
+\textcolor{blue}{$Q^*(s,a)$} valore (ottimo) della coppia stato/azione $s,a$ (anche detta \textit{action-value function}):
+\begin{itemize}
+    \item L'agente si trova in $s$ e ha deciso di seguire $a$.
+    \item Se in \textbf{tutte le scelte successive} seguisse la polici ottima $\pi^*$ quanto si aspetta di ottenre in termini di somma totale di reward?
+    \item Lo stesso di $V$ ma abbiamo "scorporato" la prima decisione.
+\end{itemize}
+I due valori, \textcolor{blue}{$Q^*$} e \textcolor{red}{$V^*$}, sono legati tra loro. Se l'agente si trova in $s$ la policy ottima prescriverà l'azione che massimizza \textcolor{blue}{$Q^*(s,a)$}, quindi
+\[ V^*(s) = \max_{a} Q^*(s,a) \]
+Conoscere $V^*()$ implica di conoscere la policy ottima, quindi implica di aver risolto l'MDP. Che espressione ha \textcolor{blue}{$Q^*$}?
+\begin{itemize}
+    \item Visto che l'agente esegue l'azione $a$ nello stato $s$, otterrà un reward immediato che dipende dallo stato di arrivo $s'$ in cui l'azione $a$ lo porta (stocastico).
+    \item Visto che da $s'$ in avanti l'agente seguirà la policy ottima, al reward immediato aggiungerà $V*(s')$.
+\end{itemize}
+\[ Q^*(s,a) = \sum_{s'} P(s'|s,a) [ R(s,a,s') + \gamma V^*(s') ] \]
+P è la probabilità della transizone $s \xrightarrow{a} s'$, R è il reward a fronte della transizione $ s \xrightarrow{a} s' $ e V è il reward futuro scontato da $s'$ in avanti con policy ottima.
+\\ Combinando le due uguaglianze otteniamo un'espressione per il valore ottimo dello stato: 
+\[ V^*(s) = \max_{a} \sum_{s'} P(s'|s,a) [ R(s,a,s') + \gamma V^*(s') ] \]
+\textbf{\textcolor{red}{Principio di ottimalità di Bellaman}}: la soluzione ottima per uno stato $s$ ha questa forma:
+\begin{enumerate}
+    \item Fare un'azione (che va scelta in modo ottimale).
+    \item Applicare la soluzione ottima per lo stato di arrivo.
+\end{enumerate}
+L'espressione che abbiamo derivato è la celebre \textbf{equazione di Bellman}. Ammette un'\textbf{unica soluzione}: $V^*()$, la state-value function indotta dalla policy ottima
 \end{document}

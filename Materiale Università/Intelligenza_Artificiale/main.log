@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.10.19)  13 NOV 2025 09:21
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.10.19)  1 DEC 2025 11:38
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -67,6 +67,78 @@ Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \float@box=\box51
 \@float@everytoks=\toks20
 \@floatcapt=\box52
+) (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\@emptytoks=\toks21
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+) (/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty
+Package: amsmath 2023/05/13 v2.17o AMS math features
+\@mathmargin=\skip50
+
+For additional information on amsmath, use the `?' option.
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amstext.sty
+Package: amstext 2021/08/26 v2.01 AMS text
+ (/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0 generic functions
+\@emptytoks=\toks22
+\ex@=\dimen151
+)) (/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d Bold Symbols
+\pmbraise@=\dimen152
+) (/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsopn.sty
+Package: amsopn 2022/04/08 v2.04 operator names
+)
+\inf@bad=\count199
+LaTeX Info: Redefining \frac on input line 234.
+\uproot@=\count266
+\leftroot@=\count267
+LaTeX Info: Redefining \overline on input line 399.
+LaTeX Info: Redefining \colon on input line 410.
+\classnum@=\count268
+\DOTSCASE@=\count269
+LaTeX Info: Redefining \ldots on input line 496.
+LaTeX Info: Redefining \dots on input line 499.
+LaTeX Info: Redefining \cdots on input line 620.
+\Mathstrutbox@=\box53
+\strutbox@=\box54
+LaTeX Info: Redefining \big on input line 722.
+LaTeX Info: Redefining \Big on input line 723.
+LaTeX Info: Redefining \bigg on input line 724.
+LaTeX Info: Redefining \Bigg on input line 725.
+\big@size=\dimen153
+LaTeX Font Info:    Redeclaring font encoding OML on input line 743.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 744.
+\macc@depth=\count270
+LaTeX Info: Redefining \bmod on input line 905.
+LaTeX Info: Redefining \pmod on input line 910.
+LaTeX Info: Redefining \smash on input line 940.
+LaTeX Info: Redefining \relbar on input line 970.
+LaTeX Info: Redefining \Relbar on input line 971.
+\c@MaxMatrixCols=\count271
+\dotsspace@=\muskip16
+\c@parentequation=\count272
+\dspbrk@lvl=\count273
+\tag@help=\toks23
+\row@=\count274
+\column@=\count275
+\maxfields@=\count276
+\andhelp@=\toks24
+\eqnshift@=\dimen154
+\alignsep@=\dimen155
+\tagshift@=\dimen156
+\tagwidth@=\dimen157
+\totwidth@=\dimen158
+\lineht@=\dimen159
+\@envbody=\toks25
+\multlinegap=\skip51
+\multlinetaggap=\skip52
+\mathdisplay@stack=\toks26
+LaTeX Info: Redefining \[ on input line 2953.
+LaTeX Info: Redefining \] on input line 2954.
 ) (/usr/share/texlive/texmf-dist/tex/latex/xcolor/xcolor.sty
 Package: xcolor 2023/11/15 v3.01 LaTeX color extensions (UK)
  (/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/color.cfg
@@ -87,25 +159,25 @@ Package xcolor Info: Model `wave' substituted by `hsb' on input line 1373.
 File: dvipsnam.def 2016/06/17 v3.0m Driver-dependent file (DPC,SPQR)
 ) (/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2024-01-04 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count199
-\l__pdf_internal_box=\box53
+\l__color_backend_stack_int=\count277
+\l__pdf_internal_box=\box55
 ) (./main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 9.
-LaTeX Font Info:    ... okay on input line 9.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 9.
-LaTeX Font Info:    ... okay on input line 9.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 9.
-LaTeX Font Info:    ... okay on input line 9.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 9.
-LaTeX Font Info:    ... okay on input line 9.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 9.
-LaTeX Font Info:    ... okay on input line 9.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 9.
-LaTeX Font Info:    ... okay on input line 9.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 9.
-LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -143,44 +215,61 @@ LaTeX Font Info:    ... okay on input line 9.
 
 (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count266
-\scratchdimen=\dimen151
-\scratchbox=\box54
-\nofMPsegments=\count267
-\nofMParguments=\count268
-\everyMPshowfont=\toks21
-\MPscratchCnt=\count269
-\MPscratchDim=\dimen152
-\MPnumerator=\count270
-\makeMPintoPDFobject=\count271
-\everyMPtoPDFconversion=\toks22
+\scratchcounter=\count278
+\scratchdimen=\dimen160
+\scratchbox=\box56
+\nofMPsegments=\count279
+\nofMParguments=\count280
+\everyMPshowfont=\toks27
+\MPscratchCnt=\count281
+\MPscratchDim=\dimen161
+\MPnumerator=\count282
+\makeMPintoPDFobject=\count283
+\everyMPtoPDFconversion=\toks28
 ) (/usr/share/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
+ (/usr/share/texlive/texmf-dist/tex/generic/infwarerr/infwarerr.sty
+Package: infwarerr 2019/12/03 v1.5 Providing info/warning/error messages (HO)
+) (/usr/share/texlive/texmf-dist/tex/latex/grfext/grfext.sty
+Package: grfext 2019/12/03 v1.3 Manage graphics extensions (HO)
+ (/usr/share/texlive/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty
+Package: kvdefinekeys 2019-12-19 v1.6 Define keys (HO)
+)) (/usr/share/texlive/texmf-dist/tex/latex/kvoptions/kvoptions.sty
+Package: kvoptions 2022-06-15 v3.15 Key value format for package options (HO)
+ (/usr/share/texlive/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty
+Package: ltxcmds 2023-12-04 v1.26 LaTeX kernel commands for general use (HO)
+) (/usr/share/texlive/texmf-dist/tex/latex/kvsetkeys/kvsetkeys.sty
+Package: kvsetkeys 2022-10-05 v1.19 Key value parser (HO)
+)) (/usr/share/texlive/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty
+Package: pdftexcmds 2020-06-27 v0.33 Utility functions of pdfTeX for LuaTeX (HO)
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+)
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
+Package grfext Info: Graphics extension search list:
+(grfext)             [.pdf,.png,.jpg,.mps,.jpeg,.jbig2,.jb2,.PDF,.PNG,.JPG,.JPEG,.JBIG2,.JB2,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 504.
  (/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 ))
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 10.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 10.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 10.
- [1
+LaTeX Font Info:    Trying to load font information for U+msa on input line 12.
+ (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Trying to load font information for U+msb on input line 12.
+ (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+) [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2]
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 80.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 80.
- [3]
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2] [3]
 <Images/ricerca1.png, id=21, 332.74312pt x 191.9672pt>
 File: Images/ricerca1.png Graphic file (type png)
 <use Images/ricerca1.png>
-Package pdftex.def Info: Images/ricerca1.png  used on input line 90.
+Package pdftex.def Info: Images/ricerca1.png  used on input line 92.
 (pdftex.def)             Requested size: 227.62206pt x 131.32098pt.
 
-Overfull \hbox (2.3601pt too wide) in paragraph at lines 104--106
+Overfull \hbox (2.3601pt too wide) in paragraph at lines 106--108
 \OT1/cmr/m/n/10 Un \OT1/cmr/bx/n/10 al-go-ritmo di ricerca \OT1/cmr/m/n/10 riceve in in-put un prob-lema di ricerca e resti-tu-isce una soluzione o un'indicazione
  []
 
@@ -188,117 +277,117 @@ Overfull \hbox (2.3601pt too wide) in paragraph at lines 104--106
 <Images/UCS.png, id=29, 308.65312pt x 231.11343pt>
 File: Images/UCS.png Graphic file (type png)
 <use Images/UCS.png>
-Package pdftex.def Info: Images/UCS.png  used on input line 144.
+Package pdftex.def Info: Images/UCS.png  used on input line 146.
 (pdftex.def)             Requested size: 227.62206pt x 170.44292pt.
  [5]
 <Images/Ottimilita_UCS.png, id=33, 270.25969pt x 235.63031pt>
 File: Images/Ottimilita_UCS.png Graphic file (type png)
 <use Images/Ottimilita_UCS.png>
-Package pdftex.def Info: Images/Ottimilita_UCS.png  used on input line 151.
+Package pdftex.def Info: Images/Ottimilita_UCS.png  used on input line 153.
 (pdftex.def)             Requested size: 227.62206pt x 198.46022pt.
 
 
-LaTeX Warning: Command \textrightarrow invalid in math mode on input line 153.
+LaTeX Warning: Command \textrightarrow invalid in math mode on input line 155.
 
 
-LaTeX Warning: Command \textrightarrow invalid in math mode on input line 153.
+LaTeX Warning: Command \textrightarrow invalid in math mode on input line 155.
 
 
-LaTeX Warning: Command \textrightarrow invalid in math mode on input line 153.
+LaTeX Warning: Command \textrightarrow invalid in math mode on input line 155.
 
 
-LaTeX Warning: Command \textrightarrow invalid in math mode on input line 153.
+LaTeX Warning: Command \textrightarrow invalid in math mode on input line 155.
 
 
-LaTeX Warning: Command \textrightarrow invalid in math mode on input line 153.
+LaTeX Warning: Command \textrightarrow invalid in math mode on input line 155.
 
 
-LaTeX Warning: Command \textrightarrow invalid in math mode on input line 153.
+LaTeX Warning: Command \textrightarrow invalid in math mode on input line 155.
 
 
-Overfull \hbox (16.44304pt too wide) in paragraph at lines 153--155
+Overfull \hbox (16.44304pt too wide) in paragraph at lines 155--157
 \OT1/cmr/bx/n/10 Overload della no-tazione\OT1/cmr/m/n/10 : es-tendo la no-tazione di $\OML/cmm/m/it/10 g$ \OT1/cmr/m/n/10 ren-den-dola ap-pli-ca-bile an-che ai path $\OML/cmm/m/it/10 g\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 X\OT1/cmr/m/n/10 ^^Y\OML/cmm/m/it/10 Y\OT1/cmr/m/n/10 ^^Y [] ^^Y\OML/cmm/m/it/10 Z\OT1/cmr/m/n/10 ) =
  []
 
 <Images/UCS_conEXL.png, id=34, 702.37407pt x 286.06876pt>
 File: Images/UCS_conEXL.png Graphic file (type png)
 <use Images/UCS_conEXL.png>
-Package pdftex.def Info: Images/UCS_conEXL.png  used on input line 171.
+Package pdftex.def Info: Images/UCS_conEXL.png  used on input line 173.
 (pdftex.def)             Requested size: 455.24411pt x 185.42303pt.
 [6 <./Images/UCS.png> <./Images/Ottimilita_UCS.png>]
 <Images/implementazione_UCS.png, id=41, 769.37437pt x 360.59718pt>
 File: Images/implementazione_UCS.png Graphic file (type png)
 <use Images/implementazione_UCS.png>
-Package pdftex.def Info: Images/implementazione_UCS.png  used on input line 176.
+Package pdftex.def Info: Images/implementazione_UCS.png  used on input line 178.
 (pdftex.def)             Requested size: 455.24411pt x 213.37224pt.
  [7 <./Images/UCS_conEXL.png> <./Images/implementazione_UCS.png>]
 <Images/A_conEXL.png, id=48, 368.87813pt x 433.62pt>
 File: Images/A_conEXL.png Graphic file (type png)
 <use Images/A_conEXL.png>
-Package pdftex.def Info: Images/A_conEXL.png  used on input line 198.
+Package pdftex.def Info: Images/A_conEXL.png  used on input line 200.
 (pdftex.def)             Requested size: 182.09486pt x 214.05038pt.
 <Images/consistenza.png, id=49, 481.8pt x 385.44pt>
 File: Images/consistenza.png Graphic file (type png)
 <use Images/consistenza.png>
-Package pdftex.def Info: Images/consistenza.png  used on input line 209.
+Package pdftex.def Info: Images/consistenza.png  used on input line 211.
 (pdftex.def)             Requested size: 113.81102pt x 91.04892pt.
  [8 <./Images/A_conEXL.png> <./Images/consistenza.png>]
 <Images/assimilitaA.png, id=54, 238.8925pt x 234.8775pt>
 File: Images/assimilitaA.png Graphic file (type png)
 <use Images/assimilitaA.png>
-Package pdftex.def Info: Images/assimilitaA.png  used on input line 223.
+Package pdftex.def Info: Images/assimilitaA.png  used on input line 225.
 (pdftex.def)             Requested size: 113.81102pt x 111.89769pt.
 <Images/OttimalitaA2.png, id=55, 409.53pt x 315.1775pt>
 File: Images/OttimalitaA2.png Graphic file (type png)
 <use Images/OttimalitaA2.png>
-Package pdftex.def Info: Images/OttimalitaA2.png  used on input line 236.
+Package pdftex.def Info: Images/OttimalitaA2.png  used on input line 238.
 (pdftex.def)             Requested size: 227.62206pt x 175.18527pt.
 <Images/creareEuristica.png, id=56, 1330.9725pt x 299.1175pt>
 File: Images/creareEuristica.png Graphic file (type png)
 <use Images/creareEuristica.png>
-Package pdftex.def Info: Images/creareEuristica.png  used on input line 251.
+Package pdftex.def Info: Images/creareEuristica.png  used on input line 253.
 (pdftex.def)             Requested size: 455.24411pt x 102.30563pt.
  [9 <./Images/assimilitaA.png> <./Images/OttimalitaA2.png>]
 <Images/rilassamento.png, id=60, 1395.2125pt x 379.4175pt>
 File: Images/rilassamento.png Graphic file (type png)
 <use Images/rilassamento.png>
-Package pdftex.def Info: Images/rilassamento.png  used on input line 260.
+Package pdftex.def Info: Images/rilassamento.png  used on input line 262.
 (pdftex.def)             Requested size: 341.43307pt x 92.85098pt.
  [10 <./Images/creareEuristica.png> <./Images/rilassamento.png>]
 <Images/limitiA.png, id=64, 542.025pt x 377.41pt>
 File: Images/limitiA.png Graphic file (type png)
 <use Images/limitiA.png>
-Package pdftex.def Info: Images/limitiA.png  used on input line 286.
+Package pdftex.def Info: Images/limitiA.png  used on input line 288.
 (pdftex.def)             Requested size: 227.62206pt x 158.49384pt.
 <Images/salesman.png, id=65, 1433.355pt x 371.3875pt>
 File: Images/salesman.png Graphic file (type png)
 <use Images/salesman.png>
-Package pdftex.def Info: Images/salesman.png  used on input line 302.
+Package pdftex.def Info: Images/salesman.png  used on input line 304.
 (pdftex.def)             Requested size: 455.24411pt x 117.95105pt.
  [11 <./Images/limitiA.png> <./Images/salesman.png>]
 <Images/focal.png, id=69, 564.1075pt x 303.1325pt>
 File: Images/focal.png Graphic file (type png)
 <use Images/focal.png>
-Package pdftex.def Info: Images/focal.png  used on input line 312.
+Package pdftex.def Info: Images/focal.png  used on input line 314.
 (pdftex.def)             Requested size: 227.62206pt x 122.3147pt.
 <Images/moreAlgoritmi.png, id=70, 1339.0025pt x 556.0775pt>
 File: Images/moreAlgoritmi.png Graphic file (type png)
 <use Images/moreAlgoritmi.png>
-Package pdftex.def Info: Images/moreAlgoritmi.png  used on input line 345.
+Package pdftex.def Info: Images/moreAlgoritmi.png  used on input line 347.
 (pdftex.def)             Requested size: 455.24411pt x 189.05536pt.
  [12 <./Images/focal.png>] [13 <./Images/moreAlgoritmi.png>] [14]
 <Images/alberoGioco.png, id=81, 634.37pt x 784.9325pt>
 File: Images/alberoGioco.png Graphic file (type png)
 <use Images/alberoGioco.png>
-Package pdftex.def Info: Images/alberoGioco.png  used on input line 415.
+Package pdftex.def Info: Images/alberoGioco.png  used on input line 417.
 (pdftex.def)             Requested size: 227.62206pt x 281.64127pt.
 <Images/minmax.png, id=82, 1369.115pt x 335.2525pt>
 File: Images/minmax.png Graphic file (type png)
 <use Images/minmax.png>
-Package pdftex.def Info: Images/minmax.png  used on input line 428.
+Package pdftex.def Info: Images/minmax.png  used on input line 430.
 (pdftex.def)             Requested size: 341.43307pt x 83.60318pt.
 
-Overfull \hbox (9.11774pt too wide) in paragraph at lines 418--429
+Overfull \hbox (9.11774pt too wide) in paragraph at lines 420--431
 \OT1/cmr/m/n/10 Per adesso as-sum-i-amo che trovaer la strate-gia ot-tima sia un prob-lema di search che tiene conto dell'avverario:
  []
 
@@ -306,145 +395,173 @@ Overfull \hbox (9.11774pt too wide) in paragraph at lines 418--429
 <Images/analisiMinMax.png, id=86, 1413.28pt x 596.2275pt>
 File: Images/analisiMinMax.png Graphic file (type png)
 <use Images/analisiMinMax.png>
-Package pdftex.def Info: Images/analisiMinMax.png  used on input line 437.
+Package pdftex.def Info: Images/analisiMinMax.png  used on input line 439.
 (pdftex.def)             Requested size: 341.43307pt x 144.04367pt.
 <Images/MinMaxNonOttimo.png, id=87, 2483.2775pt x 656.4525pt>
 File: Images/MinMaxNonOttimo.png Graphic file (type png)
 <use Images/MinMaxNonOttimo.png>
-Package pdftex.def Info: Images/MinMaxNonOttimo.png  used on input line 445.
+Package pdftex.def Info: Images/MinMaxNonOttimo.png  used on input line 447.
 (pdftex.def)             Requested size: 455.24411pt x 120.33998pt.
 <Images/minmaxmoreagents.png, id=88, 1487.5575pt x 542.025pt>
 File: Images/minmaxmoreagents.png Graphic file (type png)
 <use Images/minmaxmoreagents.png>
-Package pdftex.def Info: Images/minmaxmoreagents.png  used on input line 453.
+Package pdftex.def Info: Images/minmaxmoreagents.png  used on input line 455.
 (pdftex.def)             Requested size: 455.24411pt x 165.87564pt.
  [16 <./Images/minmax.png> <./Images/analisiMinMax.png> <./Images/MinMaxNonOttimo.png>]
 <Images/migliorieMinimax.png, id=92, 1503.6175pt x 461.725pt>
 File: Images/migliorieMinimax.png Graphic file (type png)
 <use Images/migliorieMinimax.png>
-Package pdftex.def Info: Images/migliorieMinimax.png  used on input line 464.
+Package pdftex.def Info: Images/migliorieMinimax.png  used on input line 466.
 (pdftex.def)             Requested size: 455.24411pt x 139.79378pt.
  [17 <./Images/minmaxmoreagents.png> <./Images/migliorieMinimax.png>]
 <Images/alphabeta.png, id=97, 1264.725pt x 529.98pt>
 File: Images/alphabeta.png Graphic file (type png)
 <use Images/alphabeta.png>
-Package pdftex.def Info: Images/alphabeta.png  used on input line 479.
+Package pdftex.def Info: Images/alphabeta.png  used on input line 481.
 (pdftex.def)             Requested size: 455.24411pt x 190.76839pt.
  [18 <./Images/alphabeta.png>]
 <Images/quiescent.png, id=101, 1272.755pt x 230.8625pt>
 File: Images/quiescent.png Graphic file (type png)
 <use Images/quiescent.png>
-Package pdftex.def Info: Images/quiescent.png  used on input line 542.
+Package pdftex.def Info: Images/quiescent.png  used on input line 544.
 (pdftex.def)             Requested size: 341.43307pt x 61.92859pt.
  [19 <./Images/quiescent.png>]
 <Images/tris.png, id=106, 634.37pt x 256.96pt>
 File: Images/tris.png Graphic file (type png)
 <use Images/tris.png>
-Package pdftex.def Info: Images/tris.png  used on input line 550.
+Package pdftex.def Info: Images/tris.png  used on input line 552.
 (pdftex.def)             Requested size: 136.57462pt x 55.31981pt.
 <Images/giocoConIncertezza.png, id=107, 3183.895pt x 903.375pt>
 File: Images/giocoConIncertezza.png Graphic file (type png)
 <use Images/giocoConIncertezza.png>
-Package pdftex.def Info: Images/giocoConIncertezza.png  used on input line 582.
+Package pdftex.def Info: Images/giocoConIncertezza.png  used on input line 584.
 (pdftex.def)             Requested size: 341.43307pt x 96.8628pt.
  [20 <./Images/tris.png>]
 <Images/alfabeta_stocastico.png, id=111, 2928.9425pt x 680.5425pt>
 File: Images/alfabeta_stocastico.png Graphic file (type png)
 <use Images/alfabeta_stocastico.png>
-Package pdftex.def Info: Images/alfabeta_stocastico.png  used on input line 597.
+Package pdftex.def Info: Images/alfabeta_stocastico.png  used on input line 599.
 (pdftex.def)             Requested size: 455.24411pt x 105.77374pt.
 <Images/montecarlo.png, id=112, 829.0975pt x 648.4225pt>
 File: Images/montecarlo.png Graphic file (type png)
 <use Images/montecarlo.png>
-Package pdftex.def Info: Images/montecarlo.png  used on input line 607.
+Package pdftex.def Info: Images/montecarlo.png  used on input line 609.
 (pdftex.def)             Requested size: 227.62206pt x 178.01497pt.
  [21 <./Images/giocoConIncertezza.png> <./Images/alfabeta_stocastico.png>]
 <Images/mab.png, id=116, 2854.665pt x 1222.5675pt>
 File: Images/mab.png Graphic file (type png)
 <use Images/mab.png>
-Package pdftex.def Info: Images/mab.png  used on input line 629.
+Package pdftex.def Info: Images/mab.png  used on input line 631.
 (pdftex.def)             Requested size: 364.19667pt x 155.97322pt.
  [22 <./Images/montecarlo.png> <./Images/mab.png>]
 <Images/puzzle.png, id=122, 2031.59pt x 907.39pt>
 File: Images/puzzle.png Graphic file (type png)
 <use Images/puzzle.png>
-Package pdftex.def Info: Images/puzzle.png  used on input line 659.
+Package pdftex.def Info: Images/puzzle.png  used on input line 661.
 (pdftex.def)             Requested size: 364.19667pt x 162.65855pt.
  [23 <./Images/puzzle.png>]
 <Images/regine1.png, id=126, 2041.6275pt x 1082.0425pt>
 File: Images/regine1.png Graphic file (type png)
 <use Images/regine1.png>
-Package pdftex.def Info: Images/regine1.png  used on input line 679.
+Package pdftex.def Info: Images/regine1.png  used on input line 681.
 (pdftex.def)             Requested size: 455.24411pt x 241.26965pt.
 <Images/regine2.png, id=127, 2306.6175pt x 1102.1175pt>
 File: Images/regine2.png Graphic file (type png)
 <use Images/regine2.png>
-Package pdftex.def Info: Images/regine2.png  used on input line 680.
+Package pdftex.def Info: Images/regine2.png  used on input line 682.
 (pdftex.def)             Requested size: 455.24411pt x 217.51025pt.
 <Images/coloring1.png, id=128, 2286.5425pt x 1090.0725pt>
 File: Images/coloring1.png Graphic file (type png)
 <use Images/coloring1.png>
-Package pdftex.def Info: Images/coloring1.png  used on input line 686.
+Package pdftex.def Info: Images/coloring1.png  used on input line 688.
 (pdftex.def)             Requested size: 455.24411pt x 217.02928pt.
  [24 <./Images/regine1.png> <./Images/regine2.png>]
 <Images/sudoku.png, id=132, 2280.52pt x 738.76pt>
 File: Images/sudoku.png Graphic file (type png)
 <use Images/sudoku.png>
-Package pdftex.def Info: Images/sudoku.png  used on input line 691.
+Package pdftex.def Info: Images/sudoku.png  used on input line 693.
 (pdftex.def)             Requested size: 455.24411pt x 147.46756pt.
  [25 <./Images/coloring1.png> <./Images/sudoku.png>]
 <Images/vincoli.png, id=137, 1156.32pt x 433.62pt>
 File: Images/vincoli.png Graphic file (type png)
 <use Images/vincoli.png>
-Package pdftex.def Info: Images/vincoli.png  used on input line 712.
+Package pdftex.def Info: Images/vincoli.png  used on input line 714.
 (pdftex.def)             Requested size: 364.19667pt x 136.57117pt.
 <Images/constraintPropagation.png, id=138, 1830.84pt x 293.095pt>
 File: Images/constraintPropagation.png Graphic file (type png)
 <use Images/constraintPropagation.png>
-Package pdftex.def Info: Images/constraintPropagation.png  used on input line 720.
+Package pdftex.def Info: Images/constraintPropagation.png  used on input line 722.
 (pdftex.def)             Requested size: 364.19667pt x 58.30042pt.
  [26 <./Images/vincoli.png> <./Images/constraintPropagation.png>]
 <Images/consistenza_darco.png, id=142, 1505.625pt x 568.1225pt>
 File: Images/consistenza_darco.png Graphic file (type png)
 <use Images/consistenza_darco.png>
-Package pdftex.def Info: Images/consistenza_darco.png  used on input line 750.
+Package pdftex.def Info: Images/consistenza_darco.png  used on input line 752.
 (pdftex.def)             Requested size: 364.19667pt x 137.41844pt.
 <Images/ac3.png, id=143, 3266.2025pt x 730.73pt>
 File: Images/ac3.png Graphic file (type png)
 <use Images/ac3.png>
-Package pdftex.def Info: Images/ac3.png  used on input line 757.
+Package pdftex.def Info: Images/ac3.png  used on input line 759.
 (pdftex.def)             Requested size: 455.24411pt x 101.84435pt.
  [27 <./Images/consistenza_darco.png> <./Images/ac3.png>]
 <Images/backtracking_search.png, id=147, 2971.1pt x 1194.4625pt>
 File: Images/backtracking_search.png Graphic file (type png)
 <use Images/backtracking_search.png>
-Package pdftex.def Info: Images/backtracking_search.png  used on input line 783.
+Package pdftex.def Info: Images/backtracking_search.png  used on input line 785.
 (pdftex.def)             Requested size: 364.19667pt x 146.4095pt.
  [28 <./Images/backtracking_search.png>]
 <Images/min_conflicts.png, id=151, 1373.13pt x 536.0025pt>
 File: Images/min_conflicts.png Graphic file (type png)
 <use Images/min_conflicts.png>
-Package pdftex.def Info: Images/min_conflicts.png  used on input line 814.
+Package pdftex.def Info: Images/min_conflicts.png  used on input line 816.
 (pdftex.def)             Requested size: 364.19667pt x 142.16266pt.
- [29 <./Images/min_conflicts.png>] (./main.aux)
+ [29 <./Images/min_conflicts.png>] [30]
+<Images/MDP.png, id=158, 2113.8975pt x 517.935pt>
+File: Images/MDP.png Graphic file (type png)
+<use Images/MDP.png>
+Package pdftex.def Info: Images/MDP.png  used on input line 863.
+(pdftex.def)             Requested size: 455.24411pt x 111.53561pt.
+<Images/reward1.png, id=159, 2232.34pt x 1080.035pt>
+File: Images/reward1.png Graphic file (type png)
+<use Images/reward1.png>
+Package pdftex.def Info: Images/reward1.png  used on input line 885.
+(pdftex.def)             Requested size: 455.24411pt x 220.255pt.
+<Images/reward2.png, id=160, 2214.2725pt x 913.4125pt>
+File: Images/reward2.png Graphic file (type png)
+<use Images/reward2.png>
+Package pdftex.def Info: Images/reward2.png  used on input line 886.
+(pdftex.def)             Requested size: 455.24411pt x 187.79434pt.
+ [31 <./Images/MDP.png>]
+<Images/rewardScontati.png, id=166, 2402.9775pt x 1043.9pt>
+File: Images/rewardScontati.png Graphic file (type png)
+<use Images/rewardScontati.png>
+Package pdftex.def Info: Images/rewardScontati.png  used on input line 897.
+(pdftex.def)             Requested size: 455.24411pt x 197.7537pt.
+ [32 <./Images/reward1.png> <./Images/reward2.png>]
+<Images/stazionarieta.png, id=170, 2288.55pt x 576.1525pt>
+File: Images/stazionarieta.png Graphic file (type png)
+<use Images/stazionarieta.png>
+Package pdftex.def Info: Images/stazionarieta.png  used on input line 913.
+(pdftex.def)             Requested size: 455.24411pt x 114.60426pt.
+ [33 <./Images/rewardScontati.png> <./Images/stazionarieta.png>] [34] (./main.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 2791 strings out of 476182
- 47231 string characters out of 5795594
+ 4152 strings out of 476182
+ 68659 string characters out of 5795594
  1938975 words of memory out of 5000000
- 24798 multiletter control sequences out of 15000+600000
- 563005 words of font info for 52 fonts, out of 8000000 for 9000
+ 26097 multiletter control sequences out of 15000+600000
+ 566613 words of font info for 69 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 57i,7n,71p,982b,312s stack positions out of 10000i,1000n,20000p,200000b,200000s
- </home/federico/.texlive2023/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1000.600pk></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on main.pdf (29 pages, 7029316 bytes).
+ 61i,12n,71p,982b,317s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ </home/federico/.texlive2023/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1000.600pk></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on main.pdf (34 pages, 7663233 bytes).
 PDF statistics:
- 219 PDF objects out of 1000 (max. 8388607)
- 112 compressed objects within 2 object streams
+ 250 PDF objects out of 1000 (max. 8388607)
+ 129 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
- 196 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 221 words of extra memory for PDF output out of 10000 (max. 10000000)
 
