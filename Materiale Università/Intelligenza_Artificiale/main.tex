@@ -953,5 +953,133 @@ P è la probabilità della transizone $s \xrightarrow{a} s'$, R è il reward a f
     \item Fare un'azione (che va scelta in modo ottimale).
     \item Applicare la soluzione ottima per lo stato di arrivo.
 \end{enumerate}
-L'espressione che abbiamo derivato è la celebre \textbf{equazione di Bellman}. Ammette un'\textbf{unica soluzione}: $V^*()$, la state-value function indotta dalla policy ottima
+L'espressione che abbiamo derivato è la celebre \textbf{equazione di Bellman}. Ammette un'\textbf{unica soluzione}: $V^*()$, la state-value function indotta dalla policy ottima.
+\\L'equazione di Bellman ci mostra la sott-struttura ottima del problema. Possiamo applicare metodi basati su \textbf{Dynamic Programming}: scomposizione in sotto-problemi e risoluzione ricorsiva.
+\\L'equazione non solo ci indica questa possibilità ma ci suggerisce anche un metodo operativo con cui procedere.
+\\ Vedremo i due approcci risolutivi più famosi basati su Dynamic Programming:
+\begin{itemize}
+    \item \textbf{\textcolor{red}{Value Iteration}}
+    \item \textbf{\textcolor{blue}{Policy Iteration}}
+\end{itemize}
+\subsection{Running example}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{Images/runningExample.png}
+\end{figure}
+\subsection{Value Iteration}
+Metodo: costruire iterativamente i valori di $V^*$.
+\\ Inizializzo $V_0(s)=0$ per ogni stato $s$ e ad ogni iterazione $K+1$ calcolo $V_{k+1}(s)$ per ogni stato $s$ usando i valori $V_k(s)$ ottenuti nell'iterazione precedente. Lo si fa tramite \textbf{Bellman Update}
+\[ V_{k+1}(s) \leftarrow  \max_{a} \sum_{s'} P(s'|s,a) [ R(s,a,s') + \gamma V_k(s') ] \]
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{Images/valueIteration.png}
+\end{figure}
+Calcolo di $Q(s,a)$ lavora con i valori di $V$ dell'iterazione precedente. Il test di convergenza verifica se i nuovi valori $V_{k+1}(s)$ sono "praticamente" uguali a quelli precedenti:
+\begin{itemize}
+    \item \textbf{somma delle differenze}: $\sum_s |V_{k+1}(s) - V_k(s)| \leq \epsilon$;
+    \item \textbf{span}: $|\max_{s}(V_{k+1}(s)-V_k(s)) - \min_{s} (V_{k+1}(s)-V_k(s))| \leq \epsilon$.
+\end{itemize}
+\textbf{\textcolor{ForestGreen}{Proprietà fondamentale}}: iterazione dopo iterazione i valori $V_k(s)$ convergono verso $V^*(s)$.
+\pagebreak
+\subsubsection{Convergenza di Value Iteration}
+Intuizione sul perchè Value Iteration converge verso valori ottimi.
+Osserviamo il Bellman Update e riflettiamo sulla sua definizione, che cosa ci ricorda?
+\[ V_{k+1}(s) \leftarrow  \max_{a} \sum_{s'} P(s'|s,a) [ R(s,a,s') + \gamma V_k(s') ] \]
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{Images/giocoStocastico.png} 
+\end{figure}
+Le sequenze di applicazione del Bellman Update per uno stato $s$ possono essere rappresentate con lo stesso formalismo di un gioco stocastico in cui c'è solo il giocatore MAX
+\[ V_{k+1}(s) \leftarrow  \max_{a} \sum_{s'} P(s'|s,a) [ R(s,a,s') + \gamma V_k(s') ] \]
+\textcolor{ForestGreen}{Esempio con $k=0$}
+\begin{figure}[H]
+    \includegraphics[width=0.3\textwidth]{Images/legenda.png}
+    \\ 
+    \includegraphics[width=1\textwidth]{Images/convergenzak0.png}
+\end{figure}
+\textcolor{ForestGreen}{Esempio con $k=1$}
+\begin{figure}[H]
+    \includegraphics[width=1\textwidth]{Images/convergenzak1.png}
+\end{figure}
+La struttura dell'albero \textcolor{ForestGreen}{$k$} è contenuta in quella dell'albero \textcolor{blue}{$k+1$}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{Images/convergenzaUnita.png}
+\end{figure}
+Che relazione c'è tra $V_{k+1}(s)$ e $V_k(s)$?
+\\ Dipende da quello che trovo nel calcolo di $V_{k+1}(s)$ \textcolor{red}{al livello di profondità $k+1$} (quello esplorato in più rispetto a $V_k(s)$).
+\\ I reward che si ottengo sulle $k+1$-esime transizioni devono essere tutti minori o uguali a $R_{MAX}$ (il massimo reward possibile nell'MDP) e maggiori o uguali a $R_{MIN}$
+(il minimo reward possibile nell'MDP).
+\\ Caso migliore: sono tutti uguali a $R_{MAX}$, quindi ogni transizione al livello ${k+1}$ aggiunge $\gamma^kR_{MAX}$.
+\\ Caso peggiore: sono tutti uguali a $R_{MIN}$, quindi ogni transizione al livello ${k+1}$ aggiunge $\gamma^kR_{MIN}$.
+\\Quindi: $V_k(s) + \gamma^k R_{MIN} \leq V_{k+1}(s) \leq V_k(s) + \gamma^k R_{MAX}$
+\\ Essendo $0\leq \gamma <1$, per $k \rightarrow \infty$ si ha $V_k(s)=V_{k+1}(s)$, \textbf{Value Iteration converge!}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{Images/valueIterationRis.png}
+\end{figure}
+\subsection{Policy Extraction}
+Conoscere $V^*()$ è equivalente a conoscere $\pi^*$, ma nella pratica come possiamo sintetizzare la policy ottima a partire dalla state-value function?
+\\ \textbf{\textcolor{blue}{Policy Extraction}}: calcolo della policy ottima a partire dalla state-value function ottima
+\[ \pi^*(s) = \mathop{\arg\max}_{a} \sum_{s'} P(s'|s,a) [ R(s,a,s') + \gamma V^*(s') ] \]
+Applicato al risultato della value iteration nell'esempio precedente otteniamo $\pi^*(sf)=H$, $\pi^*(ex)=L$
+\subsection{Value Iteration: svantaggi}
+È un procedimento abbastanza \textbf{inefficiente}: ad ogni iterazione, nel caso pessimo, dobbiamo calcolare $|S| \times |A| \times |S|$ termini, e come si sceglie $\epsilon$? Molti
+di questi termini si ripetono, c'è un sacco di lavoro ridondante (anche se si possono implementare delle look-up tables, simili alle transposition tables).
+\\ La policy di norma \textbf{\textcolor{blue}{converge prima della state-value function}}. Se applichiamo Policy Extraction ad ogni iterazione nell'esempio precedente:
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{Images/valueIterationSvantaggi.png}
+\end{figure}
+\subsection{Policy Iteration}
+Per provare a mitigare questi problemi esiste un metodo alternativo chiamato \textbf{\textcolor{red}{policy iteration}}.
+Si lavora direttamente sulla policy e non sulla state-value function. L'approccui su basa su questi step:
+\begin{enumerate}
+    \item scegliere una policy iniziale $\pi$ (casuale);
+    \item \textbf{\textcolor{Fuchsia}{Policy evaluation}}: calcolare i valori della state-value function $V^\pi(s)$ che la policy $\pi$ induce nell'MDP (\textcolor{red}{Attenzione!} Non saranno i valori ottimi!);
+    \item \textbf{Policy Extraction} usando i valori $V^\pi(s)$ appena calcolati, si estrae una nuova policy $\pi'$;
+    \item la nuova policy $\pi'$ è uguale alla vecchia $\pi$?
+    \begin{enumerate}
+        \item Se sì l'algoritmo termina e restituisce $\pi$
+        \item Altrimenti \textbf{\textcolor{red}{policy update}}: sostituisci $\pi$ con $\pi'$ e ritorna allo step 2.
+    \end{enumerate} 
+\end{enumerate}
+\subsection{Policy evaluation}
+Problema inverso rispetto alla policy extraction: ho una policy data $\pi$ (non necessariamente ottima) e la devo valutare: calcolare i valori $V^\pi(s)$ che $\pi$ garantisce.
+Visto che la policy è data, la scelta di quale azione fare in ogni stato è fissata e nota a priori, quindi
+\[ V^\pi(s) = \sum_{s'} P(s'|s,\pi(s)) [ R(s,\pi(s),s') + \gamma V^\pi(s') ] \]
+Come si risolve? Due alternative:
+\begin{itemize}
+    \item Applichiamo un procedimento di \textbf{value iteration} con Bellman update modificato dove, non essendoci più il max e l'azione è fissata dalla policy $\pi$, si ha: $V^\pi_{k+1}(s) \leftarrow Q(s,\pi(s))$ dove $Q(s,\pi(s))$ è calcolato 
+    usando i valori $V^\pi_k(s)$ dall'iterazione precedente.
+    \item Visto che non c'è il max l'equazione è \textbf{lineare}: associo una variabile ad ogni $V^\pi(s)$ e ottengo un sistema lineare di $|S|$ equazioni in $|S|$ incognite.
+    \item Potremmo usare anche Expectimax.
+\end{itemize}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{Images/policyIteration.png}
+\end{figure}
+\subsection{Recap}
+Value e policy iteration sono algorimti di programmazione dinamica per il calcolo della policy ottima in un MDP.
+\\ \textbf{\textcolor{red}{Value iteration}}
+\begin{itemize}
+    \item Lavora sulla state-value function, la policy è trattata indirettamente attraverso l'operatore max nel Bellman update.
+    \item Una volta terminato bisogna fare policy extraction.
+\end{itemize}
+\textbf{\textcolor{blue}{Policy iteration}}
+\begin{itemize}
+    \item Lavora direttamente sulla policy, migliorandola iterativamente.
+    \item In ogni iterazione svolge una policy evaluation della policy incombente.
+    \item Di norma converge prima di value iteration.
+\end{itemize}
+\textbf{\textcolor{red}{Value iteration}}: metodo di programmazione dinamica per calcolare la state-value function $V^*()$ della policy ottima $\pi^*$ in un MDP, lavora aggiornando iterativamente i valori della funzione.
+\\ \textbf{\textcolor{blue}{Policy iteration}}: metodo di programmazione dinamica per calcolare la policy ottima $\pi^*$ in un MDP, lavora aggiornando iterativamente la policy.
+\\ \textbf{\textcolor{Cerulean}{Policy evaluation}}: data una policy $\pi$ calcolare la state-value function $V^\pi()$ che questa genera in un MDP, viene usata in uno step di policy iteration.
+\\ \textbf{\textcolor{Fuchsia}{Policy extraction}}: data una state-value function $V^\pi()$,calcolare la policy $\pi$ che la genera, viene usata alla fine di value iteration per ottenere la policy ottima e in uno step di policy iteration.
+\\ \textbf{\textcolor{ForestGreen}{Policy update}}: modifica una policy $\pi$ per ottenre una nuova $\pi'$ che di solito è migliore, viene usata in uno step di policy iteration.
+\pagebreak
+\section{Reinforcement Learning}
+Sappiamo che un MDP è dato dalla tupla $\langle S,A,P,R \rangle$, che fornisce insieme degli stati $S=\{s,q,p,\dots\}$, azioni $A(s)$, modello di transizione $P(s' | s,a)$ e funzione di reward $R(s,a,s')$.
+\\ Rappresentazione compatta: $\langle P,R \rangle$, conoscere modello di transizione e funzione di reward significa, implicitamente, conoscere tutto l'MDP.
+\\ $\langle P,R \rangle$, il nostro MDP, è anche detto \textbf{modello}: codifica le leggi con cui l'ambiente risponde alle azioni dell'agente in termini di transizioni di stato (effetti di un'azione) e di reward (bontà di una transizione).
 \end{document}

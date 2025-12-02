@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.10.19)  1 DEC 2025 11:38
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.10.19)  2 DEC 2025 20:21
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -543,25 +543,79 @@ File: Images/stazionarieta.png Graphic file (type png)
 <use Images/stazionarieta.png>
 Package pdftex.def Info: Images/stazionarieta.png  used on input line 913.
 (pdftex.def)             Requested size: 455.24411pt x 114.60426pt.
- [33 <./Images/rewardScontati.png> <./Images/stazionarieta.png>] [34] (./main.aux)
+ [33 <./Images/rewardScontati.png> <./Images/stazionarieta.png>] [34]
+<Images/runningExample.png, id=178, 2314.6475pt x 1122.1925pt>
+File: Images/runningExample.png Graphic file (type png)
+<use Images/runningExample.png>
+Package pdftex.def Info: Images/runningExample.png  used on input line 967.
+(pdftex.def)             Requested size: 455.24411pt x 220.70164pt.
+<Images/valueIteration.png, id=179, 2384.91pt x 455.7025pt>
+File: Images/valueIteration.png Graphic file (type png)
+<use Images/valueIteration.png>
+Package pdftex.def Info: Images/valueIteration.png  used on input line 975.
+(pdftex.def)             Requested size: 455.24411pt x 86.98767pt.
+ [35 <./Images/runningExample.png> <./Images/valueIteration.png>]
+<Images/giocoStocastico.png, id=183, 2290.5575pt x 580.1675pt>
+File: Images/giocoStocastico.png Graphic file (type png)
+<use Images/giocoStocastico.png>
+Package pdftex.def Info: Images/giocoStocastico.png  used on input line 990.
+(pdftex.def)             Requested size: 455.24411pt x 115.30551pt.
+<Images/legenda.png, id=184, 590.205pt x 260.975pt>
+File: Images/legenda.png Graphic file (type png)
+<use Images/legenda.png>
+Package pdftex.def Info: Images/legenda.png  used on input line 996.
+(pdftex.def)             Requested size: 136.57462pt x 60.38934pt.
+<Images/convergenzak0.png, id=185, 2073.7475pt x 503.8825pt>
+File: Images/convergenzak0.png Graphic file (type png)
+<use Images/convergenzak0.png>
+Package pdftex.def Info: Images/convergenzak0.png  used on input line 998.
+(pdftex.def)             Requested size: 455.24411pt x 110.61613pt.
+<Images/convergenzak1.png, id=186, 2370.8575pt x 843.15pt>
+File: Images/convergenzak1.png Graphic file (type png)
+<use Images/convergenzak1.png>
+Package pdftex.def Info: Images/convergenzak1.png  used on input line 1002.
+(pdftex.def)             Requested size: 455.24411pt x 161.89839pt.
+<Images/convergenzaUnita.png, id=187, 2085.7925pt x 945.5325pt>
+File: Images/convergenzaUnita.png Graphic file (type png)
+<use Images/convergenzaUnita.png>
+Package pdftex.def Info: Images/convergenzaUnita.png  used on input line 1007.
+(pdftex.def)             Requested size: 455.24411pt x 206.35861pt.
+ [36 <./Images/giocoStocastico.png> <./Images/legenda.png> <./Images/convergenzak0.png> <./Images/convergenzak1.png>]
+<Images/valueIterationRis.png, id=191, 2180.145pt x 1094.0875pt>
+File: Images/valueIterationRis.png Graphic file (type png)
+<use Images/valueIterationRis.png>
+Package pdftex.def Info: Images/valueIterationRis.png  used on input line 1019.
+(pdftex.def)             Requested size: 455.24411pt x 228.44629pt.
+<Images/valueIterationSvantaggi.png, id=192, 1710.39pt x 646.415pt>
+File: Images/valueIterationSvantaggi.png Graphic file (type png)
+<use Images/valueIterationSvantaggi.png>
+Package pdftex.def Info: Images/valueIterationSvantaggi.png  used on input line 1032.
+(pdftex.def)             Requested size: 455.24411pt x 172.04878pt.
+ [37 <./Images/convergenzaUnita.png> <./Images/valueIterationRis.png>]
+<Images/policyIteration.png, id=197, 2049.6575pt x 1110.1475pt>
+File: Images/policyIteration.png Graphic file (type png)
+<use Images/policyIteration.png>
+Package pdftex.def Info: Images/policyIteration.png  used on input line 1060.
+(pdftex.def)             Requested size: 455.24411pt x 246.57085pt.
+ [38 <./Images/valueIterationSvantaggi.png>] [39 <./Images/policyIteration.png>] [40] (./main.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 4152 strings out of 476182
- 68659 string characters out of 5795594
+ 4222 strings out of 476182
+ 70938 string characters out of 5795594
  1938975 words of memory out of 5000000
- 26097 multiletter control sequences out of 15000+600000
+ 26167 multiletter control sequences out of 15000+600000
  566613 words of font info for 69 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  61i,12n,71p,982b,317s stack positions out of 10000i,1000n,20000p,200000b,200000s
  </home/federico/.texlive2023/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1000.600pk></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (34 pages, 7663233 bytes).
+Output written on main.pdf (40 pages, 8715741 bytes).
 PDF statistics:
- 250 PDF objects out of 1000 (max. 8388607)
- 129 compressed objects within 2 object streams
+ 281 PDF objects out of 1000 (max. 8388607)
+ 144 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
- 221 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 271 words of extra memory for PDF output out of 10000 (max. 10000000)
 
