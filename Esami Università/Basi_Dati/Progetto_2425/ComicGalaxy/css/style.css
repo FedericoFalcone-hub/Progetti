@@ -341,5 +341,53 @@ body {
     text-decoration: underline;
 }
 
+.input-container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.input-container .form-group {
+    margin-bottom: 20px;
+}
+
+.input-container label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.input-container input[type="text"],
+.input-container input[type="email"] {
+    width: 100%;  /* ora prendono tutta la larghezza del form */
+    padding: 10px;
+    border: 2px solid #ff6f61;
+    border-radius: 10px;
+    font-size: 16px;
+    outline: none;
+    transition: 0.3s;
+}
+
+.input-container input[type="text"]:focus,
+.input-container input[type="email"]:focus {
+    border-color: #ffb347;
+}
+
+.input-container .form-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.negozio-chiuso{
+    max-width: 600px; 
+    margin: 50px auto; 
+    padding: 30px; 
+    background: #ffe6e6; 
+    border-left: 5px solid #cc0000; 
+    border-radius: 10px; 
+    font-family: Arial;
+}
+
+
 
 

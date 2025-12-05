@@ -4,7 +4,6 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 include 'lib/functions.php';
-include 'lib/functions.ini.php';
 
 $errore = null;
 
@@ -15,6 +14,7 @@ if (isset($_POST['login'])) {
     $login_info = login($mail, $password);
 
     if ($login_info !== null && isset($login_info['mail'])) {
+
         $_SESSION['user'] = $login_info['mail'];
         $_SESSION['ruolo'] = $login_info['ruolo'];
         $_SESSION['nome'] = $login_info['nome'];
@@ -22,7 +22,7 @@ if (isset($_POST['login'])) {
         $_SESSION['telefono'] = $login_info['telefono'];
 
         if ($login_info['ruolo'] === 'manager') {
-            header("Location: area_manager.php");
+            header("Location: manager/area_manager.php");
             exit();
         } elseif ($login_info['ruolo'] === 'cliente') {
             header("Location: area_clienti.php");
@@ -36,35 +36,56 @@ if (isset($_POST['login'])) {
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="it">
 <head>
     <meta charset="UTF-8">
     <title>Login - ComicGalaxy</title>
-    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
+
+    <!-- BOOTSTRAP -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
 </head>
-<body>
+<body class="bg-light">
 
-<div class="login-container">
-    <h2>Accedi a ComicGalaxy</h2>
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
 
-    <?php if (!empty($errore)) : ?>
-        <div class="error"><?= htmlspecialchars($errore) ?></div>
-    <?php endif; ?>
+    <div class="card shadow-lg p-4" style="width: 360px;">
 
-    <form method="post">
-        <input type="text" name="mail" placeholder="E-mail" required>
-        <input type="password" name="password" placeholder="Password" required>
-        <input type="submit" name="login" value="Accedi">
-    </form>
+        <h2 class="text-center mb-4 text-primary fw-bold">Accedi a ComicGalaxy</h2>
 
-    <div class="back-link">
-        <a href="index.php">🏠 Torna alla home</a>
+        <?php if (!empty($errore)) : ?>
+            <div class="alert alert-danger text-center">
+                <?= htmlspecialchars($errore) ?>
+            </div>
+        <?php endif; ?>
+
+        <form method="post">
+            <div class="mb-3">
+                <label class="form-label">E-mail</label>
+                <input type="email" name="mail" class="form-control" placeholder="Inserisci la tua email" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Password</label>
+                <input type="password" name="password" class="form-control" placeholder="Inserisci la password" required>
+            </div>
+
+            <button type="submit" name="login" class="btn btn-primary w-100">
+                Accedi
+            </button>
+        </form>
+
+        <div class="text-center mt-3">
+            <a href="index.php" class="text-decoration-none">Torna alla home</a>
+        </div>
+
     </div>
+
 </div>
+
+<!-- BOOTSTRAP JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>

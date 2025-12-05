@@ -2,29 +2,66 @@
 // navbar.php
 ?>
 
-<div class="navbar">
-    <div class="nav-left">
-        <a href="index.php">ComicGalaxy</a>
-        <a href="#">Negozi</a>
-        <a href="#">Clienti</a>
-        <a href="#">Tessere</a>
-        <a href="#">Ordini</a>
-        <a href="#">Fornitori</a>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid">
+
+        <!-- Brand -->
+        <a class="navbar-brand" href="/index.php">ComicGalaxy</a>
+
+        <!-- Bottone mobile -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Menu -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+            <!-- Nav sinistra -->
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item"><a class="nav-link" href="#">Negozi</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Clienti</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Tessere</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Ordini</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Fornitori</a></li>
+            </ul>
+
+            <!-- Nav destra -->
+            <ul class="navbar-nav ms-auto">
+
+                <?php if (!isset($_SESSION['user'])) : ?>
+
+                    <li class="nav-item">
+                        <a class="btn btn-warning fw-bold" href="login.php">Login</a>
+                    </li>
+
+                <?php else : ?>
+
+                    <li class="nav-item d-flex align-items-center me-3 text-white fw-bold">
+                        Benvenuto, <a href="/profilo.php" class="ms-1 text-white text-decoration-underline">
+                            <?= htmlspecialchars($_SESSION['nome']) ?>
+                        </a>
+                    </li>
+
+                    <?php if ($_SESSION['ruolo'] === 'manager') : ?>
+                        <li class="nav-item">
+                            <a class="btn btn-light me-2" href="/manager/area_manager.php">Area Riservata</a>
+                        </li>
+
+                    <?php elseif ($_SESSION['ruolo'] === 'cliente') : ?>
+                        <li class="nav-item">
+                            <a class="btn btn-light me-2" href="area_clienti.php">La mia Area</a>
+                        </li>
+                    <?php endif; ?>
+
+                    <li class="nav-item">
+                        <a class="btn btn-danger" href="/index.php?logout=1">Logout</a>
+                    </li>
+
+                <?php endif; ?>
+
+            </ul>
+
+        </div>
     </div>
-
-    <div class="nav-right">
-        <?php if (!isset($_SESSION['user'])) : ?>
-            <a href="login.php" class="button">Login</a>
-        <?php else : ?>
-            <span>Benvenuto, <a href="profilo.php" class="username-link"><?= htmlspecialchars($_SESSION['nome']) ?></a></span>
-
-            <?php if ($_SESSION['ruolo'] === 'manager') : ?>
-                <a href="area_manager.php" class="button" style="margin-left:10px;">Area Riservata</a>
-            <?php elseif ($_SESSION['ruolo'] === 'cliente') : ?>
-                <a href="area_clienti.php" class="button" style="margin-left:10px;">La mia Area</a>
-            <?php endif; ?>
-
-            <a href="index.php?logout=1" class="button" style="margin-left:10px;">Logout</a>
-        <?php endif; ?>
-    </div>
-</div>
+</nav>
