@@ -1110,7 +1110,7 @@ Consideriamo una prima versione del problema che il nostro agente deve affrontar
 \textbf{Problema affrontato dalla agente}: imparare quanto è buona la policy $\pi$. 
 \\ In pratica imparare $V^\pi(s)$ dove $s$ è un qualsiasi stato raggiungibile eseguendo $\pi$ per un numero finito di step, assumendo un fattore di sconto $\gamma$. Stesso problema che abbiamo precedentemente chiamato policy evaluation, ma ora
 $P(s'|s,a)$ e $R(s,a,s')$ sono inizialmente sconosciuti. L'agente non deve calcolare una policy ottima, ma solo scoprire quanto è buona una policy data.
-\subsubsection{Adaptive Dynamic Programming}
+\subsection{Adaptive Dynamic Programming}
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{Images/adaptiveDynamicProgramming.png}
@@ -1145,4 +1145,135 @@ Vengono usati i metodi che  già conosciamo, in alternativa:
 \textcolor{Fuchsia}{Quante volte mi sno trovato nello stato sf e ho fatto l'azione H?12 volte. Di queste 12 volte quante volte facendo l'azione H essendo nello stato sf, sono rimasto in sf? 9 volte
 Il modello trovato è diverso da quello reale: vediamo che manco una uno stato (quello finale, molto importante). Quindi la policy ottima di questo MDP differisce da quella reale.
 }
+\subsection{Adaptive Dynamic Programming}
+Cerca di apprendere il modello per utilizzare le tecniche che lavorano sotto l'assunzione di conoscere il modello. Per questo motivo l'ADP è detto \textbf{\textcolor{blue}{Model-based}}.
+\\ Aumentando il numero di episodi nel training set la stima del modello \textbf{migliora}: le frequenze empiriche che emergono dalle osservazioni convergono verso le vere probabilità di transizione.
+Migliore è la stima del modello, più realistica è la valutazione della policy.
+\\ Quando l'MDP sottostante ha un numero \textbf{molto grande} di stati può richiedere un numero molto alto di episodi, l'esplorazione richiede troppo tempo per poter fornire una stima ragionevole del modello.
+Deve mantenere il conto totale di visite e transizioni, richiedendo però molta memoria.
+\\ Un approccio alternativo è il \textbf{\textcolor{red}{Model-Free}}: non stimare il modello, ma direttamente i valori della state value function.
+\subsection{Stima diretta}
+È un metodo più semplice per stimare $V^\pi()$ senza costruire $\hat{P}$ e $\hat{R}$: si genera un dataset con una fase di esplorazione uguale a quella di ADP. Per ogni visita allo stato $s$ estraggo il reward accomulato da $s$ fino alla fine dell'episodio.
+
+\[TotR_1^s,TotR_2^s,TotR_3^s, \dots, TotR_k^s\]
+
+Divido la somma dei totali per il numero di visite ad $s$ (media aritmetica):
+\[\hat{V}^\pi(s)=\frac{1}{k}\sum_{i=1}^k TotR_i^s\]
+Anche in questo caso più prolungata è l'esplorazione (maggior numero di episodi nel dataset, maggior numero di visite ad $s$) più $\hat{V}^\pi(s)$ tende a $V^\pi(s)$.
+\\ \textcolor{ForestGreen}{Vantaggi}: semplicità
+\\ \textcolor{red}{Svantaggi}:  
+\begin{itemize}
+    \item Richiede comunque di tenere traccia del numero di visite ad ogni stato osservato.
+    \item Stima i vari $V^\pi(s)$ come se fossero indipendenti tra di loro, anche se c'è una dipendenza che include il modello di transizione e prende la forma dall'equazione di Bellman.
+\end{itemize}
+\subsection{Temporal Difference Learning}
+I limiti di base della stima diretta sono risolvibili con un secondo approccio di tipo Model-Free chiamato \textbf{Temporal Difference Learning} (TD).
+\\ \textcolor{ForestGreen}{\textbf{Idea}}: aggiornare le stime di $V^\pi()$ in modo iterativo ad ogni transizione effettuata in fase di esplorazione.
+\\  L'agente si trova nello stato $s$ per il quale ha calcolato la stima corrente $\hat{V}^\pi(s)$ (la stima corrente è calcolata per ogni stato osservato). Esegue l'azione $\pi(s)$ osservando la transizione $s \xrightarrow{R} s'$:
+\begin{itemize}
+    \item il fatto che l'azione prescritta dalla policy nello stato $s$ sia risultata in $s'$ con reward $R$ può essere usato per migliorare la stima corrente $\hat{V}^\pi(s)$.
+    \item In particolare, immaginando di considerare unicamente la transazione osservata (come se fosse l'unica possibile da $s$) si può affermare:
+\end{itemize}
+\[\hat{V}^\pi(s)=R+\gamma \hat{V}^\pi(s')\]
+$R+\gamma \hat{V}^\pi(s')$ è quanto dovrebbe valore lo stato $\hat{V}^\pi(s)$ in base alla \textbf{sola} transizione che è stata osservata, chiamiamo questa quantità \textbf{$z$}, viene calcolata \textbf{dopo} aver fatto la transiozione usando il reward ottenuto e la stima
+corrente della state-value function nello stato di arrivo.
+\\ In generale, $z$ sarà diverso dalla stima corrente $\hat{V}^\pi(s)$ che avevamo prima della transizione.
+\\ \textbf{Update} di $\hat{V}^\pi(s)$ sulla base dello $z$ calcolato dalla transizione osservata:
+\[\hat{V}^\pi(s) \leftarrow \hat{V}^\pi(s)+ \textcolor{blue}{\alpha}(z - \hat{V}^\pi(s)) \]
+dove $0\leq \alpha \leq 1$ è un parametro detto \textbf{\textcolor{blue}{learning rate}}
+\\ La stima $\hat{V}^\pi(s)$ viene "corretta" sulla base dell'osservazione $z$ in modo da avvicinarla a quanto è stato suggerito dall'esperienza: il termine $z - \hat{V}^\pi(s)$ è un segnale di errore.\\
+La learning rate quantifica la "forza" di tale correzione:
+
+\begin{itemize}
+    \item $\alpha =0$, la transizione osservata viene \textbf{ignorata} e la stima non viene corretta;
+    \item $\alpha=1$, la vecchia stima viene \textbf{rimpiazzata} con quanto indicato dall'osservazione $z$;
+\end{itemize}
+Sostituiendo $z$ e semplificando abbiamo:
+\[\hat{V}^\pi(s) \leftarrow (1-\alpha)\hat{V}^\pi(s) + \alpha ( R(s,a,s') + \gamma \hat{V}^\pi(s') )\]
+
+La nuova stima di $\hat{V}^\pi(s)$ è una combinazione convessa tra la vecchia stima e quella derivata dall'osservazione: un po' dell'una e un po' dell'altra, a seconda di $\alpha$.
+\\ Immaginando di ripetere iterativamente questo update sulla base di una sequenza di osservazioni $z_1,z_2,z_3,\dots, z_k$ fatte a partire dallo stato $s$:
+\begin{itemize}
+    \item ad ogni iterazione otterremo una nuova versione di $\hat{V}^\pi(s)$ (similmente a quello che succedeva con Value Iteration);
+    \item chiamiamo $\hat{V}_i^\pi(s)$ la stima corretta ottenuta considerando l'osservazione $z_i=R(s,\pi(s),s')+\gamma \hat{V}_{i-1}^\pi(s')$;
+\end{itemize}
+\[
+\hat{V}^\pi_k(s)
+  = \textcolor{blue}{(1-\alpha)}\,\textcolor{red}{\hat{V}^\pi_{k-1}(s)}
+  + \textcolor{blue}{\alpha z_k}
+\]
+
+\[
+\hat{V}^\pi_k(s)
+  = \textcolor{blue}{(1-\alpha)}
+    \Big[
+      \textcolor{red}{(1-\alpha)}\,\textcolor{green!60!black}{\hat{V}^\pi_{k-2}(s)}
+      + \textcolor{red}{\alpha z_{k-1}} 
+    \Big]
+    + \textcolor{blue}{\alpha z_k}
+\]
+
+\[
+\hat{V}^\pi_k(s)
+  = \textcolor{blue}{(1-\alpha)}
+    \Big[
+      \textcolor{red}{(1-\alpha)}
+      \Big[
+        \textcolor{green!60!black}{(1-\alpha)}\,\textcolor{purple}{\hat{V}^\pi_{k-3}(s)}
+        + \textcolor{green!60!black}{\alpha z_{k-2}}
+      \Big]
+      + \textcolor{red}{\alpha z_{k-1}}
+    \Big]
+    + \textcolor{blue}{\alpha z_k}
+\]
+
+\[
+\hat{V}^\pi_k(s)
+  = \textcolor{blue}{(1-\alpha)}
+    \Big[
+      \textcolor{red}{(1-\alpha)}
+      \Big[
+        \textcolor{green!60!black}{(1-\alpha)}
+        \Big[
+          \textcolor{purple}{(1-\alpha)}\,\hat{V}^\pi_{k-4}(s)
+          + \textcolor{purple}{\alpha z_{k-3}}
+        \Big]
+        + \textcolor{green!60!black}{\alpha z_{k-2}}
+      \Big]
+      + \textcolor{red}{\alpha z_{k-1}}
+    \Big]
+    + \textcolor{blue}{\alpha z_k}
+\]
+
+\[
+\vdots
+\]
+
+\[
+\hat{V}^\pi_k(s)
+  = \alpha \sum_{i=0}^{k-1} (1-\alpha)^i\, z_{k-i}
+    + (1-\alpha)^k \hat{V}^\pi_0(s)
+\]
+$V_0^\pi(s)$ è la stima di partenza che possiamo dare in modo arbitrario, per semplificare la scegliamo pari a 0. 
+\textcolor{Fuchsia}{Più una cosa che ho osservato è vecchia, meno deve contare nel valore corrente della stima. Le osservazioni recenti pesano di più rispetto a quelle "antiche
+}
+\[\hat{V}^\pi_k(s)
+  = \alpha \sum_{i=0}^{k-1}(1-\alpha)^i\, z_{k-i}\]
+\textcolor{red}{Media "mobile" esponenziale}: più è grande $i$ più esponenzialmente piccolo è il peso dell'elemento associato nella media $(1-\alpha \leq 1)$.
+\\ Le osservazioni più vecchie hanno un peso esponenzialmente più piccolo della stima corrente.
+\\ \textbf{Il principio è pertinente con il processo di stima}: le osservazioni più vecchie sono basate su versioni più vecchie di $\hat{V}^\pi(s)$ e quindi meno corrette (si ricordi che $z_j=R(s,\pi(s),s')+\gamma \hat{V}^\pi_{j-1}(s'),j\leq 1$).
+\\ L'algoritmo può essere schematizzato così: 
+\begin{enumerate}
+    \item inizializza $\hat{V}^\pi(s)=0$ per lo stato iniziale $s_0$;
+    \item osserva lo stato corrente  $s$, \textcolor{ForestGreen}{esegue l'azione $\pi(s)$} e riceve/osserva un reward $R$ e uno stato di arrivo $s'$; se è la prima volta che visita $s'$ inizializza $\hat{V}^\pi(s')=0$;
+    \item calcola $z=R+\gamma \hat{V}^\pi(s')$;
+    \item \textbf{\textcolor{red}{update}}: $\hat{V}^\pi(s) \leftarrow \hat{V}^\pi(s)+ \alpha (z - \hat{V}^\pi(s))$;
+    \item riaparti da 2;
+\end{enumerate} 
+\textbf{Domanda}: l'algoritmo converge verso $V^\pi()$  (la state-value function corretta indotta dalla policy $\pi$)?
+\\ \textbf{\textcolor{ForestGreen}{Risposta}}: sì a patto di adattare la learning rate man mano che si procede:
+\begin{itemize}
+    \item la learning rate $\alpha$ diventa una funzione $\alpha(N_s)$ dove $N_s$ è il numero di volte che l'agente ha visitato $s$;
+    \item per ottenere la convergenza deve valere: $\sum_{n=1}^\infty \alpha(n) = \infty$ , $\sum_{n=1}^\infty \alpha^2(n) < \infty$, nella pratica si adotta una funzione decrescente con rate $O(\frac{1}{n})$.
+\end{itemize}
 \end{document}
