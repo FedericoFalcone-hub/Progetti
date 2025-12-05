@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.10.19)  2 DEC 2025 20:21
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.10.19)  4 DEC 2025 18:25
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -597,25 +597,48 @@ File: Images/policyIteration.png Graphic file (type png)
 <use Images/policyIteration.png>
 Package pdftex.def Info: Images/policyIteration.png  used on input line 1060.
 (pdftex.def)             Requested size: 455.24411pt x 246.57085pt.
- [38 <./Images/valueIterationSvantaggi.png>] [39 <./Images/policyIteration.png>] [40] (./main.aux)
+ [38 <./Images/valueIterationSvantaggi.png>] [39 <./Images/policyIteration.png>]
+<Images/reinforcementLearning.png, id=204, 2276.505pt x 1011.78pt>
+File: Images/reinforcementLearning.png Graphic file (type png)
+<use Images/reinforcementLearning.png>
+Package pdftex.def Info: Images/reinforcementLearning.png  used on input line 1089.
+(pdftex.def)             Requested size: 455.24411pt x 202.32153pt.
+ [40 <./Images/reinforcementLearning.png>]
+<Images/passiveRL.png, id=208, 1389.19pt x 399.4925pt>
+File: Images/passiveRL.png Graphic file (type png)
+<use Images/passiveRL.png>
+Package pdftex.def Info: Images/passiveRL.png  used on input line 1108.
+(pdftex.def)             Requested size: 455.24411pt x 130.91246pt.
+<Images/adaptiveDynamicProgramming.png, id=209, 1985.4175pt x 375.4025pt>
+File: Images/adaptiveDynamicProgramming.png Graphic file (type png)
+<use Images/adaptiveDynamicProgramming.png>
+Package pdftex.def Info: Images/adaptiveDynamicProgramming.png  used on input line 1116.
+(pdftex.def)             Requested size: 455.24411pt x 86.07726pt.
+ [41 <./Images/passiveRL.png> <./Images/adaptiveDynamicProgramming.png>]
+<Images/esempioADP.png, id=214, 2334.7225pt x 1375.1375pt>
+File: Images/esempioADP.png Graphic file (type png)
+<use Images/esempioADP.png>
+Package pdftex.def Info: Images/esempioADP.png  used on input line 1143.
+(pdftex.def)             Requested size: 455.24411pt x 268.11926pt.
+ [42 <./Images/esempioADP.png (PNG copy)>] (./main.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 4222 strings out of 476182
- 70938 string characters out of 5795594
+ 4250 strings out of 476182
+ 71900 string characters out of 5795594
  1938975 words of memory out of 5000000
- 26167 multiletter control sequences out of 15000+600000
+ 26195 multiletter control sequences out of 15000+600000
  566613 words of font info for 69 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  61i,12n,71p,982b,317s stack positions out of 10000i,1000n,20000p,200000b,200000s
- </home/federico/.texlive2023/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1000.600pk></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (40 pages, 8715741 bytes).
+ </home/federico/.texlive2023/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1000.600pk></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on main.pdf (42 pages, 9418753 bytes).
 PDF statistics:
- 281 PDF objects out of 1000 (max. 8388607)
- 144 compressed objects within 2 object streams
+ 296 PDF objects out of 1000 (max. 8388607)
+ 151 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
- 271 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 291 words of extra memory for PDF output out of 10000 (max. 10000000)
 

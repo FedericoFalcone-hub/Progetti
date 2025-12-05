@@ -1082,4 +1082,67 @@ Value e policy iteration sono algorimti di programmazione dinamica per il calcol
 Sappiamo che un MDP è dato dalla tupla $\langle S,A,P,R \rangle$, che fornisce insieme degli stati $S=\{s,q,p,\dots\}$, azioni $A(s)$, modello di transizione $P(s' | s,a)$ e funzione di reward $R(s,a,s')$.
 \\ Rappresentazione compatta: $\langle P,R \rangle$, conoscere modello di transizione e funzione di reward significa, implicitamente, conoscere tutto l'MDP.
 \\ $\langle P,R \rangle$, il nostro MDP, è anche detto \textbf{modello}: codifica le leggi con cui l'ambiente risponde alle azioni dell'agente in termini di transizioni di stato (effetti di un'azione) e di reward (bontà di una transizione).
+\\ Fino ad ora il modello è assunto come conosciuto e il problema affrontato, quindi, è: dato un modello $\langle P,R \rangle$ come trovare la policy ottima per quel modello? \textbf{\textcolor{ForestGreen}{Risposta}} \textcolor{ForestGreen}{: dynamic programming}.
+\\ \textbf{\textcolor{red}{Nuovo problema}}: come trovare la policy ottima in situazioni in cui il modello $\langle P,R \rangle$ è \textcolor{red}{inizialmente sconosciuto}? Tramite il \textbf{reinforcement learning}.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{Images/reinforcementLearning.png}
+\end{figure}
+Nello scenario di modello noto eseguire un'azione è il mezzo con cui l'agente svolge il proprio compito nell'ambiente, cercando di massimizzare la performance. Nel nuovo scenario di modello sconosciuto, eseguire un'azione ha una duplice funzione
+\begin{itemize}
+    \item svolgere il compito;
+    \item rivelare le leggi del modello.
+\end{itemize}
+\textbf{Come si sceglie l'azione?} Due modi:
+\begin{itemize}
+    \item \textcolor{blue}{Exploration}: scegliere un'azione privilegiando l'acquisizione di nuove informazioni del modello (sbaglio ma imparo).
+    \item \textcolor{red}{Exploitation}: scegliere un'azione privilegiando le performance rispetto a quanto si è appreso del modello (cerco di non sbagliare al netto di quello che conosco).
+\end{itemize}
+In generale, il modello appreso \textbf{non è perfettamente uguale} a quello reale ma ne rappresenta una stima. Fare la cosa ottima (exploitation) nel modello appreso non sarà buona come fare la cosa ottima nel modello reale.
+La differenza di utilità tra i due casi si chiama \textbf{regret} (rimorso).
+\pagebreak
+\subsection{Passive RL}
+Consideriamo una prima versione del problema che il nostro agente deve affrontare: \textbf{Reinforcement Learning Passivo}. In Passive RL si assume che una policy $\pi$ sia data e fissata.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{Images/passiveRL.png}
+\end{figure}
+\textbf{Problema affrontato dalla agente}: imparare quanto è buona la policy $\pi$. 
+\\ In pratica imparare $V^\pi(s)$ dove $s$ è un qualsiasi stato raggiungibile eseguendo $\pi$ per un numero finito di step, assumendo un fattore di sconto $\gamma$. Stesso problema che abbiamo precedentemente chiamato policy evaluation, ma ora
+$P(s'|s,a)$ e $R(s,a,s')$ sono inizialmente sconosciuti. L'agente non deve calcolare una policy ottima, ma solo scoprire quanto è buona una policy data.
+\subsubsection{Adaptive Dynamic Programming}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{Images/adaptiveDynamicProgramming.png}
+\end{figure}
+\textbf{\textcolor{YellowGreen}{Esplorazione}}: genera un dataset (training set) fatto da un certo numero di episodi.
+\textbf{Episodio}: una sequenza di transizioni e reward osservati di una lunghezza massima fissata (in caso si finisca in uno stato terminale si conclude l'episodio indipendentemente dalla sua lunghezza). Ogni transizione ha questa forma:
+$s_1 \xrightarrow{R(s_1, \pi(s_1),s_2)} s_2$ 
+\\ \textbf{\textcolor{Apricot}{Stima del modello}}: per ogni stato osservato ed azione eseguita durante l'esplorazione si calcolano:
+\begin{itemize}
+    \item Numero di volte in cui l'agente è stato nello stato $s$ e ha svolto l'azione $a$: $\#(s,a)$.
+     \item Numero di volte in cui l'agente è stato nello stato $s$, ha svolto l'azione $a$ e si è ritrovato nello stato $s'$: $\#(s,a,s')$.
+\end{itemize}
+Queste quantità dipendono dalla policy $\pi$ e dal modello delle \textcolor{red}{transizioni} (sconosciuto) che determina probabilisticamente gli esiti delle azioni intraprese.
+\\ Stima del modello di tranzione basata sulla frequenza relativa empirica di ogni stato osservato:
+\[ \hat{P}(s'|s,a) = \frac{\#(s,a,s')}{\#(s,a)} \]
+\\ Scoperta di alcuni reward: ogni transizione ha rivelato il reward associato a quella transizione: 
+\[ \hat{R}(s,a,s') = R(s,a,s') \]
+Una volta costruite $\hat{P}$ e $\hat{R}$ l'agente assume di trovarsi in un MDP il cui modello sia $\langle \hat{P}, \hat{R} \rangle$ (stati/azioni saranno quelli
+che sono stati osservati/eseguiti almeno una volta durante l'esplorazione).
+\\ Viene eseguita la \textbf{\textcolor{SkyBlue}{policy evaluation}} di $\pi$ dentro l'MDP $\langle \hat{P}, \hat{R} \rangle$
+\[ V^\pi(s) = Q(s,\pi(s))= \sum_{s'} \hat{P}(s'|s,\pi(s)) [ \hat{R}(s,\pi(s),s') + \gamma V^\pi(s') ] \]
+Vengono usati i metodi che  già conosciamo, in alternativa:
+\begin{itemize}
+    \item Risoluzione di un sistema di equazioni lineari.
+    \item Dynamic Programming (value iteration fino a convergenza).
+\end{itemize}
+\subsubsection{Esempio ADP}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{Images/esempioADP.png}
+\end{figure}
+\textcolor{Fuchsia}{Quante volte mi sno trovato nello stato sf e ho fatto l'azione H?12 volte. Di queste 12 volte quante volte facendo l'azione H essendo nello stato sf, sono rimasto in sf? 9 volte
+Il modello trovato è diverso da quello reale: vediamo che manco una uno stato (quello finale, molto importante). Quindi la policy ottima di questo MDP differisce da quella reale.
+}
 \end{document}
