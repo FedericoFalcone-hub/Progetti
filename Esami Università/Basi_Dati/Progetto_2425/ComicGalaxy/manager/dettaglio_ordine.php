@@ -3,7 +3,7 @@ session_start();
 
 // Protezione manager
 if (!isset($_SESSION['user']) || $_SESSION['ruolo'] !== 'manager') {
-    header("Location: login.php");
+    header("Location: ../login.php");
     exit();
 }
 
@@ -42,9 +42,7 @@ $prodotti = getProdottiOrdine($id_ordine);
         <h1 class="fw-bold">Dettaglio Ordine #<?= $id_ordine ?></h1>
     </div>
 
-    <div class="mb-3 text-center">
-        <a href="../manager/gestione_negozio.php" class="btn btn-secondary">⬅ Torna alla gestione negozio</a>
-    </div>
+    
 
     <div class="card mb-4 shadow-sm">
         <div class="card-header">
@@ -86,8 +84,10 @@ $prodotti = getProdottiOrdine($id_ordine);
             </table>
         </div>
     </div>
+    <div class="mt-4 text-center">
+        <a href="<?= htmlspecialchars($_GET['return'] ?? '../manager/ordini_negozio.php') ?>"class="btn btn-secondary">Torna Indietro</a>
+    </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

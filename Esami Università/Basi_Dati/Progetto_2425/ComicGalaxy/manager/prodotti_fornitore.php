@@ -1,7 +1,6 @@
 <?php
 session_start();
 
-// Protezione: solo admin o manager (se vuoi limitarlo solo all'admin basta cambiare la condizione)
 if (!isset($_SESSION['user']) || !in_array($_SESSION['ruolo'], ['admin', 'manager'])) {
     header("Location: ../login.php");
     exit();
@@ -9,20 +8,20 @@ if (!isset($_SESSION['user']) || !in_array($_SESSION['ruolo'], ['admin', 'manage
 
 require_once '../lib/functions.php';
 
-// Recupero ID fornitore
+
 if (!isset($_GET['p_iva'])) {
     header("Location: gestione_fornitori.php");
     exit();
 }
 $p_iva = $_GET['p_iva'];
-// Ottieni dati fornitore
+
+
 $fornitore = getFornitoreByPIVA($p_iva);
 if (!$fornitore) {
     header("Location: gestione_fornitori.php");
     exit();
 }
 
-// Ottieni prodotti forniti da quel fornitore
 $prodotti = getProdottiFornitore($p_iva);
 
 ?>
@@ -79,6 +78,5 @@ $prodotti = getProdottiFornitore($p_iva);
 
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

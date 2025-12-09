@@ -3,14 +3,13 @@ session_start();
 include '../lib/functions.php';
 
 if (!isset($_SESSION['user']) || $_SESSION['ruolo'] !== 'manager') {
-    header("Location: login.php");
+    header("Location: ../login.php");
     exit();
 }
 
 $negozio = getNegozio($_SESSION['user']);
 $success_msg = $error_msg = null;
 
-// Conferma ordine
 if (isset($_POST['conferma_ordine'])) {
     if (!empty($_SESSION['carrello'])) {
         $id_prodotti = array_keys($_SESSION['carrello']);
@@ -27,7 +26,6 @@ if (isset($_POST['conferma_ordine'])) {
     }
 }
 
-// Ottieni prodotti nel carrello
 $carrello = $_SESSION['carrello'] ?? [];
 ?>
 
@@ -96,10 +94,10 @@ $carrello = $_SESSION['carrello'] ?? [];
     <?php endif; ?>
 
     <div class="text-center mt-3">
-        <a href="gestione_negozio.php" class="btn btn-secondary">Torna alla gestione del negozio</a>
+        <a href="ordini_negozio.php" class="btn btn-secondary">Torna agli ordini</a>
     </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>

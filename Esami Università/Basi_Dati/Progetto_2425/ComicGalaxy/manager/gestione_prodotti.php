@@ -1,15 +1,13 @@
 <?php
 session_start();
 
-// Protezione: solo manager loggato
 if (!isset($_SESSION['user']) || $_SESSION['ruolo'] !== 'manager') {
-    header("Location: login.php");
+    header("Location: ../login.php");
     exit();
 }
 
 include '../lib/functions.php';
 
-// Ottieni l'id del negozio associato al manager
 $negozio = getNegozio($_SESSION['user']);
 if ($negozio === null) {
     die('<div class="container text-center mt-5">
@@ -66,7 +64,6 @@ if (isset($_POST['elimina'])) {
 <div class="container my-5">
 
     <div class="text-center mb-4">
-        <a href="gestione_negozio.php" class="btn btn-secondary mb-3">← Torna a Gestione Negozio</a>
         <h1 class="fw-bold">Gestione Prodotti</h1>
         <h2 class="text-primary"><?= htmlspecialchars($negozio['nome']) ?></h2>
     </div>
@@ -116,7 +113,10 @@ if (isset($_POST['elimina'])) {
     </div>
 
 </div>
+<div class="text-center mb-4">
+        <a href="prodotti_negozio.php" class="btn btn-secondary mb-3">Torna indietro</a>
+        
+    </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

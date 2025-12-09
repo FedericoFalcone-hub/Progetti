@@ -1,7 +1,6 @@
 <?php
 session_start();
 
-// Protezione: solo manager loggato
 if (!isset($_SESSION['user']) || $_SESSION['ruolo'] !== 'manager') {
     header("Location: ../login.php");
     exit();
@@ -17,7 +16,7 @@ if (isset($_POST['crea'])) {
     $nome = $_POST['nome'];
     $cf = $_POST['codice_fiscale'];
     $cognome = $_POST['cognome'];
-    $telefono = $_POST['telefono'];
+    $telefono = str_replace(' ', '', $_POST['telefono']);
     $password = $_POST['password'];
 
     $result = crea_cliente($mail, $nome, $cognome, $telefono, $password, $cf);
@@ -71,7 +70,7 @@ if (isset($_POST['crea'])) {
 
         <div class="mb-3">
             <label class="form-label">Codice Fiscale</label>
-            <input type="text" name="codice_fiscale" class="form-control" required>
+            <input type="text" name="codice_fiscale" class="form-control" required minlength="16" maxlength="16">
         </div>
 
         <div class="mb-3">
@@ -97,6 +96,5 @@ if (isset($_POST['crea'])) {
 
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

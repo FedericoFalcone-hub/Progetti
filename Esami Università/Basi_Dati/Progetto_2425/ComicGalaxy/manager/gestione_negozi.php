@@ -1,7 +1,6 @@
 <?php
 session_start();
 
-// Protezione: solo admin loggato
 if (!isset($_SESSION['user']) || $_SESSION['ruolo'] !== 'manager') {
     header("Location: ../login.php");
     exit();
@@ -10,9 +9,9 @@ if (!isset($_SESSION['user']) || $_SESSION['ruolo'] !== 'manager') {
 include '../lib/functions.php';
 
 $success_msg = $error_msg = null;
-// Ottieni lista negozi e manager disponibili
-$negozi = getNegozi(); // array: id, nome, indirizzo, manager_attuale
-$manager = getManagerLiberi(); // array: mail, nome, cognome
+
+$negozi = getNegozi(); 
+$manager = getManagerLiberi(); 
 
 // --- CREAZIONE NUOVO NEGOZIO ---
 if (isset($_POST['crea_negozio'])) {

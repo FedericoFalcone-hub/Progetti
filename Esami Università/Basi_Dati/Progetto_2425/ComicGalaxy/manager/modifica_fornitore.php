@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-// Protezione: solo manager loggato
+
 if (!isset($_SESSION['user']) || $_SESSION['ruolo'] !== 'manager') {
     header("Location: ../login.php");
     exit();
@@ -9,7 +9,7 @@ if (!isset($_SESSION['user']) || $_SESSION['ruolo'] !== 'manager') {
 
 include '../lib/functions.php';
 
-// Ottieni l'id del cliente da modificare (passato via GET)
+
 if (!isset($_GET['p_iva'])) {
     header("Location: gestione_fornitori.php");
     exit();
@@ -86,7 +86,7 @@ if (isset($_POST['save'])) {
 
         <div class="mb-3">
             <label class="form-label">Partita IVA</label>
-            <input type="text" name="f_p_iva" class="form-control" value="<?= htmlspecialchars($p_iva) ?>" required>
+            <input type="text" name="f_p_iva" class="form-control" value="<?= htmlspecialchars($p_iva) ?>" required minlength="13" maxlength="13">
         </div>
 
         <div class="mb-3">
@@ -122,6 +122,6 @@ if (isset($_POST['save'])) {
     </form>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>

@@ -1,7 +1,6 @@
 <?php
 session_start();
 
-// Protezione: solo manager loggato
 if (!isset($_SESSION['user']) || $_SESSION['ruolo'] !== 'manager') {
     header("Location: ../login.php");
     exit();
@@ -9,7 +8,6 @@ if (!isset($_SESSION['user']) || $_SESSION['ruolo'] !== 'manager') {
 
 include '../lib/functions.php';
 
-// Ottieni l'id del cliente da modificare (passato via GET)
 if (!isset($_GET['id'])) {
     header("Location: gestione_negozi.php");
     exit();
@@ -114,6 +112,5 @@ if (isset($_POST['save'])) {
     </form>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -25,7 +25,7 @@ if (isset($_POST['login'])) {
             header("Location: manager/area_manager.php");
             exit();
         } elseif ($login_info['ruolo'] === 'cliente') {
-            header("Location: area_clienti.php");
+            header("Location: cliente/area_clienti.php");
             exit();
         } else {
             $errore = "Ruolo non riconosciuto!";

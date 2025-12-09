@@ -19,11 +19,8 @@
 
             <!-- Nav sinistra -->
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item"><a class="nav-link" href="#">Negozi</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Clienti</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Tessere</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Ordini</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Fornitori</a></li>
+                <li class="nav-item"><a class="nav-link" href="/lista_negozi.php">I nostri negozi</a></li>
+                <li class="nav-item"><a class="nav-link" href="/lista_prodotti.php">I nostri prodotti</a></li>
             </ul>
 
             <!-- Nav destra -->
@@ -38,7 +35,7 @@
                 <?php else : ?>
 
                     <li class="nav-item d-flex align-items-center me-3 text-white fw-bold">
-                        Benvenuto, <a href="/profilo.php" class="ms-1 text-white text-decoration-underline">
+                        Ciao, <a href="/profilo.php" class="ms-1 text-white text-decoration-underline">
                             <?= htmlspecialchars($_SESSION['nome']) ?>
                         </a>
                     </li>
@@ -50,7 +47,7 @@
 
                     <?php elseif ($_SESSION['ruolo'] === 'cliente') : ?>
                         <li class="nav-item">
-                            <a class="btn btn-light me-2" href="area_clienti.php">La mia Area</a>
+                            <a class="btn btn-light me-2" href="cliente/area_clienti.php">La mia Area</a>
                         </li>
                     <?php endif; ?>
 

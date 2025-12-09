@@ -1,9 +1,9 @@
 <?php
 session_start();
 
-// Protezione: solo manager loggato
+
 if (!isset($_SESSION['user']) || $_SESSION['ruolo'] !== 'manager') {
-    header("Location: login.php");
+    header("Location: ../login.php");
     exit();
 }
 
@@ -39,7 +39,7 @@ if (isset($_POST['aggiungi_carrello'])) {
 }
 
 // Ottieni prodotti ordinabili dai fornitori
-$prodotti_fornitori = getProdottiOrdinabili(); // array con 'id_prodotto', 'nome_prodotto', 'prezzo', 'quantita', 'fornitore'
+$prodotti_fornitori = getProdottiOrdinabili(); 
 ?>
 
 <!DOCTYPE html>
@@ -106,6 +106,5 @@ $prodotti_fornitori = getProdottiOrdinabili(); // array con 'id_prodotto', 'nome
     </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -14,7 +14,7 @@ $success_msg = $error_msg = null;
 if (isset($_POST['update_profile'])) {
     $telefono = trim($_POST['telefono']);
     
-    if (aggiornaTelefono($_SESSION['user'], $telefono)) {
+    if (aggiorna_telefono($_SESSION['user'], $telefono)) {
         $_SESSION['telefono'] = $telefono;
         $success_msg = "Profilo aggiornato correttamente!";
     } else {
@@ -29,10 +29,12 @@ if (isset($_POST['change_password'])) {
     
     if ($new !== $confirm) {
         $error_msg = "La nuova password e la conferma non coincidono.";
-    } elseif (cambiaPassword($_SESSION['user'], $current, $new)) {
-        $success_msg = "Password aggiornata con successo!";
+    } 
+    $result = cambia_password($_SESSION['user'], $current, $new);
+    if ($result["success"]) {
+        $success_msg = $result["msg"];
     } else {
-        $error_msg = "Password corrente errata.";
+        $error_msg = $result["msg"];
     }
 }
 ?>

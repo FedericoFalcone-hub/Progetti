@@ -16,7 +16,7 @@ if (isset($_POST['crea'])) {
     $mail = $_POST['mail'];
     $nome = $_POST['nome'];
     $cognome = $_POST['cognome'];
-    $telefono = $_POST['telefono'];
+    $telefono = str_replace(' ', '', $_POST['telefono']);
     $password = $_POST['password'];
 
     $result = crea_manager($mail, $nome, $cognome, $telefono, $password);
@@ -92,6 +92,5 @@ if (isset($_POST['crea'])) {
 
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

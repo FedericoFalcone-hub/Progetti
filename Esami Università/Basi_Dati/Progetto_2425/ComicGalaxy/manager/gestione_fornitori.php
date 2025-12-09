@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-// Protezione: solo admin o manager
+
 if (!isset($_SESSION["user"]) || $_SESSION["ruolo"] !== "manager") {
     header("Location: ../login.php");
     exit();
@@ -45,7 +45,7 @@ if (isset($_POST['crea_fornitore'])) {
     $citta = $_POST['citta'];
     $via = $_POST['via'];
     $civico = intval($_POST['civico']);
-    $telefono = $_POST['telefono'];
+    $telefono = str_replace(' ', '', $_POST['telefono']);
 
     $result = crea_fornitore($nome, $f_p_iva, $mail, $citta, $via, $civico, $telefono);
     if ($result === true) {
@@ -216,6 +216,5 @@ unset($_SESSION["error"]);
 
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
