@@ -3,10 +3,13 @@ session_start();
 
 
 if (!isset($_SESSION['user']) || $_SESSION['ruolo'] !== 'manager') {
-     header("Location: login.php");
-     exit();
+    header("Location: login.php");
+    exit();
 }
-
+if ($_SESSION['sospeso'] === 't') {
+    header("Location: area_manager.php");
+    exit();
+}
 require_once "../lib/functions.php";
 
 
@@ -15,6 +18,7 @@ $tesserati = getTesseratiPuntiElevati();
 ?>
 <!DOCTYPE html>
 <html lang="it">
+
 <head>
     <meta charset="UTF-8">
     <title>Tesserati punti elevati</title>
@@ -22,13 +26,14 @@ $tesserati = getTesseratiPuntiElevati();
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
 </head>
+
 <body>
 
-<?php include '../navbar.php'; ?>
+    <?php include '../navbar.php'; ?>
 
-<div class="container mt-5">
+    <div class="container mt-5">
 
-    <h1 class="text-primary fw-bold mb-4 text-center">Tesserati punti elevati</h1>
+        <h1 class="text-primary fw-bold mb-4 text-center">Tesserati punti elevati</h1>
 
 
         <div class="card shadow-sm">
@@ -39,7 +44,7 @@ $tesserati = getTesseratiPuntiElevati();
                             <th>Nome</th>
                             <th>Cognome</th>
                             <th>Mail</th>
-                            <th>Negozio</th>
+                            <th>Negozio Emissione</th>
                             <th>Saldo punti</th>
                         </tr>
                     </thead>
@@ -55,7 +60,7 @@ $tesserati = getTesseratiPuntiElevati();
                                 <tr>
                                     <td><?= htmlspecialchars($t['nome_cliente']) ?></td>
                                     <td><?= htmlspecialchars($t['cognome_cliente']) ?></td>
-                                     <td><?= htmlspecialchars($t['mail']) ?></td>
+                                    <td><?= htmlspecialchars($t['mail']) ?></td>
                                     <td><?= htmlspecialchars($t['nome_negozio']) ?></td>
                                     <td><?= htmlspecialchars($t['punti']) ?></td>
                                 </tr>
@@ -66,11 +71,12 @@ $tesserati = getTesseratiPuntiElevati();
             </div>
         </div>
 
-    <div class="mt-4 text-center">
-        <a href="statistiche.php" class="btn btn-secondary">Torna alle Statistiche</a>
+        <div class="mt-4 text-center">
+            <a href="statistiche.php" class="btn btn-secondary">Torna alle Statistiche</a>
+        </div>
+
     </div>
 
-</div>
-
 </body>
+
 </html>

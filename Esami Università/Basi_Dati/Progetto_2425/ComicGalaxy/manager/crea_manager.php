@@ -1,9 +1,13 @@
 <?php
 session_start();
 
-// Protezione: solo manager loggato
 if (!isset($_SESSION['user']) || $_SESSION['ruolo'] !== 'manager') {
     header("Location: ../login.php");
+    exit();
+}
+
+if ($_SESSION['sospeso'] === 't') {
+    header("Location: area_manager.php");
     exit();
 }
 
@@ -11,7 +15,6 @@ include '../lib/functions.php';
 
 $success_msg = $error_msg = null;
 
-// Gestione creazione nuovo utente
 if (isset($_POST['crea'])) {
     $mail = $_POST['mail'];
     $nome = $_POST['nome'];

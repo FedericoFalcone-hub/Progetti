@@ -7,9 +7,13 @@ if (!isset($_SESSION['user']) || $_SESSION['ruolo'] !== 'manager') {
     exit();
 }
 
+if ($_SESSION['sospeso'] === 't') {
+    header("Location: area_manager.php");
+    exit();
+}
+
 include '../lib/functions.php';
 
-// Ottieni l'id del negozio associato al manager
 $negozio = getNegozio($_SESSION['user']);
 if ($negozio === null) {
     die('<div class="container text-center mt-5">
@@ -21,7 +25,6 @@ if ($negozio === null) {
         </div>');
 }
 
-// Aggiungi prodotto al carrello
 $success_msg = $error_msg = null;
 if (isset($_POST['aggiungi_carrello'])) {
     $id_prodotto = $_POST['id_prodotto'];
@@ -38,7 +41,6 @@ if (isset($_POST['aggiungi_carrello'])) {
     }
 }
 
-// Ottieni prodotti ordinabili dai fornitori
 $prodotti_fornitori = getProdottiOrdinabili(); 
 ?>
 

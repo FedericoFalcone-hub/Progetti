@@ -68,9 +68,10 @@ if (isset($_POST['change_password'])) {
             <p><strong>Cognome:</strong> <?= htmlspecialchars($_SESSION['cognome']) ?></p>
             <p><strong>Email:</strong> <?= htmlspecialchars($_SESSION['user']) ?></p>
             <p><strong>Ruolo:</strong> <?= htmlspecialchars($_SESSION['ruolo']) ?></p>
+            <p><strong>Telefono:</strong> <?= htmlspecialchars($_SESSION['telefono']) ?></p>
 
             <hr>
-
+            <?php if ($_SESSION['sospeso']==='f'):?>
             <!-- Modifica telefono -->
             <h5>Aggiorna Telefono</h5>
             <form method="post" class="mb-4">
@@ -94,13 +95,18 @@ if (isset($_POST['change_password'])) {
                 </div>
                 <button type="submit" name="change_password" class="btn btn-warning">Aggiorna Password</button>
             </form>
+            <?php else: ?>
+                <div class="alert alert-danger">
+                    Il tuo account è attualmente sospeso. Non puoi modificare le informazioni del profilo.
+                </div>
+            <?php endif; ?>
 
         </div>
         <div class="card-footer text-center">
             <a href="<?=
                 $_SESSION['ruolo'] === 'manager'
                     ? 'manager/area_manager.php'
-                    : 'area_clienti.php'
+                    : 'cliente/area_clienti.php'
             ?>" class="btn btn-secondary">Torna alla tua area riservata</a>
         </div>
     </div>

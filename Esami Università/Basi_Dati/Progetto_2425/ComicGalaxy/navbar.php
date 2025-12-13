@@ -47,7 +47,7 @@
 
                     <?php elseif ($_SESSION['ruolo'] === 'cliente') : ?>
                         <li class="nav-item">
-                            <a class="btn btn-light me-2" href="cliente/area_clienti.php">La mia Area</a>
+                            <a class="btn btn-light me-2" href="/cliente/area_clienti.php">La mia Area</a>
                         </li>
                     <?php endif; ?>
 

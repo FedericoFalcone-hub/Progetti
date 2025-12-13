@@ -20,6 +20,8 @@ if (isset($_POST['login'])) {
         $_SESSION['nome'] = $login_info['nome'];
         $_SESSION['cognome'] = $login_info['cognome'];
         $_SESSION['telefono'] = $login_info['telefono'];
+        $_SESSION['sospeso'] = $login_info['sospeso'];
+        $_SESSION['cf'] = $login_info['cf'];
 
         if ($login_info['ruolo'] === 'manager') {
             header("Location: manager/area_manager.php");

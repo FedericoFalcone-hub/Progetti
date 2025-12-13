@@ -3,7 +3,7 @@ session_start();
 
 include 'lib/functions.php';
 
-$negozi = getNegozi_aperti();
+$negozi = getNegozi();
 
 
 ?>
@@ -33,16 +33,29 @@ $negozi = getNegozi_aperti();
                     <tr>
                         <th>Nome</th>
                         <th>Indirizzo</th>
+                        <th>Stato</th>
+                        <th>Orari</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($negozi as $n): ?>
-                    <tr>
-                        <td><?= htmlspecialchars($n['nome']) ?></td>
-                        <td><?= htmlspecialchars($n['indirizzo']) ?></td>
-                    </tr>
-                    <?php endforeach; ?>
-                </tbody>
+    <?php foreach ($negozi as $n): ?>
+    <tr>
+        <td><?= htmlspecialchars($n['nome']) ?></td>
+        <td><?= htmlspecialchars($n['indirizzo']) ?></td>
+        <td>
+            <span class="badge <?= $n['data_chiusura'] ? 'bg-danger' : 'bg-success' ?>">
+                <?= $n['data_chiusura'] ? 'Chiuso Definitivamente' : 'Aperto' ?>
+            </span>
+        </td>
+        <td>
+            <a href="orari_negozio.php?id=<?= htmlspecialchars($n['id']) ?>" class="btn btn-sm btn-outline-primary">
+                Visualizza Orari
+            </a>
+        </td>
+    </tr>
+    <?php endforeach; ?>
+</tbody>
+
             </table>
         </div>
     </div>

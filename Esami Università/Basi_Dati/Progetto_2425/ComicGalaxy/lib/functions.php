@@ -1,7 +1,8 @@
 <?php
 
 require_once __DIR__ . '/functions.ini.php';
-function login($user, $psw) {
+function login($user, $psw)
+{
     $db = open_pg_connection();
 
     // Recupera l'hash della password e i dati dell'utente
@@ -14,7 +15,9 @@ function login($user, $psw) {
                    END AS ruolo,
                    COALESCE(c.nome, m.nome) AS nome,
                    COALESCE(c.cognome, m.cognome) AS cognome,
-                   u.telefono
+                   u.telefono,
+                   u.sospeso,
+                   c.cf
             FROM comicgalaxy.utente u
             LEFT JOIN comicgalaxy.cliente c ON u.mail = c.mail
             LEFT JOIN comicgalaxy.manager m ON u.mail = m.mail
@@ -33,7 +36,9 @@ function login($user, $psw) {
                 'ruolo' => $row['ruolo'],
                 'nome' => $row['nome'],
                 'cognome' => $row['cognome'],
-                'telefono' => $row['telefono']
+                'telefono' => $row['telefono'],
+                'sospeso' => $row['sospeso'],
+                'cf' => $row['cf']
             );
         }
     }
@@ -43,7 +48,8 @@ function login($user, $psw) {
 }
 
 
-function getNegozio($mail){
+function getNegozio($mail)
+{
 
     $db = open_pg_connection();
 
@@ -66,12 +72,13 @@ function getNegozio($mail){
             'civico' => $row['civico']
         );
     }
-    
+
     close_pg_connection($db);
     return $negozio;
 }
 
-function getProdotti($id_negozio){
+function getProdotti($id_negozio)
+{
 
 
     $db = open_pg_connection();
@@ -99,8 +106,9 @@ function getProdotti($id_negozio){
     return $prodotti;
 }
 
-function getOrarioNegozio($id_negozio){
-  
+function getOrarioNegozio($id_negozio)
+{
+
 
     $db = open_pg_connection();
 
@@ -109,7 +117,7 @@ function getOrarioNegozio($id_negozio){
             WHERE id_negozio = $1
             order by giorno";
 
-    $param = array($id_negozio); 
+    $param = array($id_negozio);
     $result = pg_prepare($db, "get_orario", $sql);
     $result = pg_execute($db, "get_orario", $param);
 
@@ -125,8 +133,9 @@ function getOrarioNegozio($id_negozio){
     return $orari;
 }
 
-function aggiornaOrario($id_negozio, $giorno, $apertura, $chiusura,$chiuso=false){
-    
+function aggiornaOrario($id_negozio, $giorno, $apertura, $chiusura, $chiuso = false)
+{
+
 
     $db = open_pg_connection();
 
@@ -148,8 +157,9 @@ function aggiornaOrario($id_negozio, $giorno, $apertura, $chiusura,$chiuso=false
     return $result;
 }
 
-function aggiornaPrezzoProdotto($id_negozio, $id_prodotto, $prezzo){
- 
+function aggiornaPrezzoProdotto($id_negozio, $id_prodotto, $prezzo)
+{
+
 
     $db = open_pg_connection();
 
@@ -165,8 +175,9 @@ function aggiornaPrezzoProdotto($id_negozio, $id_prodotto, $prezzo){
     return $result;
 }
 
-function eliminaFornituraProdotto($id_negozio, $id_prodotto){
-   
+function eliminaFornituraProdotto($id_negozio, $id_prodotto)
+{
+
     $db = open_pg_connection();
 
     $sql = "DELETE FROM comicgalaxy.fornitura_negozio
@@ -179,9 +190,10 @@ function eliminaFornituraProdotto($id_negozio, $id_prodotto){
     close_pg_connection($db);
     return $result;
 }
-function getOrdiniNegozio($id_negozio){
+function getOrdiniNegozio($id_negozio)
+{
     date_default_timezone_set('Europe/Rome');
-   
+
 
     $db = open_pg_connection();
 
@@ -203,11 +215,9 @@ function getOrdiniNegozio($id_negozio){
         $ritirato = $row['ritirato'];
         if ($ritirato === 't' || $ritirato === true) {
             $stato = "Ritirato";
-        } 
-        else if ($dataConsegna <= $oggi) {
+        } else if ($dataConsegna <= $oggi) {
             $stato = "Da ritirare";
-        } 
-        else {
+        } else {
             $stato = "In arrivo";
         }
 
@@ -225,8 +235,9 @@ function getOrdiniNegozio($id_negozio){
     return $ordini;
 }
 
-function ritiraOrdine($id_ordine){
-   
+function ritiraOrdine($id_ordine)
+{
+
 
     $db = open_pg_connection();
 
@@ -242,7 +253,8 @@ function ritiraOrdine($id_ordine){
     return $result;
 }
 
-function getProdottiOrdinabili(){
+function getProdottiOrdinabili()
+{
 
 
     $db = open_pg_connection();
@@ -267,8 +279,9 @@ function getProdottiOrdinabili(){
     return $prodotti;
 }
 
-function creaOrdine($id_negozio, $id_prodotti, $quantita) {
-   
+function creaOrdine($id_negozio, $id_prodotti, $quantita)
+{
+
     $db = open_pg_connection();
 
     // Converte gli array PHP in array PostgreSQL
@@ -278,7 +291,7 @@ function creaOrdine($id_negozio, $id_prodotti, $quantita) {
     // Prepara ed esegue la funzione PL/pgSQL
     $sql = "SELECT comicgalaxy.ordina_prodotti($1, $2::int[], $3::int[])";
     $params = array($id_negozio, $prodotti_pg, $quantita_pg);
-    
+
     $result = pg_prepare($db, "ordina_prodotti", $sql);
     $result = pg_execute($db, "ordina_prodotti", $params);
 
@@ -292,8 +305,9 @@ function creaOrdine($id_negozio, $id_prodotti, $quantita) {
     return true;
 }
 
-function getProdottoById($id_prodotto){
- 
+function getProdottoById($id_prodotto)
+{
+
     $db = open_pg_connection();
 
     $sql = "SELECT nome
@@ -315,8 +329,9 @@ function getProdottoById($id_prodotto){
     return $prodotto;
 }
 
-function getSubtotaleProdotto($id_prodotto, $quantita){
-   
+function getSubtotaleProdotto($id_prodotto, $quantita)
+{
+
 
     $db = open_pg_connection();
 
@@ -335,7 +350,8 @@ function getSubtotaleProdotto($id_prodotto, $quantita){
     return $prezzo;
 }
 
-function getDettaglioOrdine($id_ordine){
+function getDettaglioOrdine($id_ordine)
+{
 
     $db = open_pg_connection();
 
@@ -346,19 +362,17 @@ function getDettaglioOrdine($id_ordine){
     $param = array($id_ordine);
     $result = pg_prepare($db, "get_dettaglio_ordine", $sql);
     $result = pg_execute($db, "get_dettaglio_ordine", $param);
-    
-while ($row = pg_fetch_assoc($result)) {
-        
+
+    while ($row = pg_fetch_assoc($result)) {
+
         $oggi = date('Y-m-d');
         $dataConsegna = $row['data_consegna'];
         $ritirato = $row['ritirato'];
         if ($ritirato === 't' || $ritirato === true) {
             $stato = "Ritirato";
-        } 
-        else if ($dataConsegna <= $oggi) {
+        } else if ($dataConsegna <= $oggi) {
             $stato = "Da ritirare";
-        } 
-        else {
+        } else {
             $stato = "In arrivo";
         }
 
@@ -375,7 +389,8 @@ while ($row = pg_fetch_assoc($result)) {
     close_pg_connection($db);
     return $ordine;
 }
-function getProdottiOrdine($id_ordine){
+function getProdottiOrdine($id_ordine)
+{
 
     $db = open_pg_connection();
 
@@ -403,7 +418,8 @@ function getProdottiOrdine($id_ordine){
     return $prodotti;
 }
 
-function getClientiNegozio($id_negozio){
+function getClientiNegozio($id_negozio)
+{
 
     $db = open_pg_connection();
 
@@ -445,7 +461,7 @@ function getClientiNegozio($id_negozio){
             'data_scadenza' => $data_scadenza,
             'saldo' => $saldo,
             'telefono' => $row['telefono'],
-            
+
         );
     }
 
@@ -453,15 +469,16 @@ function getClientiNegozio($id_negozio){
     return $clienti;
 }
 
-function aggiornaUtente($old_mail, $mail, $nome, $cognome, $telefono){
+function aggiornaUtente($old_mail, $mail, $nome, $cognome, $telefono)
+{
     $db = open_pg_connection();
- 
+
     $sql = "SELECT comicgalaxy.aggiorna_utente($1, $2, $3, $4, $5)";
     $params = array($old_mail, $mail, $nome, $cognome, $telefono);
     $result = pg_prepare($db, "update_utente", $sql);
     $result = pg_execute($db, "update_utente", $params);
 
-    
+
 
     if (!$result) {
         $result = pg_last_error($db);
@@ -470,27 +487,29 @@ function aggiornaUtente($old_mail, $mail, $nome, $cognome, $telefono){
     return $result;
 }
 
-function chiudiNegozioDefinitivamente($id_negozio){
+function chiudiNegozioDefinitivamente($id_negozio)
+{
     $db = open_pg_connection();
 
     $sql = "UPDATE comicgalaxy.negozio
             SET data_chiusura = CURRENT_DATE
             WHERE id = $1";
 
-    $params = array( $id_negozio);
+    $params = array($id_negozio);
 
     $result = pg_query_params($db, $sql, $params);
 
     if (!$result) {
         echo "PG ERROR: " . pg_last_error($db);
     }
-    
+
 
     close_pg_connection($db);
     return $result;
 }
 
-function getUtenti(){
+function getUtenti()
+{
     $db = open_pg_connection();
 
     $sql = "SELECT u.mail,
@@ -524,7 +543,8 @@ function getUtenti(){
     return $utenti;
 }
 
-function getUtente($mail){
+function getUtente($mail)
+{
     $db = open_pg_connection();
 
     $sql = "SELECT u.mail,
@@ -535,7 +555,8 @@ function getUtente($mail){
                 END AS ruolo,
             COALESCE(c.nome, m.nome) AS nome,
             COALESCE(c.cognome, m.cognome) AS cognome,
-            u.telefono
+            u.telefono,
+            u.sospeso
             FROM comicgalaxy.utente u
             LEFT JOIN comicgalaxy.cliente c ON u.mail = c.mail
             LEFT JOIN comicgalaxy.manager m ON u.mail = m.mail
@@ -544,7 +565,7 @@ function getUtente($mail){
     $param = array($mail);
     $result = pg_prepare($db, "get_utente", $sql);
     $result = pg_execute($db, "get_utente", $param);
-    
+
     $utente = null;
     if ($row = pg_fetch_assoc($result)) {
         $utente = array(
@@ -552,7 +573,8 @@ function getUtente($mail){
             'nome' => $row['nome'],
             'cognome' => $row['cognome'],
             'ruolo' => $row['ruolo'],
-            'telefono' => $row['telefono']
+            'telefono' => $row['telefono'],
+            'sospeso' => $row['sospeso']
         );
     }
 
@@ -560,7 +582,8 @@ function getUtente($mail){
     return $utente;
 }
 
-function getClienti(){
+function getClienti()
+{
     $db = open_pg_connection();
 
     $sql = "SELECT *
@@ -570,7 +593,7 @@ function getClienti(){
     $result = pg_prepare($db, "get_utenti", $sql);
     $result = pg_execute($db, "get_utenti", array());
     $utenti = array();
-   
+
     while ($row = pg_fetch_assoc($result)) {
         $utenti[] = array(
             'mail' => $row['mail'],
@@ -585,7 +608,8 @@ function getClienti(){
     return $utenti;
 }
 
-function crea_cliente($mail, $nome, $cognome, $telefono, $password, $cf) {
+function crea_cliente($mail, $nome, $cognome, $telefono, $password, $cf)
+{
     $db = open_pg_connection();
     $psw_hash = password_hash($password, PASSWORD_BCRYPT);
     $sql = "SELECT comicgalaxy.crea_cliente($1, $2, $3, $4, $5, $6)";
@@ -608,7 +632,6 @@ function crea_cliente($mail, $nome, $cognome, $telefono, $password, $cf) {
 
         close_pg_connection($db);
         return true;
-
     } catch (Exception $e) {
         close_pg_connection($db);
         return $e->getMessage();
@@ -616,9 +639,10 @@ function crea_cliente($mail, $nome, $cognome, $telefono, $password, $cf) {
 }
 
 
-function sospendi_utente($mail){
+function sospendi_utente($mail)
+{
     $db = open_pg_connection();
-    
+
     $sql = "select comicgalaxy.sospendi_utente($1)";
 
     $params = array($mail);
@@ -639,7 +663,6 @@ function sospendi_utente($mail){
 
         close_pg_connection($db);
         return true;
-
     } catch (Exception $e) {
         close_pg_connection($db);
         return $e->getMessage();
@@ -647,7 +670,8 @@ function sospendi_utente($mail){
 }
 
 
-function riattiva_utente($mail){
+function riattiva_utente($mail)
+{
     $db = open_pg_connection();
 
     $sql = "UPDATE comicgalaxy.utente
@@ -662,7 +686,8 @@ function riattiva_utente($mail){
     return $result;
 }
 
-function getManager(){
+function getManager()
+{
     $db = open_pg_connection();
 
     $sql = "SELECT m.mail,
@@ -677,7 +702,7 @@ function getManager(){
     $result = pg_prepare($db, "get_manager", $sql);
     $result = pg_execute($db, "get_manager", array());
     $managers = array();
-   
+
     while ($row = pg_fetch_assoc($result)) {
         $managers[] = array(
             'mail' => $row['mail'],
@@ -693,7 +718,8 @@ function getManager(){
     return $managers;
 }
 
-function crea_manager($mail, $nome, $cognome, $telefono, $password) {
+function crea_manager($mail, $nome, $cognome, $telefono, $password)
+{
     $db = open_pg_connection();
     $psw_hash = password_hash($password, PASSWORD_BCRYPT);
     $sql = "SELECT comicgalaxy.crea_manager($1, $2, $3, $4, $5)";
@@ -716,14 +742,14 @@ function crea_manager($mail, $nome, $cognome, $telefono, $password) {
 
         close_pg_connection($db);
         return true;
-
     } catch (Exception $e) {
         close_pg_connection($db);
         return $e->getMessage();
     }
 }
 
-function getNegozi(){
+function getNegozi()
+{
     $db = open_pg_connection();
 
     $sql = "SELECT n.id, n.nome, n.data_chiusura, i.citta, i.via, i.civico, m.nome AS nome_manager, m.cognome AS cognome_manager
@@ -735,23 +761,24 @@ function getNegozi(){
     $result = pg_prepare($db, "get_negozi", $sql);
     $result = pg_execute($db, "get_negozi", array());
     $negozi = array();
-   
+
     while ($row = pg_fetch_assoc($result)) {
-    $negozi[] = array(
-        'id' => $row['id'],
-        'nome' => $row['nome'],
-        'data_chiusura' => $row['data_chiusura'],
-        'indirizzo' => $row['citta'] . ', ' . $row['via'] . ', ' . $row['civico'],
-        'manager' => $row['nome_manager'] . ' ' . $row['cognome_manager']
-    );
-}
+        $negozi[] = array(
+            'id' => $row['id'],
+            'nome' => $row['nome'],
+            'data_chiusura' => $row['data_chiusura'],
+            'indirizzo' => $row['citta'] . ', ' . $row['via'] . ', ' . $row['civico'],
+            'manager' => $row['nome_manager'] . ' ' . $row['cognome_manager']
+        );
+    }
 
 
     close_pg_connection($db);
     return $negozi;
 }
 
-function getManagerLiberi(){
+function getManagerLiberi()
+{
     $db = open_pg_connection();
 
     $sql = "SELECT m.mail, m.nome, m.cognome
@@ -763,7 +790,7 @@ function getManagerLiberi(){
     $result = pg_prepare($db, "get_manager_liberi", $sql);
     $result = pg_execute($db, "get_manager_liberi", array());
     $managers = array();
-   
+
     while ($row = pg_fetch_assoc($result)) {
         $managers[] = array(
             'mail' => $row['mail'],
@@ -776,7 +803,8 @@ function getManagerLiberi(){
     return $managers;
 }
 
-function crea_negozio($nome, $manager, $citta, $via, $civico, $telefono) {
+function crea_negozio($nome, $manager, $citta, $via, $civico, $telefono)
+{
     $db = open_pg_connection();
 
     $sql = "SELECT comicgalaxy.crea_negozio($1, $2, $3, $4, $5, $6)";
@@ -802,7 +830,8 @@ function crea_negozio($nome, $manager, $citta, $via, $civico, $telefono) {
     return true;  // tutto ok
 }
 
-function aggiorna_manager($id_negozio, $manager) {
+function aggiorna_manager($id_negozio, $manager)
+{
     $db = open_pg_connection();
 
     $sql = "UPDATE comicgalaxy.negozio
@@ -817,7 +846,8 @@ function aggiorna_manager($id_negozio, $manager) {
     return $result;
 }
 
-function getFornitori(){
+function getFornitori()
+{
     $db = open_pg_connection();
 
     $sql = "SELECT p_iva, nome, telefono, mail, via, civico, citta, sospeso
@@ -827,7 +857,7 @@ function getFornitori(){
     $result = pg_prepare($db, "get_fornitori", $sql);
     $result = pg_execute($db, "get_fornitori", array());
     $fornitori = array();
-   
+
     while ($row = pg_fetch_assoc($result)) {
         $fornitori[] = array(
             'p_iva' => $row['p_iva'],
@@ -843,7 +873,8 @@ function getFornitori(){
     return $fornitori;
 }
 
-function getProdottiFornitore($p_iva){
+function getProdottiFornitore($p_iva)
+{
     $db = open_pg_connection();
 
     $sql = "SELECT p.id, p.nome, f.prezzo, f.quantita
@@ -864,12 +895,13 @@ function getProdottiFornitore($p_iva){
             'quantita' => $row['quantita']
         );
     }
-    
+
     close_pg_connection($db);
     return $prodotti;
 }
 
-function getFornitoreByPIVA($p_iva){
+function getFornitoreByPIVA($p_iva)
+{
     $db = open_pg_connection();
 
     $sql = "SELECT nome, telefono, mail, via, civico, citta
@@ -889,7 +921,8 @@ function getFornitoreByPIVA($p_iva){
     return $fornitore;
 }
 
-function sospendi_fornitore($p_iva){
+function sospendi_fornitore($p_iva)
+{
     $db = open_pg_connection();
 
     $sql = "UPDATE comicgalaxy.fornitore
@@ -904,7 +937,8 @@ function sospendi_fornitore($p_iva){
 }
 
 
-function riattiva_fornitore($p_iva){
+function riattiva_fornitore($p_iva)
+{
     $db = open_pg_connection();
 
     $sql = "UPDATE comicgalaxy.fornitore
@@ -918,7 +952,8 @@ function riattiva_fornitore($p_iva){
     return $result;
 }
 
-function aggiorna_fornitore($old_p_iva, $p_iva, $nome, $telefono, $mail, $via, $civico, $citta){
+function aggiorna_fornitore($old_p_iva, $p_iva, $nome, $telefono, $mail, $via, $civico, $citta)
+{
     $db = open_pg_connection();
 
     $sql = "SELECT comicgalaxy.aggiorna_fornitore($1, $2, $3, $4, $5, $6, $7, $8)";
@@ -927,9 +962,9 @@ function aggiorna_fornitore($old_p_iva, $p_iva, $nome, $telefono, $mail, $via, $
     $result = pg_execute($db, "update_fornitore", $params);
 
     if (!$result) {
-        $error = pg_last_error($db); 
+        $error = pg_last_error($db);
         close_pg_connection($db);
-        return $error; 
+        return $error;
     }
 
     close_pg_connection($db);
@@ -937,7 +972,8 @@ function aggiorna_fornitore($old_p_iva, $p_iva, $nome, $telefono, $mail, $via, $
 }
 
 
-function crea_fornitore($nome, $p_iva, $mail, $citta, $via, $civico, $telefono) {
+function crea_fornitore($nome, $p_iva, $mail, $citta, $via, $civico, $telefono)
+{
     $db = open_pg_connection();
 
     $sql = "SELECT comicgalaxy.crea_fornitore($1, $2, $3, $4, $5, $6, $7)";
@@ -947,7 +983,7 @@ function crea_fornitore($nome, $p_iva, $mail, $citta, $via, $civico, $telefono) 
     if (!$prep) {
         $err = pg_last_error($db);
         close_pg_connection($db);
-        return $err;  
+        return $err;
     }
 
     $res = pg_execute($db, "create_fornitore", $params);
@@ -961,7 +997,8 @@ function crea_fornitore($nome, $p_iva, $mail, $citta, $via, $civico, $telefono) 
     return true;
 }
 
-function getNegozioById($id_negozio){
+function getNegozioById($id_negozio)
+{
     $db = open_pg_connection();
 
     $sql = "SELECT *
@@ -978,18 +1015,19 @@ function getNegozioById($id_negozio){
             'nome' => $row['nome'],
             'data_chiusura' => $row['data_chiusura'],
             'citta' => $row['citta'],
-            'telefono' => $row['telefono'], 
+            'telefono' => $row['telefono'],
             'via' => $row['via'],
             'civico' => $row['civico'],
             'manager' => $row['nome_manager'] . ' ' . $row['cognome_manager']
         );
     }
-    
+
     close_pg_connection($db);
     return $negozio;
 }
 
-function aggiorna_negozio($id_negozio, $nome, $telefono, $citta, $via, $civico){
+function aggiorna_negozio($id_negozio, $nome, $telefono, $citta, $via, $civico)
+{
     $db = open_pg_connection();
     $sql = "SELECT comicgalaxy.aggiorna_negozio($1, $2, $3, $4, $5, $6)";
     $params = array($id_negozio, $nome, $citta, $via, $civico, $telefono);
@@ -1000,7 +1038,8 @@ function aggiorna_negozio($id_negozio, $nome, $telefono, $citta, $via, $civico){
     return $result;
 }
 
-function cambia_password($mail, $password_attuale, $password_nuova) {
+function cambia_password($mail, $password_attuale, $password_nuova)
+{
     $db = open_pg_connection();   // Usa la tua funzione di connessione
 
     $sql = "SELECT password FROM comicgalaxy.utente WHERE mail = $1";
@@ -1013,7 +1052,7 @@ function cambia_password($mail, $password_attuale, $password_nuova) {
 
     $row = pg_fetch_assoc($result);
     $hash_attuale = $row["password"];
-    
+
     if (!password_verify($password_attuale, $hash_attuale)) {
         close_pg_connection($db);
         return array("success" => false, "msg" => "Password attuale errata");
@@ -1033,7 +1072,8 @@ function cambia_password($mail, $password_attuale, $password_nuova) {
     }
 }
 
-function aggiorna_telefono($mail, $telefono){
+function aggiorna_telefono($mail, $telefono)
+{
     $db = open_pg_connection();
 
     $sql = "UPDATE comicgalaxy.utente
@@ -1048,7 +1088,8 @@ function aggiorna_telefono($mail, $telefono){
     return $result;
 }
 
-function getNegozi_aperti(){
+function getNegozi_aperti()
+{
     $db = open_pg_connection();
 
     $sql = "SELECT n.id, n.nome, i.citta, i.via, i.civico
@@ -1062,18 +1103,19 @@ function getNegozi_aperti(){
     $negozi = array();
 
     while ($row = pg_fetch_assoc($result)) {
-    $negozi[] = array(
-        'id' => $row['id'],
-        'nome' => $row['nome'],
-        'indirizzo' => $row['citta'] . ', ' . $row['via'] . ', ' . $row['civico']
-    );
-}
+        $negozi[] = array(
+            'id' => $row['id'],
+            'nome' => $row['nome'],
+            'indirizzo' => $row['citta'] . ', ' . $row['via'] . ', ' . $row['civico']
+        );
+    }
 
     close_pg_connection($db);
     return $negozi;
 }
 
-function getAllProdotti(){
+function getAllProdotti()
+{
     $db = open_pg_connection();
 
     $sql = "SELECT id, nome, descrizione
@@ -1085,13 +1127,14 @@ function getAllProdotti(){
 
     $prodotti = array();
     while ($row = pg_fetch_assoc($result)) {
-        $prodotti[] =$row;
+        $prodotti[] = $row;
     }
     close_pg_connection($db);
     return $prodotti;
 }
 
-function tesseratiNegozio($id_negozio){
+function tesseratiNegozio($id_negozio)
+{
     $db = open_pg_connection();
 
     $sql = "SELECT *
@@ -1102,16 +1145,33 @@ function tesseratiNegozio($id_negozio){
     $result = pg_prepare($db, "count_tesserati", $sql);
     $result = pg_execute($db, "count_tesserati", $params);
 
-    $tesserati= array();
+    $tesserati = array();
     while ($row = pg_fetch_assoc($result)) {
-        $tesserati[] = $row;
+        $stato = "attiva";
+        if ($row['sospeso'] === 't' || $row['sospeso'] === true) {
+            $stato = "sospesa";
+        }
+        if ($row['data_scadenza'] < date('Y-m-d')) {
+            $stato = "scaduta";
+        }
+        $tesserati[] = array(
+            'cf' => $row['cf'],
+            'mail' => $row['mail'],
+            'nome' => $row['nome'],
+            'cognome' => $row['cognome'],
+            'data_emissione' => $row['data_emissione'],
+            'data_scadenza' => $row['data_scadenza'],
+            'saldo' => $row['saldo'],
+            'stato' => $stato
+        );
     }
 
     close_pg_connection($db);
     return $tesserati;
 }
 
-function getTesseratiPuntiElevati(){
+function getTesseratiPuntiElevati()
+{
     $db = open_pg_connection();
 
     $sql = "SELECT *
@@ -1136,7 +1196,8 @@ function getTesseratiPuntiElevati(){
     return $tesserati;
 }
 
-function ordiniFornitore($p_iva){
+function ordiniFornitore($p_iva)
+{
     $db = open_pg_connection();
 
     $sql = "SELECT *
@@ -1150,17 +1211,15 @@ function ordiniFornitore($p_iva){
 
     $ordini = array();
     while ($row = pg_fetch_assoc($result)) {
-        
+
         $oggi = date('Y-m-d');
         $dataConsegna = $row['data_consegna'];
         $ritirato = $row['ritirato'];
         if ($ritirato === 't' || $ritirato === true) {
             $stato = "Ritirato";
-        } 
-        else if ($dataConsegna <= $oggi) {
+        } else if ($dataConsegna <= $oggi) {
             $stato = "Da ritirare";
-        } 
-        else {
+        } else {
             $stato = "In arrivo";
         }
 
@@ -1173,12 +1232,13 @@ function ordiniFornitore($p_iva){
             'totale' => $row['totale'],
             'stato' => $stato
         );
-    }  
+    }
     close_pg_connection($db);
     return $ordini;
 }
 
-function sospendi_tessera($cf){
+function sospendi_tessera($cf)
+{
     $db = open_pg_connection();
 
     $sql = "UPDATE comicgalaxy.tessera
@@ -1192,7 +1252,8 @@ function sospendi_tessera($cf){
     return $result;
 }
 
-function riattiva_tessera($cf){
+function riattiva_tessera($cf)
+{
     $db = open_pg_connection();
 
     $sql = "UPDATE comicgalaxy.tessera
@@ -1206,7 +1267,8 @@ function riattiva_tessera($cf){
     return $result;
 }
 
-function getFattureNegozio($id_negozio){
+function getFattureNegozio($id_negozio)
+{
     $db = open_pg_connection();
 
     $sql = "SELECT *
@@ -1220,13 +1282,14 @@ function getFattureNegozio($id_negozio){
 
     $fatture = array();
     while ($row = pg_fetch_assoc($result)) {
-        $fatture[]= $row;
-    }  
+        $fatture[] = $row;
+    }
     close_pg_connection($db);
     return $fatture;
 }
 
-function getFatturaById($id_fattura){
+function getFatturaById($id_fattura)
+{
     $db = open_pg_connection();
 
     $sql = "SELECT *
@@ -1240,12 +1303,13 @@ function getFatturaById($id_fattura){
     $fattura = null;
     if ($row = pg_fetch_assoc($result)) {
         $fattura = $row;
-    }  
+    }
     close_pg_connection($db);
     return $fattura;
 }
 
-function getProdottiFattura($id_fattura){
+function getProdottiFattura($id_fattura)
+{
     $db = open_pg_connection();
 
     $sql = "SELECT *
@@ -1262,4 +1326,193 @@ function getProdottiFattura($id_fattura){
     }
     close_pg_connection($db);
     return $prodotti;
+}
+
+function getProdottiNegozio($id_negozio)
+{
+    $db = open_pg_connection();
+
+    $sql = "SELECT p.id, p.nome, p.descrizione, n.quantita, n.prezzo
+            FROM comicgalaxy.prodotto p inner join comicgalaxy.fornitura_negozio n on p.id = n.id_prodotto
+            WHERE n.id_negozio = $1
+            ORDER BY p.nome";
+
+    $param = array($id_negozio);
+    $result = pg_prepare($db, "get_prodotti_negozio", $sql);
+    $result = pg_execute($db, "get_prodotti_negozio", $param);
+
+    $prodotti = array();
+    while ($row = pg_fetch_assoc($result)) {
+        $prodotti[] = $row;
+    }
+
+    close_pg_connection($db);
+    return $prodotti;
+}
+
+function getTessera($mail)
+{
+    $db = open_pg_connection();
+
+    $sql = "SELECT *
+            FROM comicgalaxy.v_tessere
+            WHERE mail = $1";
+
+    $param = array($mail);
+    $result = pg_prepare($db, "get_tessera", $sql);
+    $result = pg_execute($db, "get_tessera", $param);
+
+    $tessera = null;
+    if ($row = pg_fetch_assoc($result)) {
+        $tessera = $row;
+    }
+
+    close_pg_connection($db);
+    return $tessera;
+}
+
+function creaTessera($cf_cliente, $id_negozio)
+{
+    $db = open_pg_connection();
+    var_dump($id_negozio);
+    $sql = "SELECT comicgalaxy.crea_tessera($1, $2)";
+    $params = array($cf_cliente, $id_negozio);
+    $result = pg_prepare($db, "create_tessera", $sql);
+    $result = pg_execute($db, "create_tessera", $params);
+
+    if (!$result) {
+        $error = pg_last_error($db);
+
+        close_pg_connection($db);
+        return $error;
+    }
+
+    close_pg_connection($db);
+    return true;
+}
+
+function rinnova_tessera($cf_cliente)
+{
+    $db = open_pg_connection();
+
+    $sql = "SELECT comicgalaxy.rinnova_tessera($1)";
+    $params = array($cf_cliente);
+    $result = pg_prepare($db, "rinnova_tessera", $sql);
+    $result = pg_execute($db, "rinnova_tessera", $params);
+
+    if (!$result) {
+        $error = pg_last_error($db);
+
+        close_pg_connection($db);
+        return $error;
+    }
+
+    close_pg_connection($db);
+    return true;
+}
+
+function esegui_acquisto($cf, $carrello, $id_negozio, $sconto = 0)
+{
+    $db = open_pg_connection();
+
+    $codici = [];
+    $quantita = [];
+
+    foreach ($carrello as $id_prodotto => $item) {
+        $codici[] = $id_prodotto;
+        $quantita[] = $item['quantita'];
+    }
+
+    $codici_pg = '{' . implode(',', $codici) . '}';
+    $quantita_pg = '{' . implode(',', $quantita) . '}';
+
+    $sql = "SELECT comicgalaxy.gestisci_acquisto($1::varchar, $2::int, $3::int[], $4::int[], $5::int)";
+    $params = array($cf, $id_negozio, $codici_pg, $quantita_pg, $sconto);
+
+    $result = pg_prepare($db, "esegui_acquisto", $sql);
+    if (!$result) {
+        $error = pg_last_error($db);
+        close_pg_connection($db);
+        return $error;
+    }
+
+    $result = pg_execute($db, "esegui_acquisto", $params);
+    if (!$result) {
+        $error = pg_last_error($db);
+        close_pg_connection($db);
+        return $error;
+    }
+
+    close_pg_connection($db);
+
+    $row = pg_fetch_row($result);
+    if ($row) {
+        return true;
+    } else {
+        return "Errore nell'esecuzione dell'ordine.";
+    }
+}
+
+function getAcquistiCliente($mail)
+{
+    $db = open_pg_connection();
+
+    $sql = "SELECT *
+            FROM comicgalaxy.v_storico_acquisti
+            WHERE mail=$1
+            ORDER BY data_acquisto DESC";
+
+    $param = array($mail);
+    $result = pg_prepare($db, "get_acquisti_cliente", $sql);
+    $result = pg_execute($db, "get_acquisti_cliente", $param);
+
+    $acquisti = array();
+    while ($row = pg_fetch_assoc($result)) {
+        $acquisti[] = $row;
+    }
+    close_pg_connection($db);
+    return $acquisti;
+}
+
+function getDettaglioAcquisto($id_fattura)
+{
+    $db = open_pg_connection();
+
+    $sql = "SELECT *
+            FROM comicgalaxy.v_storico_acquisti_dettaglio
+            WHERE id_fattura = $1";
+
+    $param = array($id_fattura);
+    $result = pg_prepare($db, "get_dettaglio_acquisto", $sql);
+    $result = pg_execute($db, "get_dettaglio_acquisto", $param);
+
+    $dettaglio = array();
+    while ($row = pg_fetch_assoc($result)) {
+        $dettaglio[] = $row;
+    }
+    close_pg_connection($db);
+    return $dettaglio;
+}
+
+function salvaOrariNegozio($id_negozio, $orari)
+{
+    $db = open_pg_connection();
+
+    $sql = "INSERT INTO comicgalaxy.orario(id_negozio, giorno, ora_apertura, ora_chiusura) VALUES ($1, $2, $3, $4)";
+    foreach ($orari as $o) {
+        $res = pg_query_params($db, $sql, [
+            $id_negozio,
+            $o['giorno'],
+            $o['apertura'],
+            $o['chiusura']
+        ]);
+        if (!$res) {
+            $error = pg_last_error($db);
+            close_pg_connection($db);
+            return $error;
+        }
+    }
+
+    close_pg_connection($db);
+    return true;
 }

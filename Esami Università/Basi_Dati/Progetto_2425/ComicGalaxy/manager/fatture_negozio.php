@@ -6,7 +6,10 @@ if (!isset($_SESSION["user"]) || $_SESSION["ruolo"] !== "manager") {
     header("Location: ../login.php");
     exit();
 }
-
+if ($_SESSION['sospeso'] === 't') {
+    header("Location: area_manager.php");
+    exit();
+}
 require_once __DIR__ . "/../lib/functions.php";
 
 $negozio = getNegozio($_SESSION["user"]);
