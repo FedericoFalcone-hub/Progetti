@@ -1276,4 +1276,137 @@ $V_0^\pi(s)$ è la stima di partenza che possiamo dare in modo arbitrario, per s
     \item la learning rate $\alpha$ diventa una funzione $\alpha(N_s)$ dove $N_s$ è il numero di volte che l'agente ha visitato $s$;
     \item per ottenere la convergenza deve valere: $\sum_{n=1}^\infty \alpha(n) = \infty$ , $\sum_{n=1}^\infty \alpha^2(n) < \infty$, nella pratica si adotta una funzione decrescente con rate $O(\frac{1}{n})$.
 \end{itemize}
+\subsection{Active RL}
+Versione più interessante del problema di \textbf{Reinforcement Learning Attivo}. La policy \textbf{non è data}, l'agente la deve calcolare.
+\\ \textbf{Problema affrontato dall'agente}: calcolare la policy ottima $\pi^*$. Due livelli di difficoltà concorrenti:
+\begin{itemize}
+    \item Capire le dinamiche dell'ambiente;
+    \item Capire come comportarsi in modo ottimo.
+\end{itemize}
+Un primo semplice approccio è quello di utilizzare un riaddattamento di Adaptive Dynamic Programming per il calcolo della policy ottima: \textbf{Active ADP}.
+\\ Idea di base:
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{Images/activeADP.png}
+\end{figure}
+L'MDP stimato viene risolto con uno dei metodi basati su DP: Value Iteration o Policy Iteration. Nel caso di Value Iteration sarà necessario svolgere un extra step di Policy Extraction.
+\\ \textbf{\textcolor{red}{Problema}}: come fare la stima del modello? In passive RL avevamo una policy fissata che guidata la scelta delle azioni, ora la dobbiamo costruire!
+\\ Approccio naïve: 
+\begin{itemize}
+    \item Uso di una policy fissa $\pi_e$ per esplorare l'ambiente.
+    \item Costruisco una stima $\langle \hat{P}, \hat{R} \rangle$ come si faceva in passive RL.
+    \item Calcolo la policy ottima su $\langle \hat{P}, \hat{R} \rangle$ usando DP.
+\end{itemize}
+Questo approccio non funziona perchè il modello stimato $\langle    \hat{P}, \hat{R} \rangle$ "rispecchia" la policy $\pi_E$: l'agente ha imparato solo le transizioni e i reward indotte dalla policy (una sola azione per ogni stato!).
+\\ Secondo approccio naïve:
+\begin{itemize}
+    \item Esploro l'ambiente in modo random.
+    \item Costruisco una stima $\langle \hat{P}, \hat{R} \rangle$ come si faceva in passive RL.
+    \item Calcolo la policy ottima su $\langle \hat{P}, \hat{R} \rangle$ usando DP.
+\end{itemize}
+Funziona ma può richiedere un tempo molto lungo, tempo nel quale l'agente si comporta in modo random pagando un prezzo. Il gap tra il reward ottenibile con la policy ottima e quello ottenuto con una policy diversa si misura con una quantità detta \textbf{regret}.
+\\ Terzo Approccio:
+\begin{enumerate}
+    \item Scelgo una policy $\pi$ arbitraria.
+    \item Esploro l'ambiente usando $\pi$.
+    \item Costruisco la stima $\langle \hat{P}, \hat{R} \rangle$ come si faceva in passive RL.
+    \item Costruisco la policy ottima $\hat{\pi}^*$ su $\langle \hat{P}, \hat{R} \rangle$ usando DP.
+    \item $\pi \leftarrow \hat{\pi}^*$, riparto da 2.
+\end{enumerate}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{Images/activeRL_approccio.png}
+\end{figure}
+\textcolor{ForestGreen}{Pro}: lo step 4 di norma converge in fretta se nello step 2 facciamo poche azioni (tipicamente una sola) perchè la stima del modello cambierà di poco e DP verrà inizializzato con la soluzione dell'iterazione precedente (valori o policy).
+\\ \textcolor{red}{Contro}: l'agente è \textbf{greedy}, la prossima azione che compie è la migliore rispetto a quanto correntemnte appreso dall'ambiente (è determinata dalla policy $\pi$ che è quella ottima rispetto al modello stimato).
+\\ Non è garantita la convergenza alla policy ottima, potrebbe convergere in un minimo locale.
+\\ Il problema dell'approccio greedy è ancora una volta legato al trade-off tra exploration e exploitation. Dobbiamo prevedere di fare anche azioni che sono correntemente valutate come subottimali, il loro valore non sta nel reward che promettono, ma ciò che rivelano riguardo all'ambiente.
+\\ Approccio $\epsilon$-greedy (dove $\epsilon$ rappresenta una probabilità molto piccola):
+\begin{enumerate}
+    \item Scelgo una policy $\pi$ arbitraria.
+    \item \textbf{Con probabilità $\epsilon$ faccio un'azione random, altrimenti suo $\pi$} $\leftarrow$ Una piccola frazione delle azioni è puramente esplorativa.
+    \item Costruisco la stima $\langle \hat{P}, \hat{R} \rangle$ come si faceva in RL.
+    \item Calcolo la policy ottima $\hat{\pi}^*$ su $\langle \hat{P}, \hat{R} \rangle$ usando DP.
+    \item $\pi \leftarrow \hat{\pi}^*$, riparto da 2.
+\end{enumerate}
+\textcolor{ForestGreen}{Pro}: convergenza con un tempo sufficientemente grande.
+\\ \textcolor{red}{Contro}: continua ad inserire scelte random anche quando la policy ottima è stata trovata.
+\\ Prima soluzione: ridurre $\epsilon$ nel tempo, analogamente a quanto fatto con la learning rate in TD learning.
+\\ Seconda soluzione: \textbf{\textcolor{red}{funzione di esplorazione}}.
+\\ \textbf{Idea}: spostare il trade-off tra exploration ed exploitation dallo step 2 (dove era definito come scelta $\epsilon$-greedy) all'interno dello Step 4, alterando il calcolo della policy ottima.
+Sarà la policy stessa a prescrivere le azioni tenendo conto di exploration ed exploitation. Immaginiamo che lo step 4 sia una Value Iteration (vale un discorso analogo per Policy Iteration):
+\begin{itemize}
+    \item alteriamo il Bellman update in modo che dato un "bonus" di valore agli stati meno visitati: l'agente greedy sarà attratto dal reward e dall'ignoto (due forze potenzialmente in conflitto);
+    \item man mano che aumentano le visite a uno stato bonus si riduce: l'agente greedy sarà sempre più attratto dal reward e compirà meno azioni puramente esplorative.
+\end{itemize}
+L'utilità "alterata" si calcola con una funzione detta di esplorazione: $f(\textcolor{blue}{u}),(\textcolor{red}{n})=u+\frac{V^+}{1+n}$ dove $\textcolor{blue}{u}$ è il vecchio reward scontato nel tempo, $n$ è il numero di visite e $V^+$ è un parametro.
+\subsubsection{Funzione di esplorazione}
+Il Bellman update della Value Iteration nello step 4 diventa:
+\[ V_{k+1}(s) \leftarrow \max_{a} (f(\textcolor{blue}{\sum_{s'}\hat{P}(s'|s,a)[\hat{R}(s,a,s')+\gamma V_k(s')]},\textcolor{red}{\#(s,a)}))\]
+\textcolor{blue}{Reward scontato da $s$ con azione $a$ in avanti}
+\\ \textcolor{red}{Numero di volte che ho esplorato l'azione $a$ nello stato $s$}
+\\ Il principio è lo stesso che abbiamo incontrato con Monte Carlo Tree Search (MCTS). 
+\\ Svolgere le azioni che sembrano le migliori dove la definizione di migliore induce due dinamiche:
+\begin{itemize}
+    \item \textcolor{blue}{Non tralasciare azioni che sembrano "cattive" senza esserne certi, vanno comunque provate un numero sufficiente di volte}.
+    \item \textcolor{red}{Non pretendere di calcolare all'esatto il valore di azioni su cui si è ormai confidenti che non siano buone}.
+\end{itemize}
+\subsection{Learning di Policy Robuste}
+Tutti gli approcci model-based (come quello appena visto) si basano sulla risoluzione di un \textcolor{blue}{modello stimato} con un modello definito per il \textcolor{red}{modello esatto}.
+\\ Value Iteration e Policy Iteration assumono che il modello su cui lavorano sia quello vero!
+\\ Abbiamo già visto come un errore di stima possa risultare in una policy che sbaglia "inconsapevolemente", in certi casi gli sbagli possono risultare grosse penalità. \textbf{Metodo alternativo}: calcolare una policy che sia robusta agli errori di stima del modello.
+\\ Accenniamo a due tecniche:
+\begin{itemize}
+    \item RL Bayesiano
+    \item Controllo robusto
+\end{itemize}
+\subsubsection{RL Bayesiano}
+Stima del modello: anzichè usare il metodo a massima verosomiglianza (basato sulle frequenze empiriche delle transizioni osservate) si utilizza un metodo più sofisticato basato su \textbf{filtro di Bayes}.
+\\ Il metodo costruisce, a partire dalle osservazioni dell'agente, una \textbf{\textcolor{red}{posterior}} $P$: una distribuzione di probabilità su possibile versioni del modello $m_1, m_2,m_3, \dots$ (anche detta belief).
+\\ Data una policy $\pi$, $V_i^\pi$ è la media di tutte le Policy Evalutation di $\pi$ a partire da ogni stato inziale possibile, assumendo che il modello sia $m_i$.
+\\ La versione Bayesiana di RL calcola questa policy ottima
+\[ \pi^*= \arg\max_{\pi} \sum_i P(m_i)V_i\pi \]
+La policy calcolata è ottima considerando ogni possibile versione del modello, pesato per la sua probabilità, quindi in un certo senso robusta.
+\subsubsection{Controllo robusto}
+Il \textbf{controllo robusto} è un approccio del tutto simile dove però non si considera la posterior. La policy ottima che si va a calcolare è
+\[ \pi^*=\arg\max_{\pi}\min_i V_i^\pi \]
+\textcolor{blue}{Assunzione worst-case}: la policy calcolata è quella ottima assumendo che il vero modello sia il peggiore tra tutti quelli possibili.
+\\ La policy è la soluzione di questo problema di ottimizzazione
+
+\[
+\max u \quad \text{s.t. } u \le V_i^{\pi}, \; \forall i
+\]
+\subsection{Active model-free learning}
+Calcolare la policy ottima senza dover mantenere una stima del modello (probabilità di transione e reward). Utilizziamo la stessa idea usata per calcolare la state-value function nel TD learning.
+Visto che non abbiamo una policy data da seguire, applichiamo questa idea alla stima della action-value function $Q(s,a)$. Una volta che abbiamo calcolato $Q(s,a)$, la policy ottima si ottiene immediatamente:
+\[\pi^*(s)=\arg\max_a Q(s,a)\]
+Il metodo basato su temporal difference per la action-value function si chiama Temporal-Difference Q-Learning, o più semplicemente, \textbf{\textcolor{red}{Q-Learning}}.
+\subsection{Q-Learning}
+Struttura dell'algoritmo eseguito dall'agente:
+\begin{enumerate}
+    \item Osservo lo stato corrente $s$, inizializzo $Q(s,a)=0, \#(s,a)=0$ per ogni $a$, e scelgo un'azione $a$ in modo arbitrario.
+    \item Eseguo $a$ e osservo la transizione: vado nello stato $s'$ e ricevo reward $R(s \xrightarrow[a]{}s')$.
+    \item Incremento $\#(s,a)$ e se $s'$ è visitato per la prima volta inizializzo $Q(s',a')=0, \#(s',a')=0$ per ogni $a'$.
+    \item \textbf{\textcolor{red}{Update di $Q(s,a)$ sulla base di quanto osservato}}.
+    \item \textbf{\textcolor{blue}{Scelgo di nuovo $a$ e riparto da 2}}.
+\end{enumerate}
+Nello \textbf{\textcolor{red}{Step 4}} faremo come già fatto precedentemente in passive RL: correzione della stima di $Q$ sulla base dell'osservazione $z$.
+\\ Nello \textbf{\textcolor{blue}{Step 5}} ritroviamo il trade-off tra esploration ed exploitation che risolveremo usando una funzione di esplorazione $f$.
+\subsubsection{Q-Learning: update di $Q(s,a)$}
+Osservazione raccolta da $(s \xrightarrow[a]{R}s')$: il reward immediato $R$ più il reward scontato da $s'$ in avanti \textbf{assumendo di usare la policy ottima indotta dalla stima corrente $Q$}.
+\[ z=R+\gamma \max_{a'} Q(s',a') \]
+\textbf{\textcolor{red}{Update (Step 4)}}:
+\[ Q(s,a) \leftarrow Q(s,a) + \textcolor{blue}{\alpha (\#(s,a))}( z - Q(s,a) ) \]
+La \textcolor{blue}{learning rate} è la stesa vista per Passive RL: una funzione $\alpha(n)$ decrescente con $n$: più proviamo una coppia stato-azione più impariamo su di essa  e quindi le correzioni vengono attenuate.
+\\ Se valgolo le condizioni già viste sulla learning rate ($\sum_{n=1}^\infty \alpha(n) = \infty$, $\sum_{n=1}^\infty \alpha^2(n) < \infty$) l'algoritmo converge alla $Q$ function ottima. \textbf{Vale con qualsiasi esplorazione}
+purchè per $t \rightarrow \infty$ ogni coppia stato-azione sia esplorate infinite volte (questa condizione deve essere vera solo nel limite!)
+\\ Intuizione: anche se esplorando si eseguono azioni subottimali o random, nella costruzione di $z$ "guardiamo in avanti" assumendo di fare l'azione ottima (operatore max). Nel guardare in avanti quindi ci svincoliamo dalla policy che usiamo per 
+esplorare: metodo \textbf{\textcolor{red}{off-policy}}.
+\pagebreak
+\subsubsection{Q-learning: scelta della prossima azione}
+Nello \textbf{\textcolor{blue}{Step 5}} dobbiamo scegliere la prossima azione da compiere. Adottiamo il metodo basato su \textbf{funzione di esplorazione}
+\[ a \leftarrow \arg\max_{a} f( Q(s,a), \#(s,a) ) \]
+Notiamo un dettaglio dovuto al fatto di essere \textbf{off-policy}: il calcolo di $a$ potrebbe anche essere svolto prima dell'update (step 4) e darebbe lo stesso risultato perchè $Q(s',a')$ non viene aggiornato.
+L'aggiornamento riguarda lo stato che abbiamo lasciato ($s$), la scelta della prossima azione invece riguarda lo stato in cui siamo ora ($s'$) in cui i valori di $Q$ sono rimasti invariati. 
+\\ In generale: \textcolor{red}{update e scelta della prossima azione sono indipendenti}.
 \end{document}

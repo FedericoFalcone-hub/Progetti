@@ -1,8 +1,8 @@
 # Fdb version 4
-["pdflatex"] 1764931515.23389 "/home/federico/Progetti-e-materiali/Materiale Università/Intelligenza_Artificiale/main.tex" "main.pdf" "main" 1764931522.07089 0
+["pdflatex"] 1765714902.25761 "/home/federico/Progetti-e-materiali/Materiale Università/Intelligenza_Artificiale/main.tex" "main.pdf" "main" 1765714908.58623 0
   "/etc/texmf/web2c/texmf.cnf" 1760861718.5102 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/home/federico/.texlive2023/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1000.600pk" 1760861786.54029 11524 f0e65b9f20707a96144d1e02adffe1dc ""
-  "/home/federico/Progetti-e-materiali/Materiale Università/Intelligenza_Artificiale/main.tex" 1764931511.66057 107989 7221099538987ec2b4f616ac463edccd ""
+  "/home/federico/Progetti-e-materiali/Materiale Università/Intelligenza_Artificiale/main.tex" 1765714901.34903 120215 d902263d64aed533e3eb669ca5e250c7 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/tcrm1000.tfm" 1136768653 1536 e07581a4bb3136ece9eeb4c3ffab8233 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm" 1246382020 988 bdf658c3bfc2d96d3c8b02cfc1c94c20 ""
@@ -90,6 +90,8 @@
   "Images/UCS.png" 1761473761.57784 19255 bfb23603c22db94a5de6564a79f68783 ""
   "Images/UCS_conEXL.png" 1761473761.57818 50959 acdc6a87b5f3a3d31035f58f61f80bf0 ""
   "Images/ac3.png" 1762952801.81895 285841 e60124c86315a746acbee9843085e9ee ""
+  "Images/activeADP.png" 1765707534.30287 39707 98e3b03f896c93a3098161b744745cfb ""
+  "Images/activeRL_approccio.png" 1765709499.85033 72585 9a829e41abfc6b6f8edb90d0e30132e7 ""
   "Images/adaptiveDynamicProgramming.png" 1764846940.73646 67119 50f07b761aea9fe76f37efe57d512c36 ""
   "Images/alberoGIoco.png" 1761814442.5661 92165 6f52660b6d28feab6aa843e1f4a63f3d ""
   "Images/alfabeta_stocastico.png" 1762428008.93127 387933 e1729ea713ffcbad6a0131f17b033b10 ""
@@ -140,8 +142,8 @@
   "Images/valueIterationRis.png" 1764675493.80704 260857 15f56a4385be152c03d66b74531252ab ""
   "Images/valueIterationSvantaggi.png" 1764676587.94239 129317 2f06456763f5d1d286605c63d8f826f1 ""
   "Images/vincoli.png" 1762513166.16433 53162 153416085165e38752ba80087df78a18 ""
-  "main.aux" 1764931522.00373 12308 e13da74a7a1ed01f2ffab556c9945038 "pdflatex"
-  "main.tex" 1764931511.66057 107989 7221099538987ec2b4f616ac463edccd ""
+  "main.aux" 1765714908.52147 13373 df2e1940b5457a5f6713812f2a499278 "pdflatex"
+  "main.tex" 1765714901.34903 120215 d902263d64aed533e3eb669ca5e250c7 ""
   (generated)
   "main.aux"
   "main.log"
