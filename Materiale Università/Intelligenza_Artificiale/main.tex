@@ -1409,4 +1409,101 @@ Nello \textbf{\textcolor{blue}{Step 5}} dobbiamo scegliere la prossima azione da
 Notiamo un dettaglio dovuto al fatto di essere \textbf{off-policy}: il calcolo di $a$ potrebbe anche essere svolto prima dell'update (step 4) e darebbe lo stesso risultato perchè $Q(s',a')$ non viene aggiornato.
 L'aggiornamento riguarda lo stato che abbiamo lasciato ($s$), la scelta della prossima azione invece riguarda lo stato in cui siamo ora ($s'$) in cui i valori di $Q$ sono rimasti invariati. 
 \\ In generale: \textcolor{red}{update e scelta della prossima azione sono indipendenti}.
+\subsection{SARSA}
+In Q-learning l'update dipende da: $s,a,R,s'$
+\[ Q(s,a) \leftarrow Q(s,a) + \alpha(\#(s,a)) \big( R + \gamma \textcolor{red}{\max_{a'} Q(s',a')} - Q(s,a) \big) \]
+Potremmo pensare di non costruire più l'osservazione $z$ assumendo che da s' in avanti l'agente seguirà la policy ottima (nel procedimento calcolata rispetto alla stima corrente di $Q$).
+\\ Anzichè guardare avanti ottimisticamente guardiamo avanti \textbf{realisitcamente}: si sceglie l'azione che effettivamente verrà scelta nel prossimo step, che chiamiamo $a'$.
+\[ Q(s,a) \leftarrow Q(s,a) + \alpha(\#(s,a)) \big( R + \gamma \textcolor{blue}{Q(s',a')} - Q(s,a) \big) \]
+Ora l'update dipende da $s,a,R,s'$ e da $a'$: è la caratteristica che dà il nome a questa variante di Q-learning: \textbf{SARSA}.
+\\ Metodo \textcolor{blue}{\textbf{on-policy}}: gli update sono fatti assumendo che l'agente continui ad usare la stessa policy corrente per l'espolorazione ($\pi_e(s')=a'$). In caso in cui l'agente usi na policy greedy ($\pi_e(s')=\arg \max_{a'}Q(s',a')$) i due approcci
+coincidono.
+\subsection{Off-policy e on-policy: recap}
+Abbiamo visto come l'agente per RL attivo sia definito attorno due concetti centrali:
+\begin{itemize}
+    \item \textbf{Learning policy}: è la policy che usa per acquisire l'esperienza attraverso ripetute interazioni con l'ambiente, la indichiamo genericamente con $\pi_e$; \textcolor{red}{\textbf{Importante}: questa policy non deve essere stazionaria}.
+    \item \textbf{Update rule}: l'operazione con cui una singola esperienza (transizione) viene usata per aggiornare i valori correnti della state-action value function $Q_t(s,a)$:
+    \[ Q_{t+1}(s,a) = Q_t(s,a) + \alpha(\#(s,a)) (\textbf{z}-Q_t(s,a)) \]
+\end{itemize}
+In $Q$-learning $z=R+\gamma \max_{a'} Q_t(s',a')$, in SARSA $z=R+\gamma Q_t(s',a')$ dove $a'=\pi_e(s')$.
+\\ Nell'eseguire l'update l'agente considera (mediante $z$):
+\begin{itemize}
+    \item il reward immediato generato dalla transizione $(R)$;
+    \item un \textbf{termine} (scontato) che quantifichi quanto è buono lo stato $s'$ in cui la transizione lo ha portato, per calcolare questo termine l'agente deve fare un'ipotesi su quale policy
+    \item sarà eseguita in $s'$.
+\end{itemize}
+\textcolor{blue}{\textbf{On-policy}}: l'update rule formula tale ipotesi usando la learning policy $\pi_e$.\\
+\textcolor{red}{\textbf{Off-policy}}: l'update rule formula tale ipotesi usando una policy \textbf{diversa} dalla learning policy (tipicamente con la policy greedy $\pi_{greedy}(s')=\arg \max_{a}Q_t(s',a)$).
+\subsection{Convergenza (off-policy)}
+Per l'update rule si assumono siano sempre valide le condizioni già viste sulla learning rate: $\sum^\infty_{n=1}\alpha(n)=\infty, \sum^\infty_{n=1} \alpha^2(n)<\infty$.
+\\ Sappiamo già che il metodo off-policy \textbf{converge sempre} purchè valga la condizione di esplorazione infinita (Infinite Exploration, IE): per $t \rightarrow \infty$ ogni coppia stato-azione è esplorata \textbf{infinite volte}. Una volta che $Q_t \rightarrow Q^*$
+l'agente dichiara concluso l'apprendimento, scarta per sempre $\pi_e$ e inizia ad usare $\pi_{greedy}$ che a convergenza coincide con $\pi^*$. 
+\\ Come si garantisce IE? Un approccio tipico è quello di mantenere una componente puramente esplorativa mediante scelte random controllate (gestire il tradeoff tra esploration ed exploitation).
+\\ \textcolor{ForestGreen}{\textbf{Esempi}: $\pi_{greedy}$ non garantisce IE, policy $\epsilon$-greedy invece la garantisce}.
+\subsection{Convergenza (on-policy)}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{Images/convergenza_on_policy.png}
+\end{figure}
+\subsection{Quale usare?}
+Quando usare on-policy o off-policy?
+\\ La domanda da porsi è: ci interessa la performance (reward cumulati) che l'agente ottiene \textbf{durante} la fase di apprendimento?
+\begin{itemize}
+    \item No: off-policy, nell'apprendimento non viene considerato il cossto dell'esplorazione.
+    \item Sì: on-policy, l'apprendimento considera esplicitamente l'esporazione.
+\end{itemize}
+\subsection{Regret}
+Con gli approcci visti fino ad ora l'agente cerca di imparare la policy ottima attraverso ripetute interazioni con l'ambiente. Durante questa fase di apprendimento si commettono degli errori: regret, al differenza tra ciò 
+che mi aspetto di ottenre con un algoritmo di apprendimento e ciò che avrei ottenuto eseguendo la policy ottima fin dall'inizio. È un costo pagato dall'agente per colmare il gap tra non conoscere nulla e conoscere la policy ottima,
+misura quanto bene vengono bilanciate exploration ed exploitation.
+\\ \textcolor{red}{\textbf{Minimizzare il regret}}: imparare ottimamente la policy ottima. 
+\\ Si paga sempre un regret! (L'agente inizialmente non conosce la policy ottima). Il caso migliore si ha quando il regret cresce logaritmicamente.
+\begin{itemize}
+    \item \textcolor{blue}{Greedy}: troppa esploitation, regret cresce linearmente;
+    \item \textcolor{blue}{$\epsilon$-greedy}: troppa exploration, regret cresce lineamente;
+    \item \textcolor{orange}{$\epsilon$-greedy con riduzione di $\epsilon$}, può dare regret logaritmico;
+    \item \textcolor{orange}{Funzione di esplorazione} (ottimismo nell'incertezza): può dare regret logaritmico;
+    \item \textcolor{ForestGreen}{Approcci più sofisticati}: UCB, garantisce regret logaritmico.
+\end{itemize}
+\pagebreak
+\section{Machine Learning}
+Tutte le tecniche presentate per risolvere il problema dell'active RL richiediono sostanzialmente di:
+\begin{itemize}
+    \item Esplorare molto.
+    \item Rappresentare in modo esplicito $V$ o $Q$.
+\end{itemize}
+Se il numero di stati possibili è molot grande ($>10^6$) la convergenza risulta \textbf{molto lenta}. Un agente che deve imparare a giocare a Go fronteggia un numero di coppie stato-azione proibitivo.
+Come affrontiamo questo problema? \textbf{\textcolor{red}{Idea}}:
+\begin{itemize}
+    \item L'agente apprende esplorando un sotto-insieme delle coppie-stato azioni.
+    \item Ciò che ha appreso viene \textbf{generalizzato} anche a situazioni che non ha visto.
+\end{itemize}
+\textcolor{ForestGreen}{Non ho bisogno di scontrarmi con tutti i muri di casa per imparare che tentare di attraversarli fornisce un rinforzo negativo!}
+\textcolor{purple}{Applicare qualcosa che ho imparato in uno stato e applicarlo ad uno stato simile.}
+\\ Questa è l'idea fondante di un insieme di tecniche che prendono il nome di \textbf{\textcolor{red}{Machine Learning}}
+\subsubsection{Generalizzare in RL}
+Sfruttiamo uno strumento che abbiamo già studiato: la funzione di valutazione
+\[ Q(s,a)= \theta_0+ \theta_1f_1(s,a)+\theta_2f_2(s,a)+\dots+\theta_n f_n(s,a) \]
+Dove $f_1(s,a), f_2(s,a), \dots, f_n(s,a)$ sono delle \textbf{feature} che descrivono la coppia stato-azione $(s,a)$ e $\Theta_0, \Theta_1, \dots, \Theta_n$ sono feature della coppia stato azione, che possiamo calcolare
+in modo efficiente e  che sono combinate linearmente per ottenere un'appossimazione di $Q(s,a)$.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{Images/generalizzare_rl.png}
+\end{figure}
+\textcolor{Fuchsia}{Ogni elemento della lista è una feature}
+\\
+L'agente non cerca più di imparare buone stime di $Q(s,a)$ per ogni coppia azione. Ora cerca di imparare un \textbf{buon set di parametri} $\theta_0, \theta_1, \theta_2, \dots$ in modo che se applicati alla feature di una coppia stato-azione calcolino
+una buona stima di $Q(s,a)$ (nel nostro caso abbiamo scelto un modello lineare).
+Prima la stima di $Q(s,a)$ era una grande tabella con un valore per ogni coppia stato azione, la funzione era rappresentata in modo \textbf{esplicito}. Ora ci basta un vettore di parametri \textbf{$\theta$} $= \langle \theta_0, \theta_1, \dots, \theta_k \rangle$, la funzione è 
+rappresentata in modo implicito, dato \textbf{$\theta$} e le feature di una coppia stato-azione calcoliamo $Q(s,a)$. Come scegliere \textbf{$\theta$}? \textcolor{red}{Dobbiamo pensare al problema in termini diversi}.
+\\ L'agente esplora l'ambiente seguendo una policy (facendo una o più transizioni).
+\\ Da tutte le transizioni generate costruisce una dataset $\mathbb{T}$ che possiamo rapprensetare così
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{Images/generalizzazione_rl.png}
+\end{figure}
+Assunta una funzione di valutazione lineare con $k$ feature, rappresentata dal vettore di parametri $\theta$.
+\\ Dato il dataset $\mathbb{T}$ (ottenuto con esplorazione)
+\\ \textcolor{red}{\textbf{Problema}}: come calcolare $\theta$ in modo che possa valutare vettori di feature $x_{new}$ che descrivano coppie stato-azione mai viste prima e senza esplorarle?
+\\ Questo è un caso specifico di una classe di problemi fondamentali studiata nel Machine Learning: \textbf{Apprendimento supervisionato (Supervised Learning)}
 \end{document}
