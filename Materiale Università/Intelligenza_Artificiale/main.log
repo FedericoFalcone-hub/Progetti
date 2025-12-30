@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.10.19)  26 DEC 2025 12:19
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.10.19)  30 DEC 2025 12:54
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -673,25 +673,167 @@ File: Images/generalizzazione_rl.png Graphic file (type png)
 <use Images/generalizzazione_rl.png>
 Package pdftex.def Info: Images/generalizzazione_rl.png  used on input line 1503.
 (pdftex.def)             Requested size: 455.24411pt x 80.4021pt.
-[50 <./Images/generalizzare_rl.png> <./Images/generalizzazione_rl.png>] [51] (./main.aux)
+[50 <./Images/generalizzare_rl.png> <./Images/generalizzazione_rl.png>] [51]
+<Images/risoluzione_numerica.png, id=253, 1180.41pt x 602.25pt>
+File: Images/risoluzione_numerica.png Graphic file (type png)
+<use Images/risoluzione_numerica.png>
+Package pdftex.def Info: Images/risoluzione_numerica.png  used on input line 1609.
+(pdftex.def)             Requested size: 455.24411pt x 232.26671pt.
+ [52] [53 <./Images/risoluzione_numerica.png>]
+<Images/regressione_lineare.png, id=261, 1194.4625pt x 407.5225pt>
+File: Images/regressione_lineare.png Graphic file (type png)
+<use Images/regressione_lineare.png>
+Package pdftex.def Info: Images/regressione_lineare.png  used on input line 1672.
+(pdftex.def)             Requested size: 227.62206pt x 77.65393pt.
+<Images/regressione_logistica.png, id=262, 1136.245pt x 407.5225pt>
+File: Images/regressione_logistica.png Graphic file (type png)
+<use Images/regressione_logistica.png>
+Package pdftex.def Info: Images/regressione_logistica.png  used on input line 1678.
+(pdftex.def)             Requested size: 341.43307pt x 122.45667pt.
+<Images/esempio_regressione.png, id=263, 2326.6925pt x 369.38pt>
+File: Images/esempio_regressione.png Graphic file (type png)
+<use Images/esempio_regressione.png>
+Package pdftex.def Info: Images/esempio_regressione.png  used on input line 1686.
+(pdftex.def)             Requested size: 341.43307pt x 54.20407pt.
+ [54 <./Images/regressione_lineare.png> <./Images/regressione_logistica.png>]
+<Images/classification.png, id=267, 2338.7375pt x 542.025pt>
+File: Images/classification.png Graphic file (type png)
+<use Images/classification.png>
+Package pdftex.def Info: Images/classification.png  used on input line 1694.
+(pdftex.def)             Requested size: 455.24411pt x 105.50008pt.
+<Images/albero_decisione.png, id=268, 1999.47pt x 445.665pt>
+File: Images/albero_decisione.png Graphic file (type png)
+<use Images/albero_decisione.png>
+Package pdftex.def Info: Images/albero_decisione.png  used on input line 1701.
+(pdftex.def)             Requested size: 341.43307pt x 76.10205pt.
+<Images/es_albero_decisione0.png, id=269, 885.3075pt x 742.775pt>
+File: Images/es_albero_decisione0.png Graphic file (type png)
+<use Images/es_albero_decisione0.png>
+Package pdftex.def Info: Images/es_albero_decisione0.png  used on input line 1704.
+(pdftex.def)             Requested size: 227.62206pt x 190.97485pt.
+<Images/es_albero_decisione.png, id=270, 1379.1525pt x 776.9025pt>
+File: Images/es_albero_decisione.png Graphic file (type png)
+<use Images/es_albero_decisione.png>
+Package pdftex.def Info: Images/es_albero_decisione.png  used on input line 1712.
+(pdftex.def)             Requested size: 341.43307pt x 192.32841pt.
+ [55 <./Images/esempio_regressione.png> <./Images/classification.png> <./Images/albero_decisione.png> <./Images/es_albero_decisione0.png>]
+<Images/es_albero_decisione_p2.png, id=275, 2194.1975pt x 690.58pt>
+File: Images/es_albero_decisione_p2.png Graphic file (type png)
+<use Images/es_albero_decisione_p2.png>
+Package pdftex.def Info: Images/es_albero_decisione_p2.png  used on input line 1725.
+(pdftex.def)             Requested size: 455.24411pt x 143.27687pt.
+ [56 <./Images/es_albero_decisione.png> <./Images/es_albero_decisione_p2.png>]
+<Images/omogeneo.png, id=279, 558.085pt x 206.7725pt>
+File: Images/omogeneo.png Graphic file (type png)
+<use Images/omogeneo.png>
+Package pdftex.def Info: Images/omogeneo.png  used on input line 1733.
+(pdftex.def)             Requested size: 227.62206pt x 84.33556pt.
+<Images/vuoto.png, id=280, 939.51pt x 214.8025pt>
+File: Images/vuoto.png Graphic file (type png)
+<use Images/vuoto.png>
+Package pdftex.def Info: Images/vuoto.png  used on input line 1738.
+(pdftex.def)             Requested size: 341.43307pt x 78.06302pt.
+<Images/disomogeno.png, id=281, 616.3025pt x 210.7875pt>
+File: Images/disomogeno.png Graphic file (type png)
+<use Images/disomogeno.png>
+Package pdftex.def Info: Images/disomogeno.png  used on input line 1744.
+(pdftex.def)             Requested size: 227.62206pt x 77.84863pt.
+<Images/disomogeneo2.png, id=282, 501.875pt x 192.72pt>
+File: Images/disomogeneo2.png Graphic file (type png)
+<use Images/disomogeneo2.png>
+Package pdftex.def Info: Images/disomogeneo2.png  used on input line 1749.
+(pdftex.def)             Requested size: 204.85846pt x 78.66576pt.
+ [57 <./Images/omogeneo.png> <./Images/vuoto.png> <./Images/disomogeno.png> <./Images/disomogeneo2.png>]
+<Images/feature_migliore.png, id=286, 1168.365pt x 503.8825pt>
+File: Images/feature_migliore.png Graphic file (type png)
+<use Images/feature_migliore.png>
+Package pdftex.def Info: Images/feature_migliore.png  used on input line 1756.
+(pdftex.def)             Requested size: 341.43307pt x 147.25241pt.
+<Images/entropia.png, id=287, 1523.6925pt x 433.62pt>
+File: Images/entropia.png Graphic file (type png)
+<use Images/entropia.png>
+Package pdftex.def Info: Images/entropia.png  used on input line 1771.
+(pdftex.def)             Requested size: 341.43307pt x 97.1633pt.
+<Images/risultato_albero.png, id=288, 2252.415pt x 712.6625pt>
+File: Images/risultato_albero.png Graphic file (type png)
+<use Images/risultato_albero.png>
+Package pdftex.def Info: Images/risultato_albero.png  used on input line 1777.
+(pdftex.def)             Requested size: 455.24411pt x 144.03062pt.
+ [58 <./Images/feature_migliore.png> <./Images/entropia.png> <./Images/risultato_albero.png>] [59]
+<Images/dimensionality.png, id=297, 2437.105pt x 953.5625pt>
+File: Images/dimensionality.png Graphic file (type png)
+<use Images/dimensionality.png>
+Package pdftex.def Info: Images/dimensionality.png  used on input line 1836.
+(pdftex.def)             Requested size: 455.24411pt x 178.10867pt.
+ [60 <./Images/dimensionality.png>]
+<Images/neurone.png, id=301, 2346.7675pt x 800.9925pt>
+File: Images/neurone.png Graphic file (type png)
+<use Images/neurone.png>
+Package pdftex.def Info: Images/neurone.png  used on input line 1850.
+(pdftex.def)             Requested size: 455.24411pt x 155.38013pt.
+<Images/rete_neurale.png, id=302, 1553.805pt x 387.4475pt>
+File: Images/rete_neurale.png Graphic file (type png)
+<use Images/rete_neurale.png>
+Package pdftex.def Info: Images/rete_neurale.png  used on input line 1855.
+(pdftex.def)             Requested size: 341.43307pt x 85.1382pt.
+<Images/funz_attivazione.png, id=303, 2212.265pt x 610.28pt>
+File: Images/funz_attivazione.png Graphic file (type png)
+<use Images/funz_attivazione.png>
+Package pdftex.def Info: Images/funz_attivazione.png  used on input line 1865.
+(pdftex.def)             Requested size: 455.24411pt x 125.58311pt.
+ [61 <./Images/neurone.png> <./Images/rete_neurale.png> <./Images/funz_attivazione.png>]
+<Images/percettore_multistrato.png, id=308, 1166.3575pt x 720.6925pt>
+File: Images/percettore_multistrato.png Graphic file (type png)
+<use Images/percettore_multistrato.png>
+Package pdftex.def Info: Images/percettore_multistrato.png  used on input line 1885.
+(pdftex.def)             Requested size: 341.43307pt x 210.96391pt.
+<Images/training.png, id=309, 2278.5125pt x 515.9275pt>
+File: Images/training.png Graphic file (type png)
+<use Images/training.png>
+Package pdftex.def Info: Images/training.png  used on input line 1895.
+(pdftex.def)             Requested size: 455.24411pt x 103.08133pt.
+ [62 <./Images/percettore_multistrato.png> <./Images/training.png>] [63]
+<Images/esempio_underfitting.png, id=316, 835.12pt x 1290.8225pt>
+File: Images/esempio_underfitting.png Graphic file (type png)
+<use Images/esempio_underfitting.png>
+Package pdftex.def Info: Images/esempio_underfitting.png  used on input line 1952.
+(pdftex.def)             Requested size: 204.85846pt x 316.63835pt.
+ [64 <./Images/esempio_underfitting.png>]
+<Images/esempio_overfitting.png, id=320, 1076.02pt x 1316.92pt>
+File: Images/esempio_overfitting.png Graphic file (type png)
+<use Images/esempio_overfitting.png>
+Package pdftex.def Info: Images/esempio_overfitting.png  used on input line 1968.
+(pdftex.def)             Requested size: 227.62206pt x 278.57082pt.
+ [65 <./Images/esempio_overfitting.png>]
+<Images/bias_variance_tradeoff.png, id=324, 2057.6875pt x 817.0525pt>
+File: Images/bias_variance_tradeoff.png Graphic file (type png)
+<use Images/bias_variance_tradeoff.png>
+Package pdftex.def Info: Images/bias_variance_tradeoff.png  used on input line 1981.
+(pdftex.def)             Requested size: 455.24411pt x 180.76195pt.
+<Images/classificazione.png, id=325, 2366.8425pt x 531.9875pt>
+File: Images/classificazione.png Graphic file (type png)
+<use Images/classificazione.png>
+Package pdftex.def Info: Images/classificazione.png  used on input line 1991.
+(pdftex.def)             Requested size: 455.24411pt x 102.32065pt.
+ [66 <./Images/bias_variance_tradeoff.png> <./Images/classificazione.png>] (./main.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 4292 strings out of 476182
- 73190 string characters out of 5795594
+ 4488 strings out of 476182
+ 79418 string characters out of 5795594
  1941975 words of memory out of 5000000
- 26235 multiletter control sequences out of 15000+600000
- 567232 words of font info for 71 fonts, out of 8000000 for 9000
+ 26425 multiletter control sequences out of 15000+600000
+ 569062 words of font info for 77 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  61i,12n,71p,982b,317s stack positions out of 10000i,1000n,20000p,200000b,200000s
- </home/federico/.texlive2023/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1000.600pk></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (51 pages, 9903338 bytes).
+ </home/federico/.texlive2023/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1000.600pk></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on main.pdf (66 pages, 12433128 bytes).
 PDF statistics:
- 330 PDF objects out of 1000 (max. 8388607)
- 171 compressed objects within 2 object streams
+ 419 PDF objects out of 1000 (max. 8388607)
+ 212 compressed objects within 3 object streams
  0 named destinations out of 1000 (max. 500000)
- 316 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 446 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -1506,4 +1506,488 @@ Assunta una funzione di valutazione lineare con $k$ feature, rappresentata dal v
 \\ Dato il dataset $\mathbb{T}$ (ottenuto con esplorazione)
 \\ \textcolor{red}{\textbf{Problema}}: come calcolare $\theta$ in modo che possa valutare vettori di feature $x_{new}$ che descrivano coppie stato-azione mai viste prima e senza esplorarle?
 \\ Questo è un caso specifico di una classe di problemi fondamentali studiata nel Machine Learning: \textbf{Apprendimento supervisionato (Supervised Learning)}
+\subsection{Supervised Learning}
+All'agente viene fornito uno \textbf{dataset} di esempi, dove ogni esempio è nella forma $\langle input, output \rangle$:
+\[ \mathcal{T} = \langle (x_1,z_1),(x_2,z_2),\dots,(x_n,z_n)\rangle\]
+Astraiamo il processo con cui questo dataset viene generato (ad esempio, esplorazione di un MDP) e la sua semantica (ad esempio, vettore di feature e stima di $Q(s,a)$ corrispondente).
+\\Assumiamo che gli esempi vengano generati in modo indipendente. Assumiamo che, per ogni esempio $i,x_i$ (esempio di input) sia un vettore mentre $z_i$ (esempio di output) uno scalare.
+\\Gli esempi del dataset provengono da una funzione $f$ che \textbf{\textcolor{red}{non conosciamo}}: $z_i=f(x_i)$.
+Sfruttando l'informazione racchiusa nel dataser costruiamo una funzione $h$ che approssima $f$. Usiamo $h$ su nuovi input $x_new$ di cui non ci è stato dato l'output.
+La funzione $h$ che vogliamo calcolare si chiama \textbf{ipotesi} o modello dei dati che abbiamo.
+\\Esistono diverse \textbf{classi di modelli}, ad esempio:
+\begin{itemize}
+    \item funzioni lineari;
+    \item funzioni polinomiali di grado $N$;
+    \item funzioni sinusoidali;
+    \item funzioni esponenziali;
+    \item ... rappresentazioni più complesse.
+\end{itemize}
+La classe descrive la forma specifica della funzione utilizzando un \textbf{certo numero di parametri}, ad esempio:
+\begin{itemize}
+    \item Lineare: $z=\theta[1,x]^T=\theta_0+\theta_1 x_1+\theta_2 x_2+\dots + \theta_n x_n$
+    \item Polinomio di grado $N$:$z=\sum^N_{i=0} \theta_ix^i$
+    \item ...
+\end{itemize}
+Una volta scelta la classe del nostro modello dobbiamo "fittarlo" sui dati: trovare il set di parametri che "spiega" i dati nel modo migliore possibile.
+\\ Nell'esempio precedente abbiamo scelto una funzione lineare:
+\[
+Q(s,a) = \theta_0 + \theta_1 f_1(s,a) + \theta_2 f_2(s,a) + \cdots + \theta_n f_n(s,a)
+\qquad \textcolor{ForestGreen}{\text{si noti che } f_0(s,a)=1} 
+\]
+\[
+z = h(x) = \theta_0 + \theta_1 x_1 + \theta_2 x_2 + \cdots + \theta_n x_n
+\qquad \textcolor{ForestGreen}{\text{gree si noti che } x_0=1}
+\]
+In questo caso il nome prende il nome di \textbf{\textcolor{red}{regressione lineare multi-variata}}.
+\\ La scelta di $\theta$ determina il modello $h$, vogliamo che $h$ spieghi bene i dati che abbiamo. Perché ciò accada devo minimizzare la \textbf{loss}:
+\[ \big (z_i-h(x_i)\big)^2 \]
+\textcolor{Fuchsia}{Differenza tra la vera $z_i$ e quella calcolata dal modello al quadrato}.
+\\ \textbf{Errore quadratico} che il modello commette sull'input $x_i$ di cui, grazie al dataset, conosciamo l'output $z_i$.
+\\ \textcolor{Fuchsia}{Con numeri elevati il quadrato amplifica l'errore mentre con i decimali lo riduce, in questo modo il sistema da importanza ai valori elevati, mentre quelli piccoli vuol dire che sono accettabili.
+Essendo i valori del dataset molto numerosi, la si confronta con la media \textbf{errore quadratico medio}}.
+\pagebreak
+\subsubsection{Risoluzione esatta (caso univariato)}
+\textcolor{red}{Primo metodo}: utilizzando tutto il dataset in una sola volta (dobbiamo averlo disponibile) e calcoliamo la loss del modello come la media degli errori quadratici \textbf{su tutto il dataset}
+\[ E(\boldsymbol{\theta})= \frac{1}{N}\sum^N_{i=1}\big (z_i - h(x_i)\big)^2 \]
+\textcolor{Fuchsia}{($\theta$ è un vettore)trovando il valore minimo della funzione troviamo i parametri che riducono al minimo l'errore quadratico medio}.
+\\ Quale $\boldsymbol{\theta}$ minimizza $E(\boldsymbol{\theta})$? La funzione $E(\boldsymbol{\theta})$ è convessa (non ci sono minimi locali) e differenziabile.
+\\ Consideriamo per semplicità il caso univariato, una solo feature: $\mathbf{x}= \langle x \rangle, z=h(x)=\theta_0+\theta_1x, \boldsymbol{\theta}=\langle\theta_0,\theta_1 \rangle$
+\\ Scelgo lo $\boldsymbol{\theta}$ che azzera il gradiente di $E(\boldsymbol{\theta})$:
+
+\[
+\begin{cases}
+\displaystyle
+\frac{\partial E(\boldsymbol{\theta})}{\partial \theta_0}
+= \frac{1}{N}\frac{\partial}{\partial \theta_0}
+\sum_{i=1}^{N} (z_i - \theta_0 - \theta_1 x_i)^2
+= -\frac{2}{N} \sum_{i=1}^{N} (z_i - \theta_0 - \theta_1 x_i) = 0
+\\[1.2em]
+\displaystyle
+\frac{\partial E(\boldsymbol{\theta})}{\partial \theta_1}
+= \frac{1}{N}\frac{\partial}{\partial \theta_1}
+\sum_{i=1}^{N} (z_i - \theta_0 - \theta_1 x_i)^2
+= -\frac{2}{N} \sum_{i=1}^{N} (z_i - \theta_0 - \theta_1 x_i)x_i = 0
+\end{cases}
+\]
+
+\[
+\Downarrow
+\]
+
+\[
+\begin{cases}
+\displaystyle
+\theta_0 =
+\frac{\sum_{i=1}^{N} z_i - \theta_1 \sum_{i=1}^{N} x_i}{N}
+\\[1.2em]
+\displaystyle
+\theta_1 =
+\frac{
+N\sum_{i=1}^{N} z_i x_i -
+\left(\sum_{i=1}^{N} z_i\right)
+\left(\sum_{i=1}^{N} x_i\right)
+}{
+N\sum_{i=1}^{N} x_i^2 -
+\left(\sum_{i=1}^{N} x_i\right)^2
+}
+\end{cases}
+\]
+
+\textcolor{Fuchsia}{Derivo una variabile e tengo ferme le altre}
+\\\textbf{Caso multivariato}: procedimento analogo con calcoli leggermente più complicati.
+\subsubsection{Risoluzione numerica}
+\textcolor{red}{Secondo metodo}: lavoriamo in modo iterativo considerando un esempio alla volta, ad ogni iterazione aggiorniamo $\boldsymbol{\theta}$. Assumo di considerare l'esempio 
+$j \langle \mathbf{x}_j, z_j \rangle$ e di avere un modello corrente $h$. Calcolo la loss che il modello corrende induce su questo esempio:
+\[ E(\boldsymbol{\theta})=\frac{1}{2}\big(z_j-h(\mathbf{x}_j)\big)^2 \]
+\textcolor{Fuchsia}{Minimizzare per una costante è la stessa cosa di quella intera. È per comodità, siccome $\frac{1}{2}$ semplifica i conti. Ora $E(\boldsymbol{\theta})$ è l'errore sull'esempio $j$ e non l'errore medio su tutto il dataset}.
+\\ Calcolo la derivata:
+\[ \frac{\partial E(\boldsymbol{\theta})}{\partial \theta_i}=\frac{1}{2}\frac{\partial \big (z_j-h(x_j)\big )^2}{\partial \theta_i}=-\big (z_j-h(\mathbf{x}_j))x_i\]
+La derivata rispetto a $\theta_i$ descrive il rate di crescita dell'errore rispetto all'aumento di $\theta_i$ (se aumento di 1 unità $\theta_i$ tenendo fissi gli altri parametri, di quando aumenta $E(\boldsymbol{\theta})$?).
+\\ Correggo $\theta_i$ in modo tale che $E$ diminuisca, di quanto? Step size (passo) $\alpha$ usato nel solito modo: $\theta_i \leftarrow \theta_i +\alpha\big(z_j-h(\mathbf{x}_j)\big)x_i$ (in certe applicazioni $\alpha$ è chiamata learning rate).
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{Images/risoluzione_numerica.png}
+\end{figure}
+Questo procedimento iterativo si chiama \textbf{discesa del gradiente}. Non richiede una risoluzione in forma chiusa, può essere usato con qualsiasi funzione di loss. Possiamo iterare un singolo esempio alla volta oppure procedere per gruppi detti \textbf{mini batch}, in questo caso
+$E(\boldsymbol{\theta})$ è definito come l'errore quadratico medio sulla mini batch.
+\\ L'algoritmo ha anche il nome di \textbf{\textcolor{red}{Hill Climbing}}.
+\subsection{Q-Learning approssimato}
+Con questo metodo possiamo risolvere il problema di RL da cui siamo partiti. L'agente fa un'ipotesi sulla action-value function: funzione di valutazione lineare:
+\[ Q(s,a)=\theta_0+\theta_1 f_1(s,a)+\theta_2 f_2(s,a)+\dots + \theta_n f_n(s,a) \]
+L'algoritmo Q-Learning ora deve lavorare su un set di parametri: \textbf{\textcolor{blue}{Q-Learning approssimato}}.
+\\ Struttura dell'algoritmo eseguito dall'agente:
+\begin{enumerate}
+    \item Inizializzare i \textbf{parametri} $\theta_0, \theta_1, \dots, \theta_n$ in modo arbitrario, scelgo un'azione arbitraria $a$.
+    \item Eseguire $a$ e osservare la transizione: l'agente va nello stato $s'$ e riceve un reward $R(s \xrightarrow[a]{} s')$.
+    \item \textbf{\textcolor{red}{Update dei parametri sulla base di quanto osservato}}.
+    \item \textbf{\textcolor{blue}{Scelgo di nuovo $\mathbf{a}$ (con criterio di exploration-esploitation) e riparto da 2}}.
+\end{enumerate}
+Update dei parametri (Step 3):
+\[
+\theta_i \leftarrow \theta_i - \alpha \frac{\partial E(\boldsymbol{\theta})}{\partial \theta_i}
+\]
+
+\[
+\theta_i \leftarrow \theta_i + \alpha \bigl(\textcolor{violet}{z} - Q(s,a)\bigr) f_i(s,a)
+\]
+
+\[
+\theta_i \leftarrow \theta_i + \alpha
+\Bigl(
+R + \textcolor{violet}{\gamma \max_{a'} Q(s',a')}
+- Q(s,a)
+\Bigr)
+f_i(s,a)
+\]
+Non serve più esplorare tutte le coppie stato-azione. 
+\\ Il limite di questo approccio è la scelta della classe del modello (in questo caso lineare).
+\pagebreak
+\subsection{Big picture}
+\textbf{\textcolor{blue}{Reinforcement Learning}}:
+\begin{itemize}
+    \item l'agente deve imparare una policy;
+    \item decisioni sequenziali, obiettivo a lungo termine;
+    \item le ripetute interazioni con l'ambiente alimentato l'apprendimento.
+\end{itemize}
+\textbf{\textcolor{red}{Supervised Learning}}:
+\begin{itemize}
+    \item l'agente deve imparare un modello;
+    \item singola decisione: dato un input prevedere l'output associato;
+    \item l'apprendimento è alimentato da un dataset di esempio $\langle input, output \rangle$.
+\end{itemize}
+\textbf{\textcolor{red}{Unservised Learning}}:
+\begin{itemize}
+    \item come supervised learning, ma gli esempi del dataset non hanno l'output.
+\end{itemize}
+\textbf{\textcolor{red}{Semi-supervised Learning}}:
+\begin{itemize}
+    \item come supervised learning ma il dataset contiene un grande numero di esempi senza l'output.
+\end{itemize}
+RL è spesso presentato come uno dei tipi di learning insieme agli altri due, ma non è del tutto comparabile. \\ Abbiamo già visto come le tecniche di supervised learning possono essere applicate nel reinforcement learning.
+\\ Tipico problema di unsupervised learning: clustering, ci concontreremo sull'apprendimendo supervisionato.
+\subsection{Supervised learning (regression)}
+Esistono due tipi di supervised learning a seconda di come è fatta la funzione $f$ che cerchiamo di imparare costruendo un modello $h$. Se $f$ restituisce un valore numerico si parla di \textbf{regressione} (o approssimazione di funzione).
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{Images/regressione_lineare.png}
+\end{figure}
+Nella regressione lineare la classe del modello è la \textbf{funzione lineare}:
+\[ z=\theta_0+\theta_1x\]
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{Images/regressione_logistica.png}
+\end{figure}
+Nella regressione logistica la classe del modello è la \textbf{funzione logistica}:
+\[ z=\frac{1}{1-e^{-(\theta_0+\theta_1x)}}\]
+Esiste chiaramente un problema di \textbf{\textcolor{red}{model class selection}}.
+\\ Non tutti i problemi di regressione possono essere affrontati con modelli classici (basati su funzioni).
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{Images/esempio_regressione.png}
+\end{figure}
+La scelta del modello corrispondente ad una risposta su $f$. Tale ipotesi non sempre è ben riposta.
+\textcolor{Fuchsia}{Queste sono classi di valori}.
+\subsection{Supervised learning (classification)}
+Se $f$ restituisce una label (etichetta) si parla di \textbf{classificazione}.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{Images/classification.png}
+\end{figure}
+I metodi di regressione (come quelli lineari o basati su funzione logistica) possono essere riaddattati per affrontare problemi di classificazione: il modello calcola un punteggio a cui si applica una soglia (o un set di intervalli). Uno dei metodi di base per affrontare la classificazione
+è quello basato sugli \textbf{\textcolor{blue}{alberi di decisione}}.
+\subsubsection{Alberi di decisione}
+Modello basato su una sequenza di test, ciasuno fatto su una particolare feature dell'input che dobbiamo classificare.
+\begin{figure}[H]
+    \includegraphics[width=0.75\textwidth]{Images/albero_decisione.png}
+\end{figure}
+\begin{figure}[H]
+    \includegraphics[width=0.5\textwidth]{Images/es_albero_decisione0.png}
+\end{figure}
+L'albero di decisione è un formalismo che descrive un processo decisionale: a partire da dei dati alla mano si deve arrivare a prendere una qualche decisione. Nella classificazione può essere usato come modello dove il dato alla mano è l'input da classificare e la decisione è l'assegnamento di
+una classe per quell'input. 
+\\ \textcolor{red}{A partire da un dataset $\mathcal{T}$ come costruiamo l'albero?}
+\textcolor{ForestGreen}{Dataset di esempio}: storico delle giornate che riporta se si è giocato o no in relazione ad alcuni indicatori meteorologici (feature).
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{Images/es_albero_decisione.png}
+\end{figure}
+Come costruisco l'albero a partire da questi dati? Vorrei che le decisioni che l'albero consenta di prendere rappresentino il più possibile questi dati. Idealmente vogliamo che sia \textbf{consistente}: in completo accordo con i dati (ogni input di $\mathcal{T}$ è classificato come specificato in $\mathcal{T}$).
+\\ Trovare l'albero consistente di dimensione minima è un problema \textbf{difficile}. Potrebbe non esistere un albero consistente perchè potrebbe esserci del rumore nei dati.
+\\ \textbf{\textcolor{ForestGreen}{Soluzione}}: approccio greedy basato su euristica. Assumiamo di avere sempre feature a valori discreti (come quelle riportate nell'esempio).
+\\ Approccio ricorsivo:
+\begin{itemize}
+    \item Scelgo la \textbf{\textcolor{red}{miglior feature}} su cui effettuare il test.
+    \item Il dataset si "splitta" in gruppi a seconda del valore della feature.
+    \item Ripeto ricorsivamente il processo su ogni gruppo generato (escludendo la feature appena scelta da quelle tra cui scegliere).
+\end{itemize}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{Images/es_albero_decisione_p2.png}
+\end{figure}
+Ci servirà un'euristica per scegliere la feature migliore da testare. Nei due split di esempio quella migliore sembra quella su vento.
+\pagebreak Da un gruppo generato in uno split si possono avere \textbf{quattro casi}:
+\begin{enumerate}
+    \item Gruppo \textcolor{red}{omogeneo} (tutti nella stessa classe): fermo la ricorsione su quel ramo.
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.5\textwidth]{Images/omogeneo.png}
+    \end{figure}
+    \item Gruppo \textcolor{red}{vuoto} (nessuno soddisfa i test che portano a quella foglia): assegno la classe di maggioranza del padre.
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.75\textwidth]{Images/vuoto.png}
+    \end{figure}
+    \textcolor{Fuchsia}{Metto il valore che ha più casi nel padre}.
+    \item Gruppo \textcolor{red}{disomogeneo} (esempi di classi diverse): continuo ricorsivamente.
+\begin{figure}[H]
+        \centering
+        \includegraphics[width=0.5\textwidth]{Images/disomogeno.png}
+    \end{figure}
+    \item Gruppo \textcolor{red}{disomogeneo} ma ho già testato tutte le feature: assegno la classe di maggioranza.
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.45\textwidth]{Images/disomogeneo2.png}
+    \end{figure}
+\end{enumerate}
+\pagebreak
+\textbf{Come scegliere la feature migliore?}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{Images/feature_migliore.png}
+\end{figure}
+Tra questi due split, il migliore è l'1 perchè può essere utilizzata per decidere la classe.
+Lo split su feature 1 sembra generare gruppi più ordinati. Per quantificare questo ordine si utilizza l'\textcolor{red}{\textbf{entropia}}.
+L'entropia è una misura dell'incerteza di una variabile aleatoria $V$. 
+\\ Se $V$ è una v.a. che può assumere i valori $v_1,v_2,\dots$ con probabilità $p_1,p_2,\dots$ allora la sua entropia è
+\[\mathcal{H}(V)=- \sum_ip_ilog_2p_i\]
+$\mathcal{H}$ misuta l'incertezza (il disordine in termini di informazione) nella variabile aleatoria $V$. 
+\begin{itemize}
+    \item Se $V$ non ha aleatorietà (può assumere un solo valore $v$ con $p=1$) l'entropia è \textcolor{red}{minima} (pari a $0$).
+    \item Se $V$ ha aleatorietà massima (può assumere $k$ valori con $p=\frac{1}{k}$ uniforme) l'entropia è \textcolor{red}{massima}.
+\end{itemize}
+Come calcolo l'entropia di un gruppo $g$?. Immaginiamo di avere una variabile aleatoria $V_g$ il cui valore è la classe di un elemento pescato a caso dal gruppo $g$.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{Images/entropia.png}
+\end{figure}
+Se uno split divide gli esempi in $k$ gruppi, posso fare la media pesata dell'entropia di ciascun gruppo, dove il peso è il numero di elementi del gruppo diviso il numero totale di elementi prima dello split.
+\\ \textbf{Information gain}: la riduzione dell'entropia media che lo split causa.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{Images/risultato_albero.png}
+\end{figure}
+\pagebreak
+\subsection{Metodi non parametrici}
+I metodi visti fino ad ora sono basati sull'estrazione di conoscenza dai dati/esperienza in forma di parametri. I parametri vengono poi utilizzati per generalizzare (classificare nuovi input). Questi approcci impongono delle
+\textbf{restrizioni} sulla classe del modello $h$ (ad esempio, restringendo al campo delle funzioni lineari). Una volta che il modello è stato appreso, \textbf{possiamo scartare il dataset di training}.
+\\ I \textbf{metodi non parametrici} adottano un approccio diverso: non si fissa un modello descritto dai parametri, ma da un meccanismo con cui fare classificazione o regressione \textcolor{red}{direttamente dai dati}.
+\subsubsection{Table lookup}
+Il metodo non parametrico più semplice possibile si chiama \textbf{tabella lookup}. 
+\\ Si considera direttamente il training set $\mathcal{T} = \langle (\mathbf{x}_1, z_1), (\mathbf{x}_2, z_2), \dots, (\mathbf{x}_N, z_N) \rangle$ dove $z_i$ può essere la classe dell'esempio $\mathbf{x}_i$ o il valore della funzione valutata
+in $\mathbf{x}_i$.
+\\ Sia per classificazione che regressione, dato un nuovo input $\mathbf{x}_{new}$ si procede come segue:
+\begin{enumerate}
+    \item Cercare $\mathbf{x}_{new}$ nel training set.
+    \item Se è stato trovato come esempio $\mathbf{x}_i$ restituire $z_i$.
+    \item Se non è stato trovato restituire errore.
+\end{enumerate}
+Questo metodo è un metodo che non è in grado di generalizzare. La sua evoluzione però rappresenta un approccio interessante: \textcolor{red}{$k$-nearest neighbors lookup} (KNN).
+\subsection{KNN}
+Dato un nuovo input $\mathbf{x}_{new}$ si procede come segue: 
+\begin{enumerate}
+    \item Cercare nel training set i $k$ esempi più simili a $\mathbf{x}_{new}$.
+    \item \textbf{\textcolor{red}{Classificazione}}: restituire la classe di maggioranza sui $k$ esempi.
+    \item \textbf{\textcolor{blue}{Regressione}}: restituire la media (o la mediana) sui $k$ esempi (o risolvere un problema di regressione lineare sulla batch).
+\end{enumerate}
+La questione centrale dell'algoritmo è: \textcolor{red}{come misurare la similarità tra due esempi?} Si utilizza una \textbf{distanza} tra un input $\mathbf{x_1}$ e un input $\mathbf{x_2}$.
+\subsubsection{KNN: funzione distanza}
+Due metodi spesso utilizzati sono la \textcolor{red}{Minkowsky distance} e la \textcolor{blue}{cosine similarity}.
+\\ \textcolor{red}{Minkowsky distance}, detta norma $L^p$.
+\[ L^p(\mathbf{x_1}, \mathbf{x_2})=\bigg(\sum_{i} |x_{1i}-x_{2i}|^p \bigg)^{\frac{1}{p}} \]
+\textcolor{Fuchsia}{La $i$ va da 1 o 0 fino a al numero di dimensioni d}.
+\begin{itemize}
+    \item Se $p=1$ si chiama \textbf{distanza di Manhattan}, usata di solito quando le feature misurano quantità non comparabili.
+    \item Se $p=2$ si chiama \textbf{distanza Euclidea}, usata di solito quando le feature misurano quantità comparabili.
+    \item Se $p=\infty$ si chiama \textbf{massimo}.
+\end{itemize}
+\textcolor{blue}{Cosine similarity}
+\[
+s(\mathbf{x_1}, \mathbf{x_2})
+= -\cos\bigl(\angle(\mathbf{x}_1,\mathbf{x}_2)\bigr)
+= - \frac{\sum_i x_{1,i}\,x_{2,i}}
+{\sqrt{\sum_i (x_{1,i})^2}\,\sqrt{\sum_i (x_{2,i})^2}}
+\]
+In certi casi conviene normalizzare i valori della feature.
+\subsubsection{KNN: pregi e difetti}
+\begin{itemize}
+    \item Metodo semplice, non richiede fase di training.
+    \item I dati "parlano" per loro stessi, non viene assunto un particolare modello con cui descriverli.
+    \item Indicato in situazioni in cui ci sono moltissimi dati ma poche features:
+    \begin{itemize}
+        \item se le features sono molte, ogni esempio è un "punto" in uno spazio a molte dimensioni: il concetto di distanza non può più essere interpretato con la stessa accezione che usiamo nello spazio 3D;
+        \item \textcolor{red}{curse of dimensionality}.
+    \end{itemize}
+    \item per poter estrarre in modo efficiente i $k$ esempi dal dataset si usano tecniche basate su hash table e alberi binari.
+\end{itemize}
+\subsubsection{Curse of dimensionality}
+Assumiamo che ogni esempio sia descritto da $d$ feature normalizzate tra $0$ e $1$, quindi $x\in[0,1]^d$
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{Images/dimensionality.png}
+\end{figure}
+\subsection{Reti neurali e deep learning}
+I metodi come la regressione lineare/logistica sono \textbf{fortemente limitati} nel tipo di pattern dei dati che possono descrivere.
+\\ \textbf{\textcolor{ForestGreen}{Esempio}}: la regressione lineare $h(\mathbf{x})= \theta_0 + \theta_1 x_1 + \theta_2 x_2 + \dots + \theta_n x_n$ può solo esprimere "valori" ottenuti moltiplicando ciascuna feature per un peso
+e poi sommando tutto.
+\\ Ciascuna variabile (feature) contribuisce in modo \textbf{indipendente} al risultato finale.
+\\ Abbiamo già visto come il fenomeno sottostante ad un particolare dataset possa essere complesso e richiedere un \textcolor{red}{modello più espressivo} per poter essere approssimato.
+\\ \textbf{Reti neurali}: modelli complessi basati su circuiti algebrici (ispirati all'architettura neurale del cervello biologico). 
+\pagebreak
+\subsection{Reti neurali}
+Una rete neurale si basa sul concetto di unità computazionale. Si rappresenta come un \textbf{vertice dentro ad un grafo diretto}.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{Images/neurone.png}
+\end{figure}
+Le unità computazionali possono essere collegate tra di loro: uno o più output di una unità diventano l'input di un'altra unità.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{Images/rete_neurale.png}
+\end{figure}
+L'uscita può essere descritta da una espressione che ha la forma di una funzione innestata:
+\[
+f_k\bigl(f_{\dots} \bigl(f_4\bigl(f_3\bigl(f_2\bigl(f_1(\mathbf{x})\bigr)\bigr)\bigr)\bigr)\bigr)
+\]
+\subsubsection{Funzioni di attivazione}
+La funzione di attivazione $g$ può avere diverse forme:
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{Images/funz_attivazione.png}
+\end{figure}
+È importante che sia:
+\begin{itemize}
+    \item \textbf{Non lineare}, altrimenti l'uscita della rete sarebbe sempre lineare (innestando funzioni lineari si ottiene sempre una funzione lineare)
+    e il modello risultante sarebbe troppo semplice.
+    \item \textbf{Differenziabile} su buona parte del dominio e \textbf{monotona} non decrescente, per poter facilitare l'applicazione di algoritmi basati
+    sulla discesa del gradiente.
+\end{itemize}
+\pagebreak
+\subsubsection{Architetture}
+Architetture particolari: 
+\begin{itemize}
+    \item Singola unità: regressione (logistica).
+    \item Cascata di unità: albero di decisione.
+\end{itemize}
+L'architettura più usata in generale si chiama \textbf{percettore multistrato} (multi-layer perceptron, MLP) ed è il tipo feedforward (l'informazione "fluisce"
+in un singolo verso)
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{Images/percettore_multistrato.png}
+\end{figure}
+Il flusso di elaborazione procede dal livello di input verso quello di output, attraversando uno o più livelli interni detti "nascosti". Se il numero di layer nascosti è alto si parla di rete
+"profonda" (deep). Ogni unità ha il suo vettore di parametri che dobbiamo apprendere a partire dal dataset di training.
+\\ \textbf{\textcolor{ForestGreen}{Teorema universale di approssimabilità}}: una NN con 2 layers (uno lineare e uno no) può approssimare qualsiasi funzione continua con precisione arbitraria.
+\subsubsection{training dei parametri}
+La tecnica principale utilizzata è la solita \textbf{discesa del gradiente} di una loss function. 
+\\ \textbf{\textcolor{ForestGreen}{Esempio}}: semplificato a due input (due feature) $\mathbf{x}= (x_1,x_2)$ a due livelli.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{Images/training.png}
+\end{figure}
+Gradiente della loss rispetto al parametro $\omega_{ac}$:
+\[
+\frac{\partial E(\omega)}{\partial \omega_{ac}}
+= 2 (z - h(\mathbf{x})) \frac{\partial (z - h(\mathbf{x}))}{\partial \omega_{ac}}
+= -2 (z - h(\mathbf{x})) \frac{\partial h(\mathbf{x})}{\partial \omega_{ac}}
+= {\color{red}-2 (z - h(\mathbf{x}  )) g_c'(\omega_{0c} + a + b)\, a}
+= {\color{red}\Delta_c}\, a 
+\]
+Gradiente del loss rispetto al parametro $\omega_{1a}$, rispetto a prima procediamo all'indietro:
+\[ \frac{\partial E(\boldsymbol{\omega})}{\partial \omega_{1a}}=\dots\]
+\[
+=
+{\color{red}
+-2\bigl(z-h(\mathbf{x})\bigr)
+g_c'(\omega_{0c}+a+b)}\,
+\omega_{ac}\,
+g_a'(\omega_{0a}+ \omega_{1a}x_1+\omega_{2a}x_2)\,
+x_1
+\]
+
+\[={\color{red} \Delta_c} \omega_{ac}g_a'(\omega_{0a}+ \omega_{1a}x_1+\omega_{2a}x_2)x_1\]
+Ritroviamo un termine (${\color{red}\Delta_c}$) che avevamo già calcolato prima: procedendo all'indietro riusiamo quello che 
+abbiamo calcolato per il layer più a destra, \textbf{è un fenomeno generalizzato in queste architetture}.
+\\ Il calcolo del gradiente per il livello $k$ ha come sotto-problema il calcolo del gradiente del livello $k-1$.
+\\È una forma di \textbf{\textcolor{red}{dynamic programming}} chiamata \textbf{\textcolor{blue}{backpropagation}} (l'errore, descritto dal gradiente 
+si propaga dagli ultimi layer ai primi).
+\subsection{Deep networks}
+Una \textbf{deep network} è una rete neurale con 3 o più hidden layers.
+\\ Con il termine \textbf{deep learning} si indica il procedimento di calcolo dei parametri della rete, tipicamente applicando la discesa del gradiente di una funzione
+di loss calcolata sul training set. \textcolor{red}{Più la rete è deep, più sono i parametri, più è difficile apprenderli}.
+\\ Abbiamo già visto che uno dei limiti di questi modelli è che richiedono molti dati per funzionare bene, dati di cui oggi disponiamo in grande quantità per alcune applicazioni.
+\\ Un'altra grossa difficoltà che ha afflitto questo problema per decenni è dovuto al fenomeno della backpropagation.
+\textbf{\textcolor{red}{Gradient vanishing}}:
+\begin{itemize}
+    \item la backpropagation implica moltiplicazioni ripetute dei termini $\Delta$;
+    \item spesso i gradienti sono numeri piccoli compresi in $(0,1)$;
+    \item se ci sono molti layer, i gradienti di quelli più a sinistra (primi layer) diventano, a causa delle moltiplicazioni, microscopici;
+    \item gli update fatti dall'algoritmo di discesa del gradiente sono molto piccoli, col risultato che i parametri dei primi layer cambiano in maniera estremamente lento;
+    \item l'algoritmo richiede un tempo proibitivo per convergere;
+    \item le tecniche per risolvere questo problema sono state inapplicabili fino a tempi recenti, grazie all'aumento della capacità computazionale dei calcolatori.
+\end{itemize}
+\textbf{\textcolor{ForestGreen}{Una rete deep non ha bisogno di feature, le impara!}} Possiamo dare in input la codifica dell'input stesso.
+\subsection{Metologia}
+Nella pratica, quando dobbiamo affrontare un problema di supervised learning quello che si fa è testare e valutare i possibili algoritmi su tre diverse porzioni del dataset.
+\begin{itemize}
+    \item \textbf{\textcolor{blue}{Training set}}: è la porzione più grande (almeno il $70\%$) sulla quale si esegue l'algoritmo di apprendimento che abbiamo scelto.
+    \item \textbf{\textcolor{orange}{Validation set}}: una porzione più piccola su cui valutare diverse parametrizzazioni dell'algoritmo (hyper-parameters, ad esempio $p$ in KNN, $\alpha$ nella discesa del gradiente, ecc.)
+    \item \textbf{\textcolor{red}{Test set}}: stessa dimensione del validation se, usato per valutare l'algoritmo con gli hyperparameters scelti (si usa \textbf{una sola volta!}).
+\end{itemize}
+\pagebreak
+\subsection{Underfitting}
+Supponiamo di aver eseguito il nostro algoritmo su un training set e di aver appreso un modello/ipotesi (ad esempio i parametri di una regressione). Quanti errori fa il modell se applicato allo stesso training set?
+\\ \textbf{\textcolor{ForestGreen}{Pochi errori}}: il modello descrive bene la distribuzione dei dati, si dice che ha un \textbf{bias ridotto}.
+\\ \textbf{\textcolor{red}{Molti errori}}: bias elevato, il modello non è in grado di descrivere nemmeno il training set: \textbf{underfitting}.
+\begin{figure}[H]
+    \includegraphics[width=0.45\textwidth]{Images/esempio_underfitting.png}
+\end{figure}
+Possibili cause (e soluzioni):
+\begin{itemize}
+    \item \textbf{la classe del modello è troppo semplice} e non riesce a descrivere la complessità del fenomeno che ha generato i dati, ad esempio usare una regressione lineare per modellare dati che provengono da una funzione
+    altamente non lineare (provare modelli più compllessi);
+    \item \textbf{le feature che stiamo usando non sono informative}, non presentano un buon valore predittivo delle caratteristiche del fenomeno che vogliamo modellare, ad esempio cercare di classificare una email come spam usando come features
+    lunghezza dell'oggetto e spazio occupato dal messaggio (scegliere feature diverse).
+\end{itemize}
+\pagebreak
+\subsection{Overfitting}
+Supponiamo che il nostro algoritmo abbia un bias molto piccolo (funzioni molto bene sul dataset di training). Può succedere che una volta testato su un dataset diverso (ad esempio validation o test set) faccia molti errori.
+In questo caso si dice che il modello ha una \textbf{\textcolor{red}{alta varianza}} o che soffre del problema dell'\textbf{\textcolor{red}{overfitting}}. 
+\\ Può anche essere interpretato così: se i dati dei training set fossero stati \textit{leggermente} diversi, il modello appreso sarebbe stato molto diverso (alta sensibilità).
+\begin{figure}[H]
+
+    \includegraphics[width=0.5\textwidth]{Images/esempio_overfitting.png}
+\end{figure}
+Possibili cause (e soluzioni):
+\begin{itemize}
+    \item \textbf{la classe del modello è troppo complessa}: l'algoritmo di apprendimento sfrutta la grande espressività del modello e finisce per imparare anche il rumore presente nei dati (provare modelli più semplici);
+    \item \textbf{ci sono tante feature ma pochi esempi nel training set}: l'algoritmo cerca di ricostruire complesse relazioni tra le feature per spiegare perfettamente i pochi dati che ha, ma quei pochi dati non sono sufficienti per descrivere il ruolo di ogni feature
+    e per rappresentare rumore e altri artefatti (ridurre dimensionalità, aggiungere esempi).
+\end{itemize}
+\pagebreak
+\subsection{Bias-Variance tradeoff}
+Tra le proprietà di bias e varianza esiste un tradeoff che posiziona il nostro modello tra i due estremi rappresentati da underfitting e overfitting.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{Images/bias_variance_tradeoff.png}
+\end{figure}
+La scelta della complessità adeguata può essere automatizzata integrandola dentro il problema di ottimizzazione per la ricerca dei parametri: \textbf{regolarizzazione}.
+\subsection{Metriche di performance}
+Quali sono le metriche di performance che ci permettono di valutare in modo quantitativo un modello?
+\\ \textbf{\textcolor{blue}{Regressione}}: calcolo la \textbf{loss media} su validation/test set, ad esempio Mean Squared Error (MSE).
+\\ \textbf{\textcolor{red}{Classificazione}}: \textbf{confusion matrix} su validation/test set.
+\\\textbf{\textcolor{ForestGreen}{Esempio}} di classificazione binaria tra una classe positiva (1) e una negativa (0).
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{Images/classificazione.png}
+\end{figure}
 \end{document}
