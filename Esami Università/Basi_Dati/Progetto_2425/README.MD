@@ -1,1 +1,0 @@
-# Progetto ancora in corso di sviluppo
