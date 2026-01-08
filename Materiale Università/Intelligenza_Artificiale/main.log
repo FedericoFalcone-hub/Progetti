@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.10.19)  30 DEC 2025 12:54
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.1.2)  7 JAN 2026 12:06
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -285,36 +285,12 @@ File: Images/Ottimilita_UCS.png Graphic file (type png)
 <use Images/Ottimilita_UCS.png>
 Package pdftex.def Info: Images/Ottimilita_UCS.png  used on input line 153.
 (pdftex.def)             Requested size: 227.62206pt x 198.46022pt.
-
-
-LaTeX Warning: Command \textrightarrow invalid in math mode on input line 155.
-
-
-LaTeX Warning: Command \textrightarrow invalid in math mode on input line 155.
-
-
-LaTeX Warning: Command \textrightarrow invalid in math mode on input line 155.
-
-
-LaTeX Warning: Command \textrightarrow invalid in math mode on input line 155.
-
-
-LaTeX Warning: Command \textrightarrow invalid in math mode on input line 155.
-
-
-LaTeX Warning: Command \textrightarrow invalid in math mode on input line 155.
-
-
-Overfull \hbox (16.44304pt too wide) in paragraph at lines 155--157
-\OT1/cmr/bx/n/10 Overload della no-tazione\OT1/cmr/m/n/10 : es-tendo la no-tazione di $\OML/cmm/m/it/10 g$ \OT1/cmr/m/n/10 ren-den-dola ap-pli-ca-bile an-che ai path $\OML/cmm/m/it/10 g\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 X\OT1/cmr/m/n/10 ^^Y\OML/cmm/m/it/10 Y\OT1/cmr/m/n/10 ^^Y [] ^^Y\OML/cmm/m/it/10 Z\OT1/cmr/m/n/10 ) =
- []
-
 <Images/UCS_conEXL.png, id=34, 702.37407pt x 286.06876pt>
 File: Images/UCS_conEXL.png Graphic file (type png)
 <use Images/UCS_conEXL.png>
 Package pdftex.def Info: Images/UCS_conEXL.png  used on input line 173.
 (pdftex.def)             Requested size: 455.24411pt x 185.42303pt.
-[6 <./Images/UCS.png> <./Images/Ottimilita_UCS.png>]
+ [6 <./Images/UCS.png> <./Images/Ottimilita_UCS.png>]
 <Images/implementazione_UCS.png, id=41, 769.37437pt x 360.59718pt>
 File: Images/implementazione_UCS.png Graphic file (type png)
 <use Images/implementazione_UCS.png>
@@ -388,7 +364,7 @@ Package pdftex.def Info: Images/minmax.png  used on input line 430.
 (pdftex.def)             Requested size: 341.43307pt x 83.60318pt.
 
 Overfull \hbox (9.11774pt too wide) in paragraph at lines 420--431
-\OT1/cmr/m/n/10 Per adesso as-sum-i-amo che trovaer la strate-gia ot-tima sia un prob-lema di search che tiene conto dell'avverario:
+\OT1/cmr/m/n/10 Per adesso as-sum-i-amo che trovare la strate-gia ot-tima sia un prob-lema di search che tiene conto dell'avverario:
  []
 
 [15 <./Images/alberoGIoco.png>]
@@ -554,7 +530,7 @@ File: Images/valueIteration.png Graphic file (type png)
 <use Images/valueIteration.png>
 Package pdftex.def Info: Images/valueIteration.png  used on input line 975.
 (pdftex.def)             Requested size: 455.24411pt x 86.98767pt.
- [35 <./Images/runningExample.png> <./Images/valueIteration.png>]
+ [35 <./Images/runningExample.png (PNG copy)> <./Images/valueIteration.png>]
 <Images/giocoStocastico.png, id=183, 2290.5575pt x 580.1675pt>
 File: Images/giocoStocastico.png Graphic file (type png)
 <use Images/giocoStocastico.png>
@@ -822,15 +798,15 @@ L3 programming layer <2024-01-22>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 4488 strings out of 476182
- 79418 string characters out of 5795594
+ 4487 strings out of 476171
+ 79400 string characters out of 5795120
  1941975 words of memory out of 5000000
- 26425 multiletter control sequences out of 15000+600000
+ 26427 multiletter control sequences out of 15000+600000
  569062 words of font info for 77 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  61i,12n,71p,982b,317s stack positions out of 10000i,1000n,20000p,200000b,200000s
  </home/federico/.texlive2023/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1000.600pk></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (66 pages, 12433128 bytes).
+Output written on main.pdf (66 pages, 12470197 bytes).
 PDF statistics:
  419 PDF objects out of 1000 (max. 8388607)
  212 compressed objects within 3 object streams
