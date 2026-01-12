@@ -93,7 +93,7 @@ Una sequenza di azioni forma un \textbf{cammino}; una \textbf{soluzione} è un c
 \end{figure}
 
 \subsubsection{La formulazione dei problemi}
-La formulazione del problema è un \textbf{modello}, ovvero una descrizione matematica astratta.\\ Il processo di rimozione dei dettagli da una rappresentazione prende il nome di \textbf{astrazione} Per una buona formulazione del problema serve il giusto livello di dettaglio.
+La formulazione del problema è un \textbf{modello}, ovvero una descrizione matematica astratta.\\ Il processo di rimozione dei dettagli da una rappresentazione prende il nome di \textbf{astrazione}. Per una buona formulazione del problema serve il giusto livello di dettaglio.
 \\
 Come faccio a specificare un problema di search?
 \begin{itemize}
@@ -159,8 +159,8 @@ Anzi possiamo affermare che: \textcolor{red}{ogni volta che UCS \textbf{selezion
     \item il percorso $p$ non è il percorso ottimo per raggiungere $V$: $p^* \neq p$;
 \end{enumerate}
 Dato il secondo punto e la \textcolor{ForestGreen}{\textbf{separation property}} della frontiera, sappiamo che deve esistere un nodo $X$ sulla frontiera, generato attraverso un cammino $p_1^*+ p_2^*$. \\
-$p*$ è il \textbf{path ottimo}, quindi $g(p_1^*)<g(p_1*)+\Delta{p_2^*} < g(p)$.
-\\ I costi sono tutti positivi, quindi $g(p_1^*)<g(p_1*)+\Delta{p_2^*} < g(p) \Rightarrow g(p_1*) <g(p)$.
+$p*$ è il \textbf{path ottimo}, quindi $g(p_1^*)<g(p_1^*)+\Delta{p_2^*} < g(p)$.
+\\ I costi sono tutti positivi, quindi $g(p_1^*)<g(p_1^*)+\Delta{p_2^*} < g(p) \Rightarrow g(p_1^*) <g(p)$.
 \\ Questo implica che $g(X)<g(V)$, \textcolor{red}{la prima ipotesi è violata}.
 \\ Se quando selezioniamo per la prima volta un nodo scopriamo il percorso ottimo, non c'è motivo di selezionare lo stesso nodo una seconda volta, introduciamo quindi la lista dei \textbf{nodi espansi}: \textbf{EXL}.
 \\ Ogni volta che selezioniamo un nodo per l'estensione:
@@ -216,7 +216,7 @@ Se assumiamo che $h$ sia consistente, possiamo costruire una dimostrazione per l
     \item Consideriamo due stati $V$ e $U$ connessi da un'azione $a$ che l'algoritmo ha generato uno dopo l'altro sull'albero di ricerca.
     \item Per definizione $f(U)=g(U)+h(U)$.
     \item Per definizione di $g$ e nostra assunzione in 1, $g(U)=g(V) + c(V,a,U)$.
-    \item Sostituiendo in 2: f(U)=g(V) + \textcolor{blue}{c(V,a,U)+h(U)}.
+    \item Sostituiendo in 2: $f(U)=g(V) + \textcolor{blue}{c(V,a,U)+h(U)}$.
     \item Per la proprietà di \textcolor{blue}{\textbf{consistenza}} $c(V,a,U)+h(U) \geq h(V)$.
     \item \textcolor{ForestGreen}{Sommando} $g(V)$ a entrambi i termini: \textcolor{ForestGreen}{$g(V)+$} $c(V,a,U)+h(U) \geq \textcolor{ForestGreen}{g(V)}+ h(V)$.
     \item \textcolor{red}{\textbf{$f(U) \geq f(V) \Rightarrow$}} \textbf{lungo ogni perorso nell'albero di ricerca la $f$ è monotono non decrescente}.
@@ -239,12 +239,13 @@ Dato 2 e la \textcolor{ForestGreen}{\textbf{separation property}} della frontier
 \end{figure}
 
 \begin{enumerate}
-    \item $g(p)>g(p^*)$ perch+ sia $p^*$ che $p$ sono path che portano a $V$, ma il primo è ottimo mentre il secondo no;
+    \item $g(p)>g(p^*)$ perchè sia $p^*$ che $p$ sono path che portano a $V$, ma il primo è ottimo mentre il secondo no;
     \item $\textcolor{purple}{f(p^*, V)} \geq \textcolor{Turquoise}{f(p^*_1,X)}$ dalla consistenza di $h$ ($f$ monotona non decrescente);
     \item $\textcolor{red}{g(p)+h(V)} > \textcolor{purple}{g(p^*,V) + h(V)}$ sommando lo stesso termine ai membri di 1;
     \item $\textcolor{red}{f(p,V)}> \textcolor{purple}{f(p^x,V)} \geq \textcolor{Turquoise}{f(p^x_1,X)}$ mettedno insieme 3, 2 e la definizione di $f$;
     \item $f(p,V) > f(p^*_1,X)$ quindi $V$ non può essere stato scelto prima di $X$, \textcolor{red}{l'ipotesi 1 è violata}
 \end{enumerate}
+\pagebreak
 \subsection{Progettare un'eutistica}
 Per capire come trovare un metodo per costruire buone euristiche, cerchiamo prima di capire come si può valutare una euristica: ci sono euristiche che sono migliori di altre? E come si stabilisce?
 \\ Possiamo immaginare la nostra $h$ come un punto in un intervallo limitato:
@@ -341,7 +342,7 @@ Effetto "fisarmonica": $FOCAL$ viene svuotata, nel momento in cui viene rimosso 
 \\ Idea: usare $f$ solo per garantire il bound e usare, in ordine, $\hat{h}_F$, e una euristica "aggressiva" $\hat{h}$ per scegliere il nodo da espandere, EES (Explicit EStimation Search, 2011)
 \subsection{Altri algoritmi di ricerca}
 I vari concetti che definiscono gli algoritmi di ricerca visti in precedenza, possono essere visti come il loro building blocks.
-\\ NUlla vieta di combinarli in modi alternativi per definire nuovi algoritmi di ricerca.
+\\ Nulla vieta di combinarli in modi alternativi per definire nuovi algoritmi di ricerca.
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\linewidth]{Images/moreAlgoritmi.png}
@@ -364,7 +365,7 @@ anche gli altri agenti. \\ Nel cercare una sequenza di azioni verso lo stato des
     \item \textbf{Informazione completa}/incompleta: i giocatori conoscono/non conoscono gli obiettivi e le azioni disponibili agli altri agenti;
     \item \textbf{Informazione perfetta}/imperfetta: i giocatori sono/non sono informati di tutto quello che è successo ad ogni punto del gioco.
 \end{itemize}
-Lo studio del comportamente individuale dei singoli agenti si chiama \textcolor{red}{\textbf{teoria dei giochi competitivi}}.
+Lo studio del comportamento individuale dei singoli agenti si chiama \textcolor{red}{\textbf{teoria dei giochi competitivi}}.
 \\Lo studio delle dinamiche nella formazione di coalizioni si chiama \textcolor{Aquamarine}{\textbf{teoria dei giochi cooperativa}}.
 \\I giochi più studiati in IA sono quelli che gli studiosi di teoria dei giochi chiamano deterministici, a due giocatori, a turni, con \textbf{informazione perfetta} (completamente osservabile), \textbf{a somma zero} (ciò che a vantaggio di un giocatore danneggia l'altro).
 \newpage
@@ -372,7 +373,7 @@ Consideriamo giochi formalizzati così:
 \begin{itemize}
     \item \textbf{Stati}: $S=\{s_1,s_2,\dots\}$ insieme o \textbf{spazio} degli stati, dove $s_k \in S$ è lo stato \textbf{iniziali} (la situazione di partenza in cui trovano gli agenti e ambiente).
     \item \textbf{Giocatori e azioni possibili}: insieme di agenti $I=\{i_1,i_2\}$, insieme di azioni disponibili $A=\{a_1,a_2,a_3,\dots\}$.
-    \item \textbf{Turni e azioni legali}: dato $s_k \in S$, $I(S_k)\in I$ è il giocatore che hanno diritto di compiere un'azione (turno) e $A(s_k)$ è l'insieme di azioni che può intraprendere.
+    \item \textbf{Turni e azioni legali}: dato $s_k \in S$, $I(s_k)\in I$ è il giocatore che hanno diritto di compiere un'azione (turno) e $A(s_k)$ è l'insieme di azioni che può intraprendere.
     \item \textbf{Modello di transizione}: dato $s_k \in S$ e $a \in A(I(s_k))$, $f(s_k,a)\in S$ indica il prossimo stato del gioco e cioè il risultato della mossa $a$.
     \item \textbf{Stati terminiali}: dato uno stato $s_k$, $T(s_k)=1$ se $s_k$ è uno stato terminale, dove il gioco termina e un payoff viene inviato ad ogni giocatore; vale 0 altrimenti.
     \item \textbf{utilità}: dato uno stato terminale $s_t$, $u_i(s_t)$ è il payoff che il giocatore $i$ riceve in quello stato.
@@ -382,7 +383,7 @@ Tutti questi punti prendono il nome di \textbf{meccanismo}.
 \\ I giochi hanno anche altre caratteristiche:
 \begin{itemize}
     \item \textbf{Informazione completa}: entrambi i giocatori hanno acceso al meccanismo, conoscono azioni possibili e utilità del proprio avversario.
-    \item \textbf{Informazione perfetta}: dato uno stato corrente del gioco $s_j$ ogni giocatore ha accesso allo stato e alla sequenza di azioni che, a partire dallo stato iniziale, ha portato dino ad $s_k$.
+    \item \textbf{Informazione perfetta}: dato uno stato corrente del gioco $s_j$ ogni giocatore ha accesso allo stato e alla sequenza di azioni che, a partire dallo stato iniziale, ha portato sino ad $s_k$.
     \item \textbf{A "somma zero"}: significa che in ogni stato terminale $s_t$ vale $u_1(s_t)+u _2(s_t)=0$.
     \begin{itemize}
         \item schema di competizione pura: il guadagno di un agente corrisponde ad una egual perdita dell'avversario;
@@ -432,7 +433,7 @@ Consideriamo giochi piccoli per ragioni di spazio, ma le considerazioni si gener
 Procedimento:
 \begin{enumerate}
     \item Eseguire una DFS sull'albero di gioco
-    \item Riposrto all'indietro dei valori
+    \item Riporto all'indietro dei valori
 \end{enumerate}
 \begin{figure}[H]
     \centering
@@ -598,7 +599,7 @@ se ne scartiamo alcuni. Questo non valeva con MAX o MIN perchè il massimo/minim
     \centering
     \includegraphics[width=1\linewidth]{Images/alfabeta_stocastico.png}
 \end{figure}
-
+\pagebreak
 \subsubsection{Stimare il valore di un'azione}
 L'incertezza non è una caratteristica del problema che dobbiamo gestire, ma può essere "sfruttata" nella definizione di un metodo risolutivo alternativo.
 \\ Con l'eccezione di $PROBCUT$, tutti i metodi che abbiamo studiato si basano su inferenze esatte; tutti questi approcci soffrono di un problema di scalabilità.
@@ -654,7 +655,7 @@ lo stato di un goal (soluzione) manipolando direttamente la sua struttura intern
 \textbf{Risolvere un CSP} consiste quindi nel trovare un valore da assegnare ad ogni variabile in modo che nessun vincolo sia violato. Conosciamo la struttura interna del problema attraverso un formalismo più specifico di quello dei problemi
 di search (dove stato, transizione e goal potevano essere arbitrari). È comunque un formalismo abbastanza generale (variabili, vincoli) da permetterci di modellare molti problemi interessanti.
 \\ \textcolor{red}{\textbf{Vantaggio chiave}}: avere accesso alla struttura del problema ci permette di definire algoritmi risolutivi più efficienti (trovando assegnamenti illegali si possono escludere grosse regioni dello spazio degli stati).
-\\ \textbf{Search vs CSP}
+\newpage \textbf{Search vs CSP}
 \\ \textcolor{ForestGreen}{Esempio: risolvere un puzzle da 12 pezzi.}
 \begin{figure}[H]
     \centering
@@ -672,8 +673,9 @@ Un vincolo si rapprenta come una tupla di sue elementi: $\langle variabili, rela
     \item \textbf{variabili}: elenco delle $k\leq n$ variabili coinvolte nel vincolo.
     \item \textbf{relazione}: elenco delle $k$-tuple di valori che le variabili possono assumere.
 \end{itemize}
-\pagebreak
+
 È un formalismo teorico con cui si può esprimere qualsiasi vincolo, ma non è efficiente. Restringeremo quindi il tipo di vincoli possibili e adotteremo un linguaggio specifico per quei vincoli.
+\pagebreak
 \subsection{Esempi}
 \subsubsection{Le N regine}
 \begin{figure}[H]
@@ -701,6 +703,7 @@ Il tipo di vincolo, diverso a seconda del problema che abbiamo, dipende dal nume
     si chiama vincolo \textbf{globale}.
 \end{itemize}
 Un CSP con domini infiniti può essere sempre convertito in uno equivalente con solo vincoli \textcolor{red}{binari}, a patto di introdurre un numero sufficiente di variabili ausiliarie.
+\pagebreak
 \subsubsection{Convertire un CSP generico in uno binario}
 \textcolor{ForestGreen}{Esempio: come converto il vincolo $A+B=C$ in uno binario?}
 \\Nuova variabile ausiliaria $V$ il cui dominio è $D_A \times D_B$ cioè i "valori" assegnabili a $V$ sono tuple di 2 valori, uno del dominio di $A$ e uno del dominio di $B$.
@@ -889,7 +892,7 @@ $U(s_0,s_1, \dots) = R_0,R_1,R_2, \dots $ migliore è la sequenza di stati che s
 La somma può avere infiniti termini quando $H=\infty$, come compariamo due policy che hanno reward totale infinito? Per fare ciò consideriamo una \textbf{somma scontata}.
 \\ Nella somma dei reward è ragionevole modellare il fatto che l'agente dia più importanza ai reward più imminenti rispetti a quelli molto lontani nel futuro.
 \\ \textbf{\textcolor{ForestGreen}{Metodo}}: applicare un decadimento esponenziale ai termini della somma dei reward:
-\[ U(s_0,s_1,,\dots)= \gamma^0 R_0 + \gamma^1 R_1 + \gamma^2 R_2 + \dots = \sum_{t=0}^{H} \gamma^t R_t \]
+\[ U(s_0,s_1,\dots)= \gamma^0 R_0 + \gamma^1 R_1 + \gamma^2 R_2 + \dots = \sum_{t=0}^{H} \gamma^t R_t \]
 Dove $0<\gamma<1$ è il \textbf{fattore di sconto}, più è piccolo più l'agente è "impaziente".
 \\ Se $H=\infty, \sum^{\infty}_{t=0} \gamma^t R_t \leq R_{max} \sum^{\infty}_{t=0} \gamma^t = \frac{R_{max}}{1-\gamma}$, anche se ci sono infiniti termini, la somma è finita.
 \begin{figure}[H]
@@ -942,7 +945,7 @@ I due valori, \textcolor{blue}{$Q^*$} e \textcolor{red}{$V^*$}, sono legati tra 
 Conoscere $V^*()$ implica di conoscere la policy ottima, quindi implica di aver risolto l'MDP. Che espressione ha \textcolor{blue}{$Q^*$}?
 \begin{itemize}
     \item Visto che l'agente esegue l'azione $a$ nello stato $s$, otterrà un reward immediato che dipende dallo stato di arrivo $s'$ in cui l'azione $a$ lo porta (stocastico).
-    \item Visto che da $s'$ in avanti l'agente seguirà la policy ottima, al reward immediato aggiungerà $V*(s')$.
+    \item Visto che da $s'$ in avanti l'agente seguirà la policy ottima, al reward immediato aggiungerà $V^*(s')$.
 \end{itemize}
 \[ Q^*(s,a) = \sum_{s'} P(s'|s,a) [ R(s,a,s') + \gamma V^*(s') ] \]
 P è la probabilità della transizone $s \xrightarrow{a} s'$, R è il reward a fronte della transizione $ s \xrightarrow{a} s' $ e V è il reward futuro scontato da $s'$ in avanti con policy ottima.
@@ -1397,7 +1400,7 @@ Osservazione raccolta da $(s \xrightarrow[a]{R}s')$: il reward immediato $R$ pi�
 \[ z=R+\gamma \max_{a'} Q(s',a') \]
 \textbf{\textcolor{red}{Update (Step 4)}}:
 \[ Q(s,a) \leftarrow Q(s,a) + \textcolor{blue}{\alpha (\#(s,a))}( z - Q(s,a) ) \]
-La \textcolor{blue}{learning rate} è la stesa vista per Passive RL: una funzione $\alpha(n)$ decrescente con $n$: più proviamo una coppia stato-azione più impariamo su di essa  e quindi le correzioni vengono attenuate.
+La \textcolor{blue}{learning rate} è la stessa vista per Passive RL: una funzione $\alpha(n)$ decrescente con $n$: più proviamo una coppia stato-azione più impariamo su di essa  e quindi le correzioni vengono attenuate.
 \\ Se valgolo le condizioni già viste sulla learning rate ($\sum_{n=1}^\infty \alpha(n) = \infty$, $\sum_{n=1}^\infty \alpha^2(n) < \infty$) l'algoritmo converge alla $Q$ function ottima. \textbf{Vale con qualsiasi esplorazione}
 purchè per $t \rightarrow \infty$ ogni coppia stato-azione sia esplorate infinite volte (questa condizione deve essere vera solo nel limite!)
 \\ Intuizione: anche se esplorando si eseguono azioni subottimali o random, nella costruzione di $z$ "guardiamo in avanti" assumendo di fare l'azione ottima (operatore max). Nel guardare in avanti quindi ci svincoliamo dalla policy che usiamo per 
@@ -1413,7 +1416,7 @@ L'aggiornamento riguarda lo stato che abbiamo lasciato ($s$), la scelta della pr
 In Q-learning l'update dipende da: $s,a,R,s'$
 \[ Q(s,a) \leftarrow Q(s,a) + \alpha(\#(s,a)) \big( R + \gamma \textcolor{red}{\max_{a'} Q(s',a')} - Q(s,a) \big) \]
 Potremmo pensare di non costruire più l'osservazione $z$ assumendo che da s' in avanti l'agente seguirà la policy ottima (nel procedimento calcolata rispetto alla stima corrente di $Q$).
-\\ Anzichè guardare avanti ottimisticamente guardiamo avanti \textbf{realisitcamente}: si sceglie l'azione che effettivamente verrà scelta nel prossimo step, che chiamiamo $a'$.
+\\ Anzichè guardare avanti ottimisticamente guardiamo avanti \textbf{realisticamente}: si sceglie l'azione che effettivamente verrà scelta nel prossimo step, che chiamiamo $a'$.
 \[ Q(s,a) \leftarrow Q(s,a) + \alpha(\#(s,a)) \big( R + \gamma \textcolor{blue}{Q(s',a')} - Q(s,a) \big) \]
 Ora l'update dipende da $s,a,R,s'$ e da $a'$: è la caratteristica che dà il nome a questa variante di Q-learning: \textbf{SARSA}.
 \\ Metodo \textcolor{blue}{\textbf{on-policy}}: gli update sono fatti assumendo che l'agente continui ad usare la stessa policy corrente per l'espolorazione ($\pi_e(s')=a'$). In caso in cui l'agente usi na policy greedy ($\pi_e(s')=\arg \max_{a'}Q(s',a')$) i due approcci
@@ -1449,17 +1452,17 @@ l'agente dichiara concluso l'apprendimento, scarta per sempre $\pi_e$ e inizia a
 Quando usare on-policy o off-policy?
 \\ La domanda da porsi è: ci interessa la performance (reward cumulati) che l'agente ottiene \textbf{durante} la fase di apprendimento?
 \begin{itemize}
-    \item No: off-policy, nell'apprendimento non viene considerato il cossto dell'esplorazione.
+    \item No: off-policy, nell'apprendimento non viene considerato il costo dell'esplorazione.
     \item Sì: on-policy, l'apprendimento considera esplicitamente l'esporazione.
 \end{itemize}
 \subsection{Regret}
-Con gli approcci visti fino ad ora l'agente cerca di imparare la policy ottima attraverso ripetute interazioni con l'ambiente. Durante questa fase di apprendimento si commettono degli errori: regret, al differenza tra ciò 
-che mi aspetto di ottenre con un algoritmo di apprendimento e ciò che avrei ottenuto eseguendo la policy ottima fin dall'inizio. È un costo pagato dall'agente per colmare il gap tra non conoscere nulla e conoscere la policy ottima,
+Con gli approcci visti fino ad ora l'agente cerca di imparare la policy ottima attraverso ripetute interazioni con l'ambiente. Durante questa fase di apprendimento si commettono degli errori: regret, la differenza tra ciò 
+che mi aspetto di ottenere con un algoritmo di apprendimento e ciò che avrei ottenuto eseguendo la policy ottima fin dall'inizio. È un costo pagato dall'agente per colmare il gap tra non conoscere nulla e conoscere la policy ottima,
 misura quanto bene vengono bilanciate exploration ed exploitation.
 \\ \textcolor{red}{\textbf{Minimizzare il regret}}: imparare ottimamente la policy ottima. 
 \\ Si paga sempre un regret! (L'agente inizialmente non conosce la policy ottima). Il caso migliore si ha quando il regret cresce logaritmicamente.
 \begin{itemize}
-    \item \textcolor{blue}{Greedy}: troppa esploitation, regret cresce linearmente;
+    \item \textcolor{blue}{Greedy}: troppa exploitation, regret cresce linearmente;
     \item \textcolor{blue}{$\epsilon$-greedy}: troppa exploration, regret cresce lineamente;
     \item \textcolor{orange}{$\epsilon$-greedy con riduzione di $\epsilon$}, può dare regret logaritmico;
     \item \textcolor{orange}{Funzione di esplorazione} (ottimismo nell'incertezza): può dare regret logaritmico;
@@ -1484,7 +1487,7 @@ Come affrontiamo questo problema? \textbf{\textcolor{red}{Idea}}:
 \subsubsection{Generalizzare in RL}
 Sfruttiamo uno strumento che abbiamo già studiato: la funzione di valutazione
 \[ Q(s,a)= \theta_0+ \theta_1f_1(s,a)+\theta_2f_2(s,a)+\dots+\theta_n f_n(s,a) \]
-Dove $f_1(s,a), f_2(s,a), \dots, f_n(s,a)$ sono delle \textbf{feature} che descrivono la coppia stato-azione $(s,a)$ e $\Theta_0, \Theta_1, \dots, \Theta_n$ sono feature della coppia stato azione, che possiamo calcolare
+Dove $f_1(s,a), f_2(s,a), \dots, f_n(s,a)$ sono delle \textbf{feature} che descrivono la coppia stato-azione $(s,a)$ e $\theta_0, \theta_1, \dots, \theta_n$ sono feature della coppia stato azione, che possiamo calcolare
 in modo efficiente e  che sono combinate linearmente per ottenere un'appossimazione di $Q(s,a)$.
 \begin{figure}[H]
     \centering
@@ -1494,17 +1497,17 @@ in modo efficiente e  che sono combinate linearmente per ottenere un'appossimazi
 \\
 L'agente non cerca più di imparare buone stime di $Q(s,a)$ per ogni coppia azione. Ora cerca di imparare un \textbf{buon set di parametri} $\theta_0, \theta_1, \theta_2, \dots$ in modo che se applicati alla feature di una coppia stato-azione calcolino
 una buona stima di $Q(s,a)$ (nel nostro caso abbiamo scelto un modello lineare).
-Prima la stima di $Q(s,a)$ era una grande tabella con un valore per ogni coppia stato azione, la funzione era rappresentata in modo \textbf{esplicito}. Ora ci basta un vettore di parametri \textbf{$\theta$} $= \langle \theta_0, \theta_1, \dots, \theta_k \rangle$, la funzione è 
-rappresentata in modo implicito, dato \textbf{$\theta$} e le feature di una coppia stato-azione calcoliamo $Q(s,a)$. Come scegliere \textbf{$\theta$}? \textcolor{red}{Dobbiamo pensare al problema in termini diversi}.
+Prima la stima di $Q(s,a)$ era una grande tabella con un valore per ogni coppia stato azione, la funzione era rappresentata in modo \textbf{esplicito}. Ora ci basta un vettore di parametri $ \boldsymbol{\theta} = \langle \theta_0, \theta_1, \dots, \theta_k \rangle$, la funzione è 
+rappresentata in modo implicito, dato $ \boldsymbol{\theta} $ e le feature di una coppia stato-azione calcoliamo $Q(s,a)$. Come scegliere $\boldsymbol{\theta}$? \textcolor{red}{Dobbiamo pensare al problema in termini diversi}.
 \\ L'agente esplora l'ambiente seguendo una policy (facendo una o più transizioni).
 \\ Da tutte le transizioni generate costruisce una dataset $\mathbb{T}$ che possiamo rapprensetare così
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{Images/generalizzazione_rl.png}
 \end{figure}
-Assunta una funzione di valutazione lineare con $k$ feature, rappresentata dal vettore di parametri $\theta$.
+Assunta una funzione di valutazione lineare con $k$ feature, rappresentata dal vettore di parametri $\boldsymbol{\theta}$.
 \\ Dato il dataset $\mathbb{T}$ (ottenuto con esplorazione)
-\\ \textcolor{red}{\textbf{Problema}}: come calcolare $\theta$ in modo che possa valutare vettori di feature $x_{new}$ che descrivano coppie stato-azione mai viste prima e senza esplorarle?
+\\ \textcolor{red}{\textbf{Problema}}: come calcolare $\boldsymbol{\theta}$ in modo che possa valutare vettori di feature $x_{new}$ che descrivano coppie stato-azione mai viste prima e senza esplorarle?
 \\ Questo è un caso specifico di una classe di problemi fondamentali studiata nel Machine Learning: \textbf{Apprendimento supervisionato (Supervised Learning)}
 \subsection{Supervised Learning}
 All'agente viene fornito uno \textbf{dataset} di esempi, dove ogni esempio è nella forma $\langle input, output \rangle$:
@@ -1536,7 +1539,7 @@ Q(s,a) = \theta_0 + \theta_1 f_1(s,a) + \theta_2 f_2(s,a) + \cdots + \theta_n f_
 \]
 \[
 z = h(x) = \theta_0 + \theta_1 x_1 + \theta_2 x_2 + \cdots + \theta_n x_n
-\qquad \textcolor{ForestGreen}{\text{gree si noti che } x_0=1}
+\qquad \textcolor{ForestGreen}{\text{si noti che } x_0=1}
 \]
 In questo caso il nome prende il nome di \textbf{\textcolor{red}{regressione lineare multi-variata}}.
 \\ La scelta di $\theta$ determina il modello $h$, vogliamo che $h$ spieghi bene i dati che abbiamo. Perché ciò accada devo minimizzare la \textbf{loss}:
@@ -1760,7 +1763,7 @@ Lo split su feature 1 sembra generare gruppi più ordinati. Per quantificare que
 L'entropia è una misura dell'incerteza di una variabile aleatoria $V$. 
 \\ Se $V$ è una v.a. che può assumere i valori $v_1,v_2,\dots$ con probabilità $p_1,p_2,\dots$ allora la sua entropia è
 \[\mathcal{H}(V)=- \sum_ip_ilog_2p_i\]
-$\mathcal{H}$ misuta l'incertezza (il disordine in termini di informazione) nella variabile aleatoria $V$. 
+$\mathcal{H}$ misura l'incertezza (il disordine in termini di informazione) nella variabile aleatoria $V$. 
 \begin{itemize}
     \item Se $V$ non ha aleatorietà (può assumere un solo valore $v$ con $p=1$) l'entropia è \textcolor{red}{minima} (pari a $0$).
     \item Se $V$ ha aleatorietà massima (può assumere $k$ valori con $p=\frac{1}{k}$ uniforme) l'entropia è \textcolor{red}{massima}.
@@ -1782,7 +1785,7 @@ I metodi visti fino ad ora sono basati sull'estrazione di conoscenza dai dati/es
 \textbf{restrizioni} sulla classe del modello $h$ (ad esempio, restringendo al campo delle funzioni lineari). Una volta che il modello è stato appreso, \textbf{possiamo scartare il dataset di training}.
 \\ I \textbf{metodi non parametrici} adottano un approccio diverso: non si fissa un modello descritto dai parametri, ma da un meccanismo con cui fare classificazione o regressione \textcolor{red}{direttamente dai dati}.
 \subsubsection{Table lookup}
-Il metodo non parametrico più semplice possibile si chiama \textbf{tabella lookup}. 
+Il metodo non parametrico più semplice possibile si chiama \textbf{table lookup}. 
 \\ Si considera direttamente il training set $\mathcal{T} = \langle (\mathbf{x}_1, z_1), (\mathbf{x}_2, z_2), \dots, (\mathbf{x}_N, z_N) \rangle$ dove $z_i$ può essere la classe dell'esempio $\mathbf{x}_i$ o il valore della funzione valutata
 in $\mathbf{x}_i$.
 \\ Sia per classificazione che regressione, dato un nuovo input $\mathbf{x}_{new}$ si procede come segue:
@@ -1945,7 +1948,7 @@ Nella pratica, quando dobbiamo affrontare un problema di supervised learning que
 \end{itemize}
 \pagebreak
 \subsection{Underfitting}
-Supponiamo di aver eseguito il nostro algoritmo su un training set e di aver appreso un modello/ipotesi (ad esempio i parametri di una regressione). Quanti errori fa il modell se applicato allo stesso training set?
+Supponiamo di aver eseguito il nostro algoritmo su un training set e di aver appreso un modello/ipotesi (ad esempio i parametri di una regressione). Quanti errori fa il modello se applicato allo stesso training set?
 \\ \textbf{\textcolor{ForestGreen}{Pochi errori}}: il modello descrive bene la distribuzione dei dati, si dice che ha un \textbf{bias ridotto}.
 \\ \textbf{\textcolor{red}{Molti errori}}: bias elevato, il modello non è in grado di descrivere nemmeno il training set: \textbf{underfitting}.
 \begin{figure}[H]
