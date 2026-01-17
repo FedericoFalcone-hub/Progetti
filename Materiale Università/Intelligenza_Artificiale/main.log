@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.1.2)  11 JAN 2026 12:35
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.1.2)  15 JAN 2026 12:46
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -365,6 +365,11 @@ Package pdftex.def Info: Images/minmax.png  used on input line 431.
 
 Overfull \hbox (9.11774pt too wide) in paragraph at lines 421--432
 \OT1/cmr/m/n/10 Per adesso as-sum-i-amo che trovare la strate-gia ot-tima sia un prob-lema di search che tiene conto dell'avverario:
+ []
+
+
+Overfull \hbox (2.6228pt too wide) in paragraph at lines 421--432
+\OT1/cmr/m/n/10 dato dall'algormitmo []\OT1/cmr/bx/n/10 min-i-max[]\OT1/cmr/m/n/10 , sostanzial-mente una DFS sull'albero di gioco con un \OT1/cmr/bx/n/10 ri-torno all'indietro
  []
 
 [15 <./Images/alberoGIoco.png>]
@@ -806,7 +811,7 @@ Here is how much of TeX's memory you used:
  14 hyphenation exceptions out of 8191
  61i,12n,71p,982b,317s stack positions out of 10000i,1000n,20000p,200000b,200000s
  </home/federico/.texlive2023/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1000.600pk></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (67 pages, 12470210 bytes).
+Output written on main.pdf (67 pages, 12470420 bytes).
 PDF statistics:
  423 PDF objects out of 1000 (max. 8388607)
  215 compressed objects within 3 object streams

@@ -13,7 +13,7 @@
 \section{Agenti}
 \subsection{Agenti e ambienti}
 Un \textbf{agente} è qualsiasi cosa possa essere vista come un sistema che percepisce il suo \textbf{ambiente} attraverso i \textbf{sensori} e agisce su di esso mediante \textbf{attuatori}.
-Usiamo il termine \textbf{percezione} per indicare i dati che i sensori di un agente percepiscono. La \textbf{sequenza percettiva} di un agente è la storia completa di tutto ciò che esso ha percepito nella sua esistenza. In generale, \textit{la scelta dell'azione di un agente in un qualsiasi istante può dipendere dalla conoscenscena integrata in esso e dall'intera sequenza percettiva osservata fino a quel punto, ma non da qualcosa che l'agente non abbia percepito}. Il comportamento di un agente quindi è descritto dalla \textbf{funzione agente}, che descrive la corrispondenza tra una qualsiasi sequenza percettiva e una specifica azione. \\
+Usiamo il termine \textbf{percezione} per indicare i dati che i sensori di un agente percepiscono. La \textbf{sequenza percettiva} di un agente è la storia completa di tutto ciò che esso ha percepito nella sua esistenza. In generale, \textit{la scelta dell'azione di un agente in un qualsiasi istante può dipendere dalla conoscenza integrata in esso e dall'intera sequenza percettiva osservata fino a quel punto, ma non da qualcosa che l'agente non abbia percepito}. Il comportamento di un agente quindi è descritto dalla \textbf{funzione agente}, che descrive la corrispondenza tra una qualsiasi sequenza percettiva e una specifica azione. \\
 Possiamo immaginare di rappresentare in forma di \textbf{tabella}  la funzione agente che descrive un certo agente. La tabella è una descrizione \textbf{esterna} dell'agente. \textbf{Internamente}, la funzione agente di un agente artificiale sarà implementata da un \textbf{programma agente}, il quale è l'implementazione della funzione agente.
 
 \subsection{Comportarsi correttamente: il concetto di razionalità}
@@ -24,8 +24,8 @@ Valutiamo il comportamento di un agente considerandone le \textit{conseguenze}. 
 \subsubsection{Razionalità}
 In un dato momento, ciò che è razionale dipende da quattro fattori:
 \begin{itemize}
-    \item la misura di presazione che definisce il criterio di successo;
-    \item la conoscenza pregressa del'ambiente da parte dell'agente;
+    \item la misura di prestazione che definisce il criterio di successo;
+    \item la conoscenza pregressa dell'ambiente da parte dell'agente;
     \item le azioni che l'agente può effettuare;
     \item la sequenza percettiva dell'agente fino all'istante corrente.
 \end{itemize}
@@ -61,7 +61,7 @@ Conoscere lo stato corrente dell'ambiente non sempre basta e decidere che cosa f
 \\ Benchè un agente basato su obiettivi sembri meno efficiente, d'altra parte è più \textbf{flessibile}, perchè la conoscenza che guida le sue decisioni è rappresentata esplicitamente e può essere modificata.
 \subsubsection{Agenti bassati sull'utilità}
 Gli obiettivi forniscono solamente una distinzione binaria tra stati "contenti" e "scontenti", laddove una misura di prestazione più generale dovrebbe permettere di confrontare stati del mondo differenti e misurare precisamente la contentezza che potrebbero portare all'agente. Per descrivere ciò utilizziamo il termine \textbf{utilità}.
-Una \textbf{funzione di utilità} di un agente è un'internalizzazione della misura di prestazione. Purchè la funzione di utilità interna e la misura di presazione esterna concordino, un agente che sceglie le azioni per massimizzare l'utilità sarà razionale in base alla misura di prestazione esterna.
+Una \textbf{funzione di utilità} di un agente è un'internalizzazione della misura di prestazione. Purchè la funzione di utilità interna e la misura di prestazione esterna concordino, un agente che sceglie le azioni per massimizzare l'utilità sarà razionale in base alla misura di prestazione esterna.
 
 \section{Risolvere i problemi con la ricerca}
 Quando l'azione giusta da compiere non è subito evidente, un agente può avere la necessità di \textit{guardare avanti}, cioè considerare una \textbf{sequenza} di azioni che formano un cammino che porterà a uno stato obiettivo. Questo tipo di agente è chiamato \textbf{agente risolutore di problemi} e il processo computazionale che effettua è la \textbf{ricerca}. \\ Gli agenti risolutori di problemi utilizzano rappresentazioni \textbf{atomiche} in cui gli stati del mondo sono considerati come entità prive di una struttura interna visibile agli algoritmi per la risoluzione dei problemi. Gli agenti che utilizzano rappresentazioni di stati \textbf{fattorizzate} o \textbf{strutturate} sono solitamente chiamati \textbf{agenti pianificatori}.
@@ -138,7 +138,7 @@ La completezza di solito si dimostra facendo vedere che la ricerca nello spazio 
 \end{itemize}
 \section{Search: UCS e A*}
 \subsection{Uniform Cost Seatch (UCS)}
-Nell'albero di ricerca, teniamo traccia del nostro accumulato sul percorso dal nodo iniziale a ogni noto $V$: $g(V)$. Non consideriamo EQL. \\
+Nell'albero di ricerca, teniamo traccia del nostro accumulato sul percorso dal nodo iniziale a ogni nodo $V$: $g(V)$. Non consideriamo EQL. \\
 L'UCS consiste nella selezione (espansione) del nodo con $g$ minore ancora da espolare (sulla frontiera). Goal check: se il \textbf{nodo selezionato per l'espansione} è un goal, mi fermo e restituisco la soluzione. \\
 Ci si pone la domanda: abbiamo trovato il percorso ottimale per l'obiettivo? Per dare una risposta, possiamo ispezionare il grafico.
 \begin{figure}[H]
@@ -349,7 +349,7 @@ I vari concetti che definiscono gli algoritmi di ricerca visti in precedenza, po
 \end{figure}
 \section{Giochi: nozioni di base, Minimax e alfa-beta pruning} 
 \subsection{Adversarial Search}
-L'adversarial search è una \textbf{ricerca con avversari} creata in un \textbf{ambiente competitivo} in cui vi sono due o più agenti con obiettivi in conglitto.
+L'adversarial search è una \textbf{ricerca con avversari} creata in un \textbf{ambiente competitivo} in cui vi sono due o più agenti con obiettivi in conflitto.
 \\ Consiste in un ambiente multi-agente in cui gli obiettivi degli altri agenti non sono necessariamente concordanti con quelli del nostro agente di riferimento. In questi casi si parla di un sistema
 multi-agente e l'interazione tra di esse può essere chiamata \textbf{gioco}.
 \subsection{Giochi}
@@ -373,7 +373,7 @@ Consideriamo giochi formalizzati così:
 \begin{itemize}
     \item \textbf{Stati}: $S=\{s_1,s_2,\dots\}$ insieme o \textbf{spazio} degli stati, dove $s_k \in S$ è lo stato \textbf{iniziali} (la situazione di partenza in cui trovano gli agenti e ambiente).
     \item \textbf{Giocatori e azioni possibili}: insieme di agenti $I=\{i_1,i_2\}$, insieme di azioni disponibili $A=\{a_1,a_2,a_3,\dots\}$.
-    \item \textbf{Turni e azioni legali}: dato $s_k \in S$, $I(s_k)\in I$ è il giocatore che hanno diritto di compiere un'azione (turno) e $A(s_k)$ è l'insieme di azioni che può intraprendere.
+    \item \textbf{Turni e azioni legali}: dato $s_k \in S$, $I(s_k)\in I$ è il giocatore che ha diritto di compiere un'azione (turno) e $A(s_k)$ è l'insieme di azioni che può intraprendere.
     \item \textbf{Modello di transizione}: dato $s_k \in S$ e $a \in A(I(s_k))$, $f(s_k,a)\in S$ indica il prossimo stato del gioco e cioè il risultato della mossa $a$.
     \item \textbf{Stati terminiali}: dato uno stato $s_k$, $T(s_k)=1$ se $s_k$ è uno stato terminale, dove il gioco termina e un payoff viene inviato ad ogni giocatore; vale 0 altrimenti.
     \item \textbf{utilità}: dato uno stato terminale $s_t$, $u_i(s_t)$ è il payoff che il giocatore $i$ riceve in quello stato.
@@ -404,7 +404,7 @@ L'altra parte è data dalle \textbf{strategie}.
 \subsubsection{Albero di gioco}
 Il meccanismo dà origine all'\textbf{\textcolor{red}{albero di gioco}}. Esso è un \textbf{albero di ricerca} che si ottiene sviluppando tutte le possibili sequenze di mosse alternate, in cui ogni nodo è un \textbf{\textcolor{red}{nodo di decisione}}: uno dei due giocatori deve fare la sua mossa.
 \\ Ogni branch rappresenta un gioco (partita). Dallo stato iniziale fino a quello terminale dove il gioco termina e i payoff sono distribuiti, ogni foglia è uno stato terminale su cui indichiamo il payoff del giocatore $i_1$ (quello del giocatore $i_1$ è uguale all'oppsoto).
-\\\textcolor{ForestGreen}{Esempio: il gioco del tris, Giocatore $i_1$: X, giocaotre $i_2$:0. Il branching massimo è b=9 e profondità massima d=9. Gli stati sono: \begin{itemize}
+\\\textcolor{ForestGreen}{Esempio: il gioco del tris, Giocatore $i_1$: X, giocatore $i_2$: 0. Il branching massimo è b=9 e profondità massima d=9. Gli stati sono: \begin{itemize}
     \item $\leq 3^9=19683$
     \item rimuovendo gli stati illegali ne restano 5478, al netto delle simmetriche sussistono di fatto 5478, al netto delle simmetrie sussistono di fatto 765 diverse situazioni strategiche in cui decide.
     \end{itemize}
@@ -419,7 +419,7 @@ Numero di nodi dell'albero di gioco: $\leq 1+9+(9*8)+(9*8*7)+(9*8*7*6)+ \dots = 
 \end{figure}
 \subsection{Minimax}
 Nei problemi di search l'albero di ricerca rappresentava/supportava il processo di inferenza per trovare una strada o la strada ottima per il goal. L'albero di gioco ha una funzione analoga: rappresenta/supporta il ragionamento strategico.
-\\ Per adesso assumiamo che trovare la strategia ottima sia un problema di search che tiene conto dell'avverario: \textbf{aversarial search}. L'approccio di base con cui si risolve la classe di giochi che stiamo considerando è dato dall'algormitmo \textbf{\textcolor{red}{minimax}}, sostanzialmente una DFS sull'albero di gioco con un \textbf{ritorno all'indietro} dei valori di utilità.
+\\ Per adesso assumiamo che trovare la strategia ottima sia un problema di search che tiene conto dell'avverario: \textbf{adversarial search}. L'approccio di base con cui si risolve la classe di giochi che stiamo considerando è dato dall'algormitmo \textbf{\textcolor{red}{minimax}}, sostanzialmente una DFS sull'albero di gioco con un \textbf{ritorno all'indietro} dei valori di utilità.
 \\ È un approccio esautistivo e inefficiente che possiamo adottare solo per giochi di dimentisioni limitate, ma è un approccio esatto, corretto e completo; sta alla base dei metodi più sofisticati.
 \\Introduciamo della notazione per semplificare la descrizione dell'algoritmo:
 \\$I=\{\textcolor{red}{MAX},\textcolor{blue}{MIN}\}$, il giocatore $i_1$ si chiama \textcolor{red}{MAX} e il suo obiettivo nel gioco è ottenere un valore di utilità il più alto possibile. Il giocatore $i_2$ si chiama \textcolor{blue}{MIN} e il suo obiettivo è far sì che l'utilità di \textcolor{red}{MAX} sia la più bassa possibile
@@ -621,7 +621,7 @@ Caso semplificato: stimare la \textbf{winning rate} di un'azione $a_i$, cioè la
 \\ Posso scegliere tra $n$ azioni ($a_1, a_2,\dots, a_n$) e ho un tempo limitato che consente di svolgere un totale di $N$ simulazioni (supponiamo di non poter parallelizzare).
 \\ Appoccio naive: eseguo $\frac{N}{n}$ simulazioni per ogni $s_i$ e per ciascuno ottengo la stima della winning rate $\omega_i=\frac{nW_i}{N}$ dove $W_i$ è il numero di simulazioni in cui ho vinto;
 alla fine gioco $a^*=argmax_i\{\omega_i\}$.
-\\ \textcolor{red}{\textbf{Problema}}: sto suddividendo lo sforzo in modo uniforme e non informato, potrei spendere troppo tempo su azioni che è chiaro che nono sono buone e, viceversa, troppo poco tempo su azioni che sembrerebbero
+\\ \textcolor{red}{\textbf{Problema}}: sto suddividendo lo sforzo in modo uniforme e non informato, potrei spendere troppo tempo su azioni che è chiaro che non sono buone e, viceversa, troppo poco tempo su azioni che sembrerebbero
 buone e che richiederebbero maggior precisione di stima (più simulazioni delle altre).
 \\ \textcolor{Green}{\textbf{Soluzione}}: concentrare più sforzo (numero di simulazioni) verso le azioni che si configurano come migliori.
 \\ \textcolor{red}{\textbf{ATTENZIONE!}} Devo stare attento a non escludere del tutto le azioni che non sembrano buone perchè, magari, con più simulazioni posso scoprire che in realtà sono migliori!
@@ -668,7 +668,7 @@ di search (dove stato, transizione e goal potevano essere arbitrari). È comunqu
     \item Insieme di \textbf{domini} $D=\{D_1,D_2,\dots,D_n\}$.
     \item Insieme di \textbf{vincoli} $C$.
 \end{itemize}
-Un vincolo si rapprenta come una tupla di sue elementi: $\langle variabili, relazione\rangle$:
+Un vincolo si rappresenta come una tupla di due elementi: $\langle variabili, relazione\rangle$:
 \begin{itemize}
     \item \textbf{variabili}: elenco delle $k\leq n$ variabili coinvolte nel vincolo.
     \item \textbf{relazione}: elenco delle $k$-tuple di valori che le variabili possono assumere.
@@ -927,7 +927,7 @@ Questo metodo si applica a quei problemi dotati di sotto-scrittura ottima o, alt
 \\ Un problema $P$ soddisfa il principio di Bellman se nella soluzione ottima di $P$ le soluzioni dei sotto-problemi $P_1, P_2, \dots$ sono esse stesse soluzioni ottime 
 per quei sottoproblemi. È un principio fondamentale che caratterizza e permette di risolvere un elevato numero di problemi.
 \subsection{Principio di ottimalità}
-Nell'MDP il principio di ottimalità è soddisfatto. Per poterlo "dare" forma alla sotto-struttura ottima dobbiamo introdurre queste nuove quantità che descrivono/definiscono la policy ottima $\pi^*$.
+Nell'MDP il principio di ottimalità è soddisfatto. Per poter "dare" forma alla sotto-struttura ottima dobbiamo introdurre queste nuove quantità che descrivono/definiscono la policy ottima $\pi^*$.
 \\ \textcolor{red}{$V^*(S)$} valore (ottimo) dello stato $s$ (anche detta \textit{state-value function}):
 \begin{itemize}
     \item L'agente si trova in $s$.
@@ -1063,7 +1063,7 @@ Come si risolve? Due alternative:
     \includegraphics[width=1\textwidth]{Images/policyIteration.png}
 \end{figure}
 \subsection{Recap}
-Value e policy iteration sono algorimti di programmazione dinamica per il calcolo della policy ottima in un MDP.
+Value e policy iteration sono algoritmi di programmazione dinamica per il calcolo della policy ottima in un MDP.
 \\ \textbf{\textcolor{red}{Value iteration}}
 \begin{itemize}
     \item Lavora sulla state-value function, la policy è trattata indirettamente attraverso l'operatore max nel Bellman update.
@@ -1079,7 +1079,7 @@ Value e policy iteration sono algorimti di programmazione dinamica per il calcol
 \\ \textbf{\textcolor{blue}{Policy iteration}}: metodo di programmazione dinamica per calcolare la policy ottima $\pi^*$ in un MDP, lavora aggiornando iterativamente la policy.
 \\ \textbf{\textcolor{Cerulean}{Policy evaluation}}: data una policy $\pi$ calcolare la state-value function $V^\pi()$ che questa genera in un MDP, viene usata in uno step di policy iteration.
 \\ \textbf{\textcolor{Fuchsia}{Policy extraction}}: data una state-value function $V^\pi()$,calcolare la policy $\pi$ che la genera, viene usata alla fine di value iteration per ottenere la policy ottima e in uno step di policy iteration.
-\\ \textbf{\textcolor{ForestGreen}{Policy update}}: modifica una policy $\pi$ per ottenre una nuova $\pi'$ che di solito è migliore, viene usata in uno step di policy iteration.
+\\ \textbf{\textcolor{ForestGreen}{Policy update}}: modifica una policy $\pi$ per ottenere una nuova $\pi'$ che di solito è migliore, viene usata in uno step di policy iteration.
 \pagebreak
 \section{Reinforcement Learning}
 Sappiamo che un MDP è dato dalla tupla $\langle S,A,P,R \rangle$, che fornisce insieme degli stati $S=\{s,q,p,\dots\}$, azioni $A(s)$, modello di transizione $P(s' | s,a)$ e funzione di reward $R(s,a,s')$.
@@ -1366,7 +1366,7 @@ Tutti gli approcci model-based (come quello appena visto) si basano sulla risolu
 \subsubsection{RL Bayesiano}
 Stima del modello: anzichè usare il metodo a massima verosomiglianza (basato sulle frequenze empiriche delle transizioni osservate) si utilizza un metodo più sofisticato basato su \textbf{filtro di Bayes}.
 \\ Il metodo costruisce, a partire dalle osservazioni dell'agente, una \textbf{\textcolor{red}{posterior}} $P$: una distribuzione di probabilità su possibile versioni del modello $m_1, m_2,m_3, \dots$ (anche detta belief).
-\\ Data una policy $\pi$, $V_i^\pi$ è la media di tutte le Policy Evalutation di $\pi$ a partire da ogni stato inziale possibile, assumendo che il modello sia $m_i$.
+\\ Data una policy $\pi$, $V_i^\pi$ è la media di tutte le Policy Evalutation di $\pi$ a partire da ogni stato iniziale possibile, assumendo che il modello sia $m_i$.
 \\ La versione Bayesiana di RL calcola questa policy ottima
 \[ \pi^*= \arg\max_{\pi} \sum_i P(m_i)V_i\pi \]
 La policy calcolata è ottima considerando ogni possibile versione del modello, pesato per la sua probabilità, quindi in un certo senso robusta.
@@ -1453,7 +1453,7 @@ Quando usare on-policy o off-policy?
 \\ La domanda da porsi è: ci interessa la performance (reward cumulati) che l'agente ottiene \textbf{durante} la fase di apprendimento?
 \begin{itemize}
     \item No: off-policy, nell'apprendimento non viene considerato il costo dell'esplorazione.
-    \item Sì: on-policy, l'apprendimento considera esplicitamente l'esporazione.
+    \item Sì: on-policy, l'apprendimento considera esplicitamente l'esplorazione.
 \end{itemize}
 \subsection{Regret}
 Con gli approcci visti fino ad ora l'agente cerca di imparare la policy ottima attraverso ripetute interazioni con l'ambiente. Durante questa fase di apprendimento si commettono degli errori: regret, la differenza tra ciò 
