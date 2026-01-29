@@ -1600,7 +1600,7 @@ N\sum_{i=1}^{N} x_i^2 -
 \\\textbf{Caso multivariato}: procedimento analogo con calcoli leggermente più complicati.
 \subsubsection{Risoluzione numerica}
 \textcolor{red}{Secondo metodo}: lavoriamo in modo iterativo considerando un esempio alla volta, ad ogni iterazione aggiorniamo $\boldsymbol{\theta}$. Assumo di considerare l'esempio 
-$j \langle \mathbf{x}_j, z_j \rangle$ e di avere un modello corrente $h$. Calcolo la loss che il modello corrende induce su questo esempio:
+$j \langle \mathbf{x}_j, z_j \rangle$ e di avere un modello corrente $h$. Calcolo la loss che il modello corrente induce su questo esempio:
 \[ E(\boldsymbol{\theta})=\frac{1}{2}\big(z_j-h(\mathbf{x}_j)\big)^2 \]
 \textcolor{Fuchsia}{Minimizzare per una costante è la stessa cosa di quella intera. È per comodità, siccome $\frac{1}{2}$ semplifica i conti. Ora $E(\boldsymbol{\theta})$ è l'errore sull'esempio $j$ e non l'errore medio su tutto il dataset}.
 \\ Calcolo la derivata:
